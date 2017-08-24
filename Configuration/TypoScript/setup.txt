@@ -1,0 +1,18 @@
+plugin.indexed_search_autocomplete {
+	autoSubmit = {$plugin.indexed_search_autocomplete.autoSubmit}
+	jQueryLoadedExternally = {$plugin.indexed_search_autocomplete.jQueryLoadedExternally}
+	cssLoadedExternally = {$plugin.indexed_search_autocomplete.cssLoadedExternally}
+	jQueryFile = {$plugin.indexed_search_autocomplete.jQueryFile}
+	noConflictMethod = {$plugin.indexed_search_autocomplete.noConflictMethod}
+	maxResults = {$plugin.indexed_search_autocomplete.maxResults}
+	onlySearchPage = {$plugin.indexed_search_autocomplete.onlySearchPage}
+	altResultLabel = {$plugin.indexed_search_autocomplete.altResultLabel}
+	altResultsLabel = {$plugin.indexed_search_autocomplete.altResultsLabel}
+	autoResize = {$plugin.indexed_search_autocomplete.autoResize}
+}
+
+includeLibs.indexed_search_autocomplete = EXT:indexed_search_autocomplete/pi1/class.tx_indexed_search_autocomplete_pi1.php
+page.2505 = USER
+page.2505 {
+	userFunc = tx_indexed_search_autocomplete_pi1->main
+}

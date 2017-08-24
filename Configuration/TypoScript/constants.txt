@@ -1,0 +1,22 @@
+plugin.indexed_search_autocomplete {
+	# cat=indexsearch_autocomplete-basic/other/a; type=options[No=0,Yes=1]; label=Enable auto submit when selecting a suggestion. If set to false the suggested search word is only written into the search field but not submitted
+	autoSubmit = 1
+	# cat=indexsearch_autocomplete-basic/other/a; type=options[No=0,Yes=1]; label=Set to true if jQuery is loaded outside of this extension (page global)
+	jQueryLoadedExternally = 0
+	# cat=indexsearch_autocomplete-basic/other/a; type=options[No=0,Yes=1]; label=Set to true if CSS data is loaded outside of this extension (page global)
+	cssLoadedExternally = 0
+	# cat=indexsearch_autocomplete-basic/other/a; type=string; label=Filepath of the jQuery library loaded internally
+	jQueryFile = typo3conf/ext/indexed_search_autocomplete/res/cb_indexedsearch_autocomplete.js
+	# cat=indexsearch_autocomplete-basic/other/a; type=integer; label=Number of maximal search suggestions presented to the user. Default value is unlimited.
+	maxResults = 99999999999
+	# cat=indexsearch_autocomplete-basic/other/a; type=options[No=0,Yes=1]; label=Use jQuery noConflict method: If you have conflict with other extensions using JavaScript Framework e.g. Mootools, switch this to on.
+	noConflictMethod = 0
+	# cat=indexsearch_autocomplete-basic/other/a; type=options[No=0,Yes=1]; label=Entension code is only included in pages with indexed_search plugin if set to enabled. Per default the code is rendered in every page.
+	onlySearchPage = 0
+	# cat=indexsearch_autocomplete-basic/other/a; type=string; label=Alternative label for 'result'
+	altResultLabel = result
+	# cat=indexsearch_autocomplete-basic/other/a; type=string; label=Alternative label for 'results'
+	altResultsLabel = results
+	# cat=indexsearch_autocomplete-basic/other/a; type=options[No=0,Yes=1]; label=Auto resize of suggestion list
+	autoResize = 0
+}

@@ -1,0 +1,45 @@
+.ac_results {
+	background: #F5F5F5;
+	width: 200px; /* This value is set in the javascript code, to match the width of the search box */
+	cursor: pointer;
+	position: absolute;
+	left: 0;
+	font-size: 90%;
+	z-index: 101;
+}
+.ac_results ul {
+	list-style-position: outside;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	border: 1px solid #AAAAAA;
+}
+
+.ac_results ul li.even {
+	background: #E5E5E5;
+}
+
+.ac_results ul li.odd {
+	background: #FFFFFF;
+}
+
+.ac_results iframe {
+	display:none;/*sorry for IE5*/
+	display/**/:block;/*sorry for IE5*/
+	position:absolute;
+	top:0;
+	left:0;
+	z-index:-1;
+}
+.ac_results li {
+	padding: 2px 5px;
+}
+.ac_results a {
+	width: 100%;
+}
+.ac_loading {
+	background:#FFFFFF url('../Images/Indicator.gif') no-repeat right center;
+}
+.over {
+	background-color: #A7CDF0 !important;
+}
