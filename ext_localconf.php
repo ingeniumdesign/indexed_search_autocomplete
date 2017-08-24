@@ -18,7 +18,7 @@ if (!is_array($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$_EXTKEY])) {
 
 // Add org. Jquery 3.2 in the Frontend
 if (!$GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$_EXTKEY]['disableJquerySource']) {
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScript($_EXTKEY, 'setup', 'page.includeJSFooterlibs.JquerySource = EXT:indexed_search_autocomplete/Resources/Public/JavaScript/Jquery-3.2.1.min.js');
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScript($_EXTKEY, 'setup', 'page.includeJSFooterlibs.JquerySource = {$plugin.tx_indexedsearch_autocomplete.jqueryFile}');
 }
 
 /***************

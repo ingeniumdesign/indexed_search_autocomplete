@@ -1,4 +1,8 @@
 plugin.tx_indexedsearch_autocomplete {
+	# cat=plugin.tx_indexedsearch_autocomplete/file; type=string; label=Filepath of the CSS Autocomplete File
+	cssAutocompleteFile = EXT:indexed_search_autocomplete/Resources/Public/Css/Indexed_search_autocomplete.css
 	# cat=plugin.tx_indexedsearch_autocomplete/file; type=string; label=Filepath of the JavaScript Autocomplete File
 	javaScriptAutocompleteFile = EXT:indexed_search_autocomplete/Resources/Public/JavaScript/Indexed_search_autocomplete.js
+	# cat=plugin.tx_indexedsearch_autocomplete/file; type=string; label=Filepath of the JavaScript Jquery Source File
+	jqueryFile = EXT:indexed_search_autocomplete/Resources/Public/JavaScript/Jquery-3.2.1.min.js
 }

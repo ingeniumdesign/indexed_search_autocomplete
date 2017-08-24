@@ -1,4 +1,7 @@
 page {
+    includeCSS {
+        indexedSearchAutocomplete = {$plugin.tx_indexedsearch_autocomplete.cssAutocompleteFile}
+    }
     includeJSFooter {
         indexedSearchAutocomplete = {$plugin.tx_indexedsearch_autocomplete.javaScriptAutocompleteFile}
     }
