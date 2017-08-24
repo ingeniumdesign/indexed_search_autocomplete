@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2017-09-19T09:11:39Z" product-name="indexed_search_autocomplete">
+        <header/>
+        <body>
+
+            <trans-unit id="setupTs.disableJquerySource">
+                <source>Disable Jquery Source: If this option is set the org. Jquery 3.2 is not loaded in the Frontend. Include "FILE:EXT:indexed_search_autocomplete/Resources/Public/JavaScript/Jquery-3.2.1.min.js" in your includeJSFooterlibs.</source>
+            </trans-unit>
+
+        </body>
+    </file>
+</xliff>
