@@ -1,4 +1,4 @@
-plugin.indexed_search_autocomplete {
+plugin.tx_indexed_search_autocomplete {
 	# cat=indexsearch_autocomplete-basic/other/a; type=options[No=0,Yes=1]; label=Enable auto submit when selecting a suggestion. If set to false the suggested search word is only written into the search field but not submitted
 	autoSubmit = 1
 	# cat=indexsearch_autocomplete-basic/other/a; type=options[No=0,Yes=1]; label=Set to true if jQuery is loaded outside of this extension (page global)
