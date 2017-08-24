@@ -1,0 +1,6 @@
+###############
+### SETUPTS ###
+###############
+
+# cat=Configuration; type=boolean; label=LLL:EXT:indexed_search_autocomplete/Resources/Private/Language/ExtConfTemplate.xlf:setupTs.disableJquerySource
+disableJquerySource = 0
