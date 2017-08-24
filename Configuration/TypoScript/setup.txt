@@ -1,18 +1,21 @@
-plugin.tx_indexed_search_autocomplete {
-	autoSubmit = {$plugin.tx_indexed_search_autocomplete.autoSubmit}
-	jQueryLoadedExternally = {$plugin.tx_indexed_search_autocomplete.jQueryLoadedExternally}
-	cssLoadedExternally = {$plugin.tx_indexed_search_autocomplete.cssLoadedExternally}
-	jQueryFile = {$plugin.tx_indexed_search_autocomplete.jQueryFile}
-	noConflictMethod = {$plugin.tx_indexed_search_autocomplete.noConflictMethod}
-	maxResults = {$plugin.tx_indexed_search_autocomplete.maxResults}
-	onlySearchPage = {$plugin.tx_indexed_search_autocomplete.onlySearchPage}
-	altResultLabel = {$plugin.tx_indexed_search_autocomplete.altResultLabel}
-	altResultsLabel = {$plugin.tx_indexed_search_autocomplete.altResultsLabel}
-	autoResize = {$plugin.tx_indexed_search_autocomplete.autoResize}
+page {
+    includeJSFooter {
+        indexedSearchAutocomplete = EXT:indexed_search_autocomplete/Resources/Public/JavaScript/Indexed_search_autocomplete.js
+    }
 }
 
-includeLibs.indexed_search_autocomplete = EXT:indexed_search_autocomplete/Classes/Hooks/IndexedSearchHook.php
-page.2505 = USER
-page.2505 {
-	userFunc = tx_indexed_search_autocomplete_pi1->main
+search = PAGE
+search {
+    typeNum = 7423794
+    config {
+        disableAllHeaderCode = 1
+        additionalHeaders = Content-type:text/html
+        xhtml_cleaning = 0
+        debug = 0
+        no_cache = 1
+        admPanel = 0
+    }
+
+    10 = COA
+    10 < tt_content.list.20.indexedsearchautocomplete_search
 }

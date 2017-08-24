@@ -8,8 +8,6 @@ if (!defined('TYPO3_MODE')) {
  */
 $GLOBALS['TYPO3_CONF_VARS']['FE']['contentRenderingTemplates'][] = 'indexed_search_autocomplete/Configuration/TypoScript/';
 
-$TYPO3_CONF_VARS['EXTCONF']['indexed_search']['pi1_hooks']['initialize_postProc'] = 'EXT:indexed_search_autocomplete/Classes/Hooks/IndexedSearchHook.php:&tx_indexed_search_autocomplete_pi1';
-$TYPO3_CONF_VARS['FE']['eID_include']['indexed_search_autocomplete'] = 'EXT:indexed_search_autocomplete/Classes/Hooks/FeIndexHook.php';
 
 /***************
  * Make the extension configuration accessible
@@ -29,3 +27,18 @@ if (!$GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$_EXTKEY]['disableJquerySourc
 if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$_EXTKEY])) {
     $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$_EXTKEY] = serialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$_EXTKEY]);
 }
+
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	'ID.' . $_EXTKEY,
+	'Search',
+	array(
+		'Search' => 'search',
+		
+	),
+	// non-cacheable actions
+	array(
+		'Entry' => 'search',
+		
+	)
+);

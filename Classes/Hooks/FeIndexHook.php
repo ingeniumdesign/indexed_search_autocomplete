@@ -22,8 +22,10 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-// Exit, if script is called directly (must be included via eID in index_ts.php)
-if (!defined ('PATH_typo3conf')) 	die ('Could not access this script directly!');
+// Check if Script is called directly:
+if (!defined ('PATH_typo3conf')) {
+    exit();
+}
 
 // Exit if user tries to fiddle with the values ;-)
 if(!(\TYPO3\CMS\Core\Utility\GeneralUtility::_GET('sr') < 1 || \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('sh') == \TYPO3\CMS\Core\Utility\GeneralUtility::md5int(\TYPO3\CMS\Core\Utility\GeneralUtility::_GET('sr') . $GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey']))) {
@@ -87,7 +89,7 @@ class tx_indexed_search_autocomplete_fe_index {
 	/*
 	* Look up the words and print them
 	*/
-	function look_up() {		
+	function look_up() {
 		$ll = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET( 'll' );
 		$language = ( !empty( $ll ) ) ? intval( $ll ) : 0;
 		$the_word_array = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(' ', \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('sw'), 1);
