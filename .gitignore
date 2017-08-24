@@ -9,6 +9,7 @@ dist
 .awspublish*
 config.json
 *.LCK
+Thumbs.db
 
 # TYPO3 Ignores, Symlinks duerfen kein Slash am Ende haben, werden behandelt wie Dateien #
 /typo3

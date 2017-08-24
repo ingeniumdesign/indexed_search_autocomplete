@@ -1,6 +1,6 @@
 page {
     includeJSFooter {
-        indexedSearchAutocomplete = EXT:indexed_search_autocomplete/Resources/Public/JavaScript/Indexed_search_autocomplete.js
+        indexedSearchAutocomplete = {$plugin.tx_indexedsearch_autocomplete.javaScriptAutocompleteFile}
     }
 }
 
