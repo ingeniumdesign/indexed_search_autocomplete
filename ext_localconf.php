@@ -20,7 +20,7 @@ if (!is_array($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$_EXTKEY])) {
 
 // Add org. Jquery 3.2 in the Frontend
 if (!$GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$_EXTKEY]['disableJquerySource']) {
-    //\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile('<INCLUDE_TYPOSCRIPT: source="FILE:EXT:' . $_EXTKEY . '/Configuration/PageTS/Mod/Wizards/newContentElement.txt">');
+    #\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile('<INCLUDE_TYPOSCRIPT: source="FILE:EXT:' . $_EXTKEY . '/Configuration/PageTS/Mod/Wizards/newContentElement.txt">');
 }
 
 
