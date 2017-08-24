@@ -23,7 +23,6 @@ if (!$GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$_EXTKEY]['disableJquerySourc
     #\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile('<INCLUDE_TYPOSCRIPT: source="FILE:EXT:' . $_EXTKEY . '/Configuration/PageTS/Mod/Wizards/newContentElement.txt">');
 }
 
-
 /***************
  * Reset extConf array to avoid errors
  */
