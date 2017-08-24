@@ -11,7 +11,7 @@ plugin.indexed_search_autocomplete {
 	autoResize = {$plugin.indexed_search_autocomplete.autoResize}
 }
 
-includeLibs.indexed_search_autocomplete = EXT:indexed_search_autocomplete/pi1/class.tx_indexed_search_autocomplete_pi1.php
+includeLibs.indexed_search_autocomplete = EXT:indexed_search_autocomplete/Classes/Hooks/IndexedSearchHook.php
 page.2505 = USER
 page.2505 {
 	userFunc = tx_indexed_search_autocomplete_pi1->main

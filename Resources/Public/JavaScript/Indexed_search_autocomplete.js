@@ -24,7 +24,7 @@ jQuery.indexedsearchAutocomplete = function(input, options) {
 		top: (pos.y + input.offsetHeight) + "px",
 		left: pos.x + "px"
 	});
-	
+
 	// Lets see if we can find it
 	var readWidth = parseInt(jQuery("input[name='tx_indexedsearch[sword]']").get(0).clientWidth);
 
@@ -32,8 +32,8 @@ jQuery.indexedsearchAutocomplete = function(input, options) {
 		$results.css({
 				width: readWidth + "px"
 		});
-	} 
-	
+	}
+
 	// Add to body element
 	jQuery("body").append(results);
 
@@ -378,7 +378,7 @@ jQuery.fn.indexedsearchAutocomplete = function(url, options) {
 	options.loadingClass = options.loadingClass || "ac_loading";
 	options.selectFirst = options.selectFirst || false;
 	options.selectOnly = options.selectOnly || false;
-	options.extensionConfig = typeof cb_indexsearch_autocomplete !== 'undefined' && typeof cb_indexsearch_autocomplete === 'object' ? cb_indexsearch_autocomplete : {};
+	options.extensionConfig = typeof indexed_search_autocomplete !== 'undefined' && typeof indexed_search_autocomplete === 'object' ? indexed_search_autocomplete : {};
 	options.extensionConfig.altResultLabel = 'altResultLabel' in options.extensionConfig ? options.extensionConfig.altResultLabel : 'result';
 	options.extensionConfig.altResultsLabel = 'altResultsLabel' in options.extensionConfig ? options.extensionConfig.altResultsLabel : 'results';
 	options.extensionConfig.autoSubmit = 'autoSubmit' in options.extensionConfig ? options.extensionConfig.autoSubmit : false;
@@ -395,5 +395,5 @@ jQuery.fn.indexedsearchAutocomplete = function(url, options) {
 }
 
 jQuery(document).ready(function() {
-	jQuery("input[name='tx_indexedsearch[sword]']").indexedsearchAutocomplete("http://" + top.location.host + top.location.pathname + "?eID=cb_indexedsearch_autocomplete&sr=" + sr + "&sh=" + sh + "" + "&ll=" + ll, { minChars:3, matchSubset:1, matchContains:1, cacheLength:10, selectOnly:1 });
+	jQuery("input[name='tx_indexedsearch[sword]']").indexedsearchAutocomplete("http://" + top.location.host + top.location.pathname + "?eID=indexed_search_autocomplete&sr=" + sr + "&sh=" + sh + "" + "&ll=" + ll, { minChars:3, matchSubset:1, matchContains:1, cacheLength:10, selectOnly:1 });
 });

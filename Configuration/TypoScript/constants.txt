@@ -6,7 +6,7 @@ plugin.indexed_search_autocomplete {
 	# cat=indexsearch_autocomplete-basic/other/a; type=options[No=0,Yes=1]; label=Set to true if CSS data is loaded outside of this extension (page global)
 	cssLoadedExternally = 0
 	# cat=indexsearch_autocomplete-basic/other/a; type=string; label=Filepath of the jQuery library loaded internally
-	jQueryFile = typo3conf/ext/indexed_search_autocomplete/res/cb_indexedsearch_autocomplete.js
+	jQueryFile = typo3conf/ext/indexed_search_autocomplete/Resources/Public/JavaScript/Indexed_search_autocomplete.js
 	# cat=indexsearch_autocomplete-basic/other/a; type=integer; label=Number of maximal search suggestions presented to the user. Default value is unlimited.
 	maxResults = 99999999999
 	# cat=indexsearch_autocomplete-basic/other/a; type=options[No=0,Yes=1]; label=Use jQuery noConflict method: If you have conflict with other extensions using JavaScript Framework e.g. Mootools, switch this to on.
