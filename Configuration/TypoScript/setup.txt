@@ -1,3 +1,22 @@
+plugin {
+    tx_indexedsearch_autocomplete {
+        view {
+            templateRootPaths {
+                0 = EXT:indexed_search_autocomplete/Resources/Private/Templates/
+                10 = {$plugin.tx_indexedsearch_autocomplete.view.templateRootPath}
+            }
+            partialRootPaths {
+                0 = EXT:indexed_search_autocomplete/Resources/Private/Partials/
+                10 = {$plugin.tx_indexedsearch_autocomplete.view.partialRootPath}
+            }
+            layoutRootPaths {
+                0 = EXT:indexed_search_autocomplete/Resources/Private/Layouts/
+                10 = {$plugin.tx_indexedsearch_autocomplete.view.layoutRootPath}
+            }
+        }
+    }
+}
+
 page {
     includeCSS {
         indexedSearchAutocomplete = {$plugin.tx_indexedsearch_autocomplete.cssAutocompleteFile}

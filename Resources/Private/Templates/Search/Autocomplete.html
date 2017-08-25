@@ -1,5 +1,15 @@
-<div class="autocomplete">
-    <f:for each="{autocompleteResults}" as="row" key="entrynumber">
-        <f:debug>{row}</f:debug>
-    </f:for>
-</div>
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:spaceless>
+    <div class="tx-indexedsearch-autocomplete">
+        <ul>
+        <f:for each="{autocompleteResults}" as="results" key="entrynumber" iteration="iterator">
+            <li>
+                Titel: {results.title}<br />
+                Beschreibung: {results.description}<br />
+                Page-ID: {results.page_id}<br />
+                Link: <f:link.typolink parameter="{results.page_id}" title="Link zur Seite {results.title}">Link zur Seite: {results.title}</f:link.typolink>
+            </li>
+        </f:for>
+        </ul>
+    </div>
+</f:spaceless>

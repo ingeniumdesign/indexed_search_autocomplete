@@ -3,6 +3,15 @@
     <file source-language="en" datatype="plaintext" original="messages" date="2017-09-19T09:11:39Z" product-name="indexed_search_autocomplete">
         <header/>
         <body>
+            <trans-unit id="constants.templateFilePath">
+                <source>FilePath to template root (FE)</source>
+            </trans-unit>
+            <trans-unit id="constants.partialsFilePath">
+                <source>Path to template partials (FE)</source>
+            </trans-unit>
+            <trans-unit id="constants.layoutsFilePath">
+                <source>Path to template layouts (FE)</source>
+            </trans-unit>
             <trans-unit id="constants.cssAutocompleteFile">
                 <source>Filepath of the CSS Autocomplete File</source>
             </trans-unit>
