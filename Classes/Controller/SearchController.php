@@ -24,6 +24,9 @@
 
 namespace ID\indexedSearchAutocomplete\Controller;
 
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * EntryController
  */
@@ -43,8 +46,54 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      */
     public function searchAction() {
         $arg = $_REQUEST;
-        $arg['s'] = 'engl';
+        $searchmode = 'word';
         
+        if ($searchmode == 'word') {
+            return $this->searchAWord($arg);
+        }
+        
+        return $this->searchASite($arg);
+
+    }
+    
+    
+    private function searchAWord($arg) {
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('index_words');
+        $result = $queryBuilder
+            ->select('baseword')
+            ->from('index_words')
+            ->where(
+                $queryBuilder->expr()->like(
+                    'baseword',
+                    $queryBuilder->createNamedParameter('%' . $queryBuilder->escapeLikeWildcards($arg['s']) . '%')
+                )
+            )
+            ->setMaxResults(10)
+            ->execute();
+        
+        $autocomplete = [];
+        while ($row = $result->fetch()) {
+            $autocomplete[] = $row['baseword'];
+        }
+        
+        // display results
+        $templates = __FILE__;
+        for ($i = 0; $i < 3; $i++) {
+            $templates = substr($templates, 0, strrpos($templates, '/'));
+        }
+        $tempView = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
+        $tempView->setTemplatePathAndFilename($templates . '/Resources/Private/Templates/Search/AutocompleteWord.html');
+
+        $tempView->assignMultiple([
+            'autocompleteResults' => $autocomplete
+        ]);
+        $tempHtml = $tempView->render();
+
+        return $tempHtml;
+    }
+    
+    
+    private function searchASite ($arg) {
         $search = [
             [
                 'sword' => $arg['s'],
@@ -175,8 +224,7 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             $templates = substr($templates, 0, strrpos($templates, '/'));
         }
         $tempView = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
-        $extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-        $tempView->setTemplatePathAndFilename($templates . '/Resources/Private/Templates/Search/Autocomplete.html');
+        $tempView->setTemplatePathAndFilename($templates . '/Resources/Private/Templates/Search/AutocompleteLink.html');
 
         $tempView->assignMultiple([
             'autocompleteResults' => $result

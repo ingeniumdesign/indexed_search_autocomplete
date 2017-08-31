@@ -13,11 +13,8 @@ function initIndexSearchAutocomplete() {
             return;
         }
         
-        
-        var url = $('#autocompleteurl').attr('href');
-        
         $.ajax({
-            url: url,
+            url: $('.search-autocomplete-results').data('searchurl'),
             cache: false,
             method: 'POST',
             data: {
