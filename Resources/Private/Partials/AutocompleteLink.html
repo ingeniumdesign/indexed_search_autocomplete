@@ -1,15 +1,14 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<!--
+	=====================
+		Partials/AutocompleteLink.html
+-->
 <f:spaceless>
-    <div class="tx-indexedsearch-autocomplete">
-        <ul>
-        <f:for each="{autocompleteResults}" as="results" key="entrynumber" iteration="iterator">
-            <li>
-                Titel: {results.title}<br />
-                Beschreibung: {results.description}<br />
-                Page-ID: {results.page_id}<br />
-                Link: <f:link.typolink parameter="{results.page_id}" title="Link zur Seite {results.title}">Link zur Seite: {results.title}</f:link.typolink>
-            </li>
-        </f:for>
-        </ul>
-    </div>
+    <li>
+        Titel: {results.title}<br />
+        Beschreibung: {results.description}<br />
+        Page-ID: {results.page_id}<br />
+        Link: <f:link.typolink parameter="{results.page_id}" title="Link zur Seite {results.title}">Link zur Seite: {results.title}</f:link.typolink>
+    </li>
 </f:spaceless>
+</html>
