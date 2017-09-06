@@ -16,8 +16,8 @@ plugin {
         }
 
         settings {
-                #LLL:EXT:indexed_search_autocomplete/Resources/Private/Language/ExtConfTemplate.xlf:constants.templatefileword
-                wordTemplateFile = {$plugin.tx_indexedsearch_autocomplete.wordTemplateFile}
+                # hallo tes test
+                wordTemplateFile = testtest
         }
     }
 }
@@ -43,6 +43,20 @@ search {
         admPanel = 0
     }
 
-    10 = COA
+    10 = FLUIDTEMPLATE
+    10 {
+        partialRootPath = EXT:indexed_search_autocomplete/Resources/Private/Partials/
+        layoutRootPath = EXT:indexed_search_autocomplete/Resources/Private/Layouts/
+        
+        file.stdWrap.cObject = CASE
+        file.stdWrap.cObject {
+            # Standard Layout
+            # Wird verwendet wenn keine spezielles Backend Layout definiert wurde.
+            default = TEXT
+            default {
+                value = EXT:indexed_search_autocomplete/Resources/Private/Templates/Default.html
+            }
+        }
+    }
     10 < tt_content.list.20.indexedsearchautocomplete_search
 }

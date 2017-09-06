@@ -74,18 +74,21 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         while ($row = $result->fetch()) {
             $autocomplete[] = $row['baseword'];
         }
-        
+        /*
         // display results
         $filename = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName('EXT:indexed_search_autocomplete/Resources/Private/Templates/Search/AutocompleteWord.html');
         $tempView = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
         $tempView->setTemplatePathAndFilename($filename);
 
         $tempView->assignMultiple([
-            'autocompleteResults' => $autocomplete
+            
         ]);
-        $tempHtml = $tempView->render();
+        $tempHtml = $tempView->render();*/
 
-        return $tempHtml;
+        return [
+            'autocompleteResults' => $autocomplete,
+            'mode' => 'link'
+        ];
     }
     
     
@@ -212,18 +215,19 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             }
         }
         
-        
+        /*
         // display results
         $filename = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName('EXT:indexed_search_autocomplete/Resources/Private/Templates/Search/AutocompleteLink.html');
         $tempView = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
         $tempView->setTemplatePathAndFilename($filename);
 
-        $tempView->assignMultiple([
-            'autocompleteResults' => $result
-        ]);
-        $tempHtml = $tempView->render();
+        $tempView->assignMultiple();
+        $tempHtml = $tempView->render();*/
 
-        return $tempHtml; 
+        return [
+            'autocompleteResults' => $result,
+            'mode' => 'link'
+        ]; 
     }
 }
 
