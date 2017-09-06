@@ -14,6 +14,11 @@ plugin {
                 10 = {$plugin.tx_indexedsearch_autocomplete.view.layoutRootPath}
             }
         }
+
+        settings {
+                #LLL:EXT:indexed_search_autocomplete/Resources/Private/Language/ExtConfTemplate.xlf:constants.templatefileword
+                wordTemplateFile = {$plugin.tx_indexedsearch_autocomplete.wordTemplateFile}
+        }
     }
 }
 

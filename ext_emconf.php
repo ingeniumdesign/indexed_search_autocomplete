@@ -18,6 +18,7 @@ $EM_CONF[$_EXTKEY] = [
         'psr-4' => [
             'ID\\IndexedSearchAutocomplete\\' => 'Classes'
         ],
+        /*'classmap' => ['Classes']*/
     ],
     'state' => 'stable',
     'uploadfolder' => 0,

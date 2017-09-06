@@ -5,23 +5,44 @@ jQuery(document).ready(function(){
 });
 
 function initIndexSearchAutocomplete() {
-    jQuery('.search').on('keyup change', function() {
-        $('.search-autocomplete-results').html('');
-        var val = $(this).val();
+    jQuery('.search, .tx-indexedsearch-searchbox-sword').on('keyup change', function() {
+        var $elem = $('#ssform'); $(this);
+        var $results;
+        while($elem.prop("tagName") !== 'HTML') {
+            $results = $elem.find('.search-autocomplete-results');
+            if ($results.length > 0) {
+                break;
+            }
+            $elem = $elem.parent();
+        }
+        if ($elem.prop("tagName") === 'HTML') {
+            console.log("we couldn't find a result div (.search-autocomplete-results)");
+            return ;
+        }
         
-        if (val.length < 3) {
+        $results.html('');
+        
+        var val = $(this).val();
+        var minlen = typeof $results.data('minlength') === 'undefined' ? 3 : $results.data('minlength');
+        var maxResults = typeof $results.data('maxresults') === 'undefined' ? 10 : $results.data('maxresults');
+        var mode = typeof $results.data('mode') === 'undefined' ? 'word' : $results.data('mode');
+        
+        if (val.length < minlen) {
             return;
         }
         
+        
         $.ajax({
-            url: $('.search-autocomplete-results').data('searchurl'),
+            url: $results.data('searchurl'),
             cache: false,
             method: 'POST',
             data: {
-                s: val
+                s: val,
+                m: mode,
+                mr: maxResults
             },
             success: function (data) {
-               $('.search-autocomplete-results').html(data);
+               $results.html(data);
             }
         });
     });
