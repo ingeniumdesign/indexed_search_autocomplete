@@ -44,14 +44,25 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      *
      * @return string
      */
-    public function searchAction() {
+    public function SearchAction() {
         $arg = $_REQUEST;
         $searchmode = $arg['m'];
+
+         /** @var \TYPO3\CMS\Fluid\View\StandaloneView $tempView */
+        $tempView = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
+
+        $extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+
+        $templateRootPath = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']);
+        $templatePathAndFilename = $templateRootPath . 'search' . '/' . 'Search' . '.html';
         
+        $this->view->assign('xlfFiles', []);
+        
+        return ;
         if ($searchmode == 'word') {
             return $this->searchAWord($arg, $arg['mr']);
         }
-        
+
         return $this->searchASite($arg, $arg['mr']);
     }
     

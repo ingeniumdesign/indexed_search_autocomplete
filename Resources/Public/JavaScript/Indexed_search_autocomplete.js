@@ -5,8 +5,8 @@ jQuery(document).ready(function(){
 });
 
 function initIndexSearchAutocomplete() {
-    jQuery('.search, .tx-indexedsearch-searchbox-sword').on('keyup change', function() {
-        var $elem = $('#ssform'); $(this);
+    jQuery('.search, .tx-indexedsearch-searchbox-sword').on('keyup change', function() {console.log('keyup');
+        var $elem = $(this);
         var $results;
         while($elem.prop("tagName") !== 'HTML') {
             $results = $elem.find('.search-autocomplete-results');
@@ -26,11 +26,12 @@ function initIndexSearchAutocomplete() {
         var minlen = typeof $results.data('minlength') === 'undefined' ? 3 : $results.data('minlength');
         var maxResults = typeof $results.data('maxresults') === 'undefined' ? 10 : $results.data('maxresults');
         var mode = typeof $results.data('mode') === 'undefined' ? 'word' : $results.data('mode');
-        
+        console.log(minlen);
         if (val.length < minlen) {
             return;
         }
         
+        console.log('huhuhuhu');
         
         $.ajax({
             url: $results.data('searchurl'),
