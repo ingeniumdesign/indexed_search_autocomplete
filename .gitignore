@@ -8,6 +8,7 @@ dist
 .sass-cache
 .awspublish*
 config.json
+nbproject
 *.LCK
 Thumbs.db
 
