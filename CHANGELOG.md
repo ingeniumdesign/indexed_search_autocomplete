@@ -1,13 +1,13 @@
 # 8.7.1
 
 ## BREAKING
-- [TASK] Smaple Text
+- [TASK] Sample Text
 
 ## FEATURE
-- [FEATURE] Smaple Text
+- [FEATURE] Sample Text
 
 ## TASK
-- [TASK] Smaple Text
+- [TASK] Sample Text
 
 ## BUGFIX
-- [BUGFIX] Smaple Text
+- [BUGFIX] Sample Text

@@ -1,4 +1,4 @@
-.ac_results {
+.tx-indexedsearch-autocomplete {
 	background: #F5F5F5;
 	width: 200px; /* This value is set in the javascript code, to match the width of the search box */
 	cursor: pointer;
@@ -7,7 +7,7 @@
 	font-size: 90%;
 	z-index: 101;
 }
-.ac_results ul {
+.tx-indexedsearch-autocomplete ul {
 	list-style-position: outside;
 	list-style: none;
 	padding: 0;
@@ -15,15 +15,15 @@
 	border: 1px solid #AAAAAA;
 }
 
-.ac_results ul li.even {
+.tx-indexedsearch-autocomplete ul li.even {
 	background: #E5E5E5;
 }
 
-.ac_results ul li.odd {
+.tx-indexedsearch-autocomplete ul li.odd {
 	background: #FFFFFF;
 }
 
-.ac_results iframe {
+.tx-indexedsearch-autocomplete iframe {
 	display:none;/*sorry for IE5*/
 	display/**/:block;/*sorry for IE5*/
 	position:absolute;
@@ -31,15 +31,15 @@
 	left:0;
 	z-index:-1;
 }
-.ac_results li {
+.tx-indexedsearch-autocomplete li {
 	padding: 2px 5px;
 }
-.ac_results a {
+.tx-indexedsearch-autocomplete a {
 	width: 100%;
 }
-.ac_loading {
+.tx-indexedsearch-autocomplete {
 	background:#FFFFFF url('../Images/Indicator.gif') no-repeat right center;
 }
-.over {
+.tx-indexedsearch-autocomplete .over {
 	background-color: #A7CDF0 !important;
 }
