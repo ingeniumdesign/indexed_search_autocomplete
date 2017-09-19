@@ -5,19 +5,19 @@
 		Templates/Search.html
 -->
 
-<f:section name="main">
+<f:section name="main"> <!-- Search type: {mode} -->
     <f:if condition="{mode}=='link'">
         <f:then>
             <ul class="tx-indexedsearch-autocomplete-links">
                 <f:for each="{autocompleteResults}" as="results" key="entrynumber" iteration="iterator">
-                    <f:render partial="AutocompleteLink"/>
+                    <f:render partial="AutocompleteLink" arguments="{_all}" />
                 </f:for>
             </ul>
         </f:then>
         <f:else>
             <ul class="tx-indexedsearch-autocomplete-words">
                 <f:for each="{autocompleteResults}" as="word" key="entrynumber" iteration="iterator">
-                    <f:render partial="AutocompleteWord"/>
+                    <f:render partial="AutocompleteWord" arguments="{_all}" /> 
                 </f:for>
             </ul>
         </f:else>
