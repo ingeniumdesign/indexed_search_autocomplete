@@ -47,23 +47,17 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     public function SearchAction() {
         $arg = $_REQUEST;
         $searchmode = $arg['m'];
-
-         /** @var \TYPO3\CMS\Fluid\View\StandaloneView $tempView */
-        $tempView = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
-
-        $extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-
-        $templateRootPath = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']);
-        $templatePathAndFilename = $templateRootPath . 'search' . '/' . 'Search' . '.html';
         
-        $this->view->assign('xlfFiles', []);
-        
-        return ;
-        if ($searchmode == 'word') {
-            return $this->searchAWord($arg, $arg['mr']);
+        $result = [];
+        if ($searchmode == 'word' && 0) {
+            $result = $this->searchAWord($arg, $arg['mr']);
+        } else {
+            $result = $this->searchASite($arg, $arg['mr']);
         }
 
-        return $this->searchASite($arg, $arg['mr']);
+        foreach($result as $key => $value) {
+            $this->view->assign($key, $value);
+        }
     }
     
     
@@ -85,25 +79,21 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         while ($row = $result->fetch()) {
             $autocomplete[] = $row['baseword'];
         }
-        /*
-        // display results
-        $filename = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName('EXT:indexed_search_autocomplete/Resources/Private/Templates/Search/AutocompleteWord.html');
-        $tempView = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
-        $tempView->setTemplatePathAndFilename($filename);
-
-        $tempView->assignMultiple([
-            
-        ]);
-        $tempHtml = $tempView->render();*/
 
         return [
             'autocompleteResults' => $autocomplete,
-            'mode' => 'link'
+            'mode' => 'word'
         ];
     }
     
     
     private function searchASite($arg, $maxResults) {
+        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');    
+        $configurationManager = $objectManager->get('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager');
+        $setting = $configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS);   
+        var_dump($setting);
+        
+        
         $search = [
             [
                 'sword' => $arg['s'],
@@ -225,15 +215,6 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
                 break;
             }
         }
-        
-        /*
-        // display results
-        $filename = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName('EXT:indexed_search_autocomplete/Resources/Private/Templates/Search/AutocompleteLink.html');
-        $tempView = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
-        $tempView->setTemplatePathAndFilename($filename);
-
-        $tempView->assignMultiple();
-        $tempHtml = $tempView->render();*/
 
         return [
             'autocompleteResults' => $result,
