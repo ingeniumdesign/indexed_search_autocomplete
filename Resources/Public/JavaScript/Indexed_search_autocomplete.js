@@ -5,7 +5,7 @@ jQuery(document).ready(function(){
 });
 
 function initIndexSearchAutocomplete() {
-    jQuery('.search, .tx-indexedsearch-searchbox-sword').on('keyup', function() {
+    jQuery('.search, .tx-indexedsearch-searchbox-sword, .indexed-search-atocomplete-sword').on('keyup', function() {
         var $elem = $(this);
         var $results;
         while($elem.prop("tagName") !== 'HTML') {

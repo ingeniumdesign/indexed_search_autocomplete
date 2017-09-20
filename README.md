@@ -15,12 +15,21 @@ Quick Install Guide
 Install the TYPO3 Core indexed_search extensions
 ------------------------------------------------
 
-You need for the Autocomplete the TYPO3 Core indexed_search Extension. Please install and configure this.
+The extension works with the TYPO3 Core indexed_search extension. So please install and configure this one first.
+Then install this plugin.
+Afterward add the class '.indexed-search-atocomplete-sword' to the search-input-box in your fluid and the folowing div at the place you want to have the results:
+<div class="search-autocomplete-results" data-mode="word" data-maxresults="10" data-minlength="2" data-searchurl="{f:uri.action(action: 'search', pageType: '7423794', noCache: 1, noCacheHash: 1)}"></div>
+
+This div is also the one where you can configure most options of the Plugin:
+(see Options)
 
 Options
 -------
 
-* Enable or Disable the JQuery-Source in the Extension Settings.
+* Enable or Disable the JQuery-Source in the Extension Settings. (Backend)
+* data-mode="word" => the following values are possible: word or link. Depending on which option the plugin suggests either words or links while typing. You can edit both template files unter indexed_search_autocomplete/Resources/Private/Partials/ (Fluid)
+* data-maxresults="10" => The amount of entrys a suggetion can have max. (Fluid)
+* data-minlength="2" => how many characters have to be in the input-box for the plugin to make it's first suggestion. (Fluid)
 
 
 Contact &amp; Communication
