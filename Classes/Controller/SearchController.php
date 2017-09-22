@@ -50,7 +50,7 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         $searchmode = $arg['m'];
 
         $result = [];
-        if ($searchmode == 'word' && 0) {
+        if ($searchmode == 'word') {
             $result = $this->searchAWord($arg, $arg['mr']);
         } else {
             $result = $this->searchASite($arg, $arg['mr']);
@@ -62,13 +62,29 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     }
 
     private function searchAWord($arg, $maxResults) {
+        $languageId = $GLOBALS['TSFE']->sys_language_uid;
+        
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('index_words');
         $result = $queryBuilder
                 ->select('baseword')
                 ->from('index_words')
+                ->join(
+                     'index_words',
+                    'index_rel',
+                    'ir',
+                    $queryBuilder->expr()->eq('ir.wid', 'index_words.wid')
+                 )->join(
+                    'ir',
+                    'index_phash',
+                    'ip',
+                    $queryBuilder->expr()->eq('ip.phash', 'ir.phash')
+                 )
                 ->where(
                         $queryBuilder->expr()->like(
-                                'baseword', $queryBuilder->createNamedParameter($queryBuilder->escapeLikeWildcards($arg['s']) . '%')
+                                'index_words.baseword', $queryBuilder->createNamedParameter($queryBuilder->escapeLikeWildcards($arg['s']) . '%')
+                        ),
+                        $queryBuilder->expr()->eq(
+                                'ip.sys_language_uid', (int) $languageId
                         )
                 )
                 ->setMaxResults($maxResults)
@@ -86,6 +102,7 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     }
 
     private function searchASite($arg, $maxResults) {
+        $languageId = $GLOBALS['TSFE']->sys_language_uid;
         $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
 
         $configurationManager = $objectManager->get('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManagerInterface');
@@ -107,7 +124,7 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         $settings = $setting['plugin.']['tx_indexedsearch.']['settings.'];
         $searchData = [
             'sortOrder' => 'rank_flag',
-            'languageUid' => -1,
+            'languageUid' => (int) $languageId,
             'sortDesc' => true,
             'searchType' => true,
             'numberOfResults' => $maxResults,
