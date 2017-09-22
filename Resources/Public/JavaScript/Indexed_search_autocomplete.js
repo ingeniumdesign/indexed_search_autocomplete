@@ -32,6 +32,7 @@ function initIndexSearchAutocomplete() {
         }
         
        
+       $results.addClass('autocomplete_searching');
         
         $.ajax({
             url: $results.data('searchurl'),
@@ -43,7 +44,7 @@ function initIndexSearchAutocomplete() {
                 mr: maxResults
             },
             success: function (data) {
-               $results.html(data);
+               $results.html(data).removeClass('autocomplete_searching');
             }
         });
     });
