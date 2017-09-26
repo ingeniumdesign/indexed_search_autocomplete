@@ -14,22 +14,11 @@
 	margin: 0;
 	border: 1px solid #AAAAAA;
 }
-
 .tx-indexedsearch-autocomplete ul li.even {
 	background: #E5E5E5;
 }
-
 .tx-indexedsearch-autocomplete ul li.odd {
 	background: #FFFFFF;
-}
-
-.tx-indexedsearch-autocomplete iframe {
-	display:none;/*sorry for IE5*/
-	display/**/:block;/*sorry for IE5*/
-	position:absolute;
-	top:0;
-	left:0;
-	z-index:-1;
 }
 .tx-indexedsearch-autocomplete li {
 	padding: 2px 5px;
