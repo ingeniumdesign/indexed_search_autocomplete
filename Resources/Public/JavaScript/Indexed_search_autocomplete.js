@@ -5,7 +5,8 @@ jQuery(document).ready(function(){
 });
 
 function initIndexSearchAutocomplete() {
-    jQuery('.search, .tx-indexedsearch-searchbox-sword, .indexed-search-atocomplete-sword').on('keyup', function() {
+    jQuery('input.search, input.tx-indexedsearch-searchbox-sword, input.indexed-search-atocomplete-sword').on('keyup', function() {
+        var $input = $(this);
         var $elem = $(this);
         var $results;
         while($elem.prop("tagName") !== 'HTML') {
@@ -44,7 +45,18 @@ function initIndexSearchAutocomplete() {
                 mr: maxResults
             },
             success: function (data) {
-               $results.html(data).removeClass('autocomplete_searching');
+               $li = $results
+                    .show()
+                    .html(data)
+                    .removeClass('autocomplete_searching')
+                    .find('li');
+                $li.click(function() {
+                    $input.val($(this).text().trim());
+                    $results.html('').hide();
+                });
+                if ($li.length === 0) {
+                    $results.html('').hide();
+                }
             }
         });
     });

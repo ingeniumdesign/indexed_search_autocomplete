@@ -82,7 +82,9 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 
         $autocomplete = [];
         while ($row = $result->fetch()) {
-            $autocomplete[] = $row['baseword'];
+            if ($row['baseword'] !== $arg['s']) {
+                $autocomplete[] = $row['baseword'];
+            }
         }
 
         return [
