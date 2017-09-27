@@ -1,11 +1,10 @@
-==================================================
 Indexed Search Autocomplete
-==================================================
+===========================
 
 Extends the TYPO3 Core Extension Indexed_Search searchform with an autocomplete feature.
 
 Minimal Dependencies
-====================
+--------------------
 
 * TYPO3 CMS 8.7 or greater
 
@@ -31,6 +30,11 @@ Options
 * data-maxresults="10" => The amount of entrys a suggetion can have max. (Fluid)
 * data-minlength="2" => how many characters have to be in the input-box for the plugin to make it's first suggestion. (Fluid)
 
+GIT
+---
+
+We are on github:
+https://github.com/ingeniumdesign/indexed_search_autocomplete
 
 Contact &amp; Communication
 =======================
