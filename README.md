@@ -4,7 +4,9 @@ Extends the TYPO3 Core Extension Indexed_Search searchform with an autocomplete 
 
 ## Minimal Dependencies
 
-* TYPO3 CMS 8.7 or greater
+* TYPO3 CMS 8.7.x
+* PHP 7.x
+* Jquery 1.x
 
 # Quick Install Guide
 
