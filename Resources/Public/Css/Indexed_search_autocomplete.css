@@ -26,9 +26,9 @@
 .tx-indexedsearch-autocomplete a {
 	width: 100%;
 }
-.tx-indexedsearch-autocomplete {
+.tx-indexedsearch-autocomplete .autocomplete_searching {
 	background:#FFFFFF url('../Images/Indicator.gif') no-repeat right center;
 }
-.tx-indexedsearch-autocomplete .over {
+.tx-indexedsearch-autocomplete .highlighted {
 	background-color: #A7CDF0 !important;
 }

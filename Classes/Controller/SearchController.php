@@ -77,6 +77,7 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
                                 'ip.sys_language_uid', (int) $languageId
                         )
                 )
+                ->groupBy('index_words.baseword')
                 ->setMaxResults($maxResults)
                 ->execute();
 
