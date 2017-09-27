@@ -21,6 +21,8 @@ function initIndexSearchAutocomplete() {
             return ;
         }
         
+        var mode = typeof $results.data('mode') === 'undefined' ? 'word' : $results.data('mode');
+        
         // navigate through the suggestion-results
         if (e.which === 38 || e.which === 40 || e.keyCode === 10 || e.keyCode === 13) { // up / down / enter
             
@@ -51,7 +53,11 @@ function initIndexSearchAutocomplete() {
             
             if ((e.keyCode === 10 || e.keyCode === 13) && e.type === 'keypress') { // enter
                 if ($results.is(':visible') && $results.find('li.highlighted').length > 0) {
-                    $results.find('li.highlighted').click();
+                    if (mode === 'word') {
+                        $results.find('li.highlighted').click();
+                    } else {
+                        window.location = $results.find('li.highlighted a.navigate-on-enter').attr('href');
+                    }
                     e.preventDefault();
                 }
             }
@@ -68,7 +74,7 @@ function initIndexSearchAutocomplete() {
         var val = $(this).val();
         var minlen = typeof $results.data('minlength') === 'undefined' ? 3 : $results.data('minlength');
         var maxResults = typeof $results.data('maxresults') === 'undefined' ? 10 : $results.data('maxresults');
-        var mode = typeof $results.data('mode') === 'undefined' ? 'word' : $results.data('mode');
+        
         
         if (val.length < minlen) {
             return;
