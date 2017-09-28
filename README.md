@@ -44,5 +44,3 @@ In der Eisenbach 22<br />
 <br />
 http://www.ingeniumdesign.de/<br />
 info@ingeniumdesign.de
-
-## Slack
