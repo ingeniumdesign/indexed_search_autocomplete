@@ -22,7 +22,7 @@ This div is also the one where you can configure most options of the Plugin:
 
 ### Options
 
-* Enable or Disable the JQuery-Source in the Extension Settings. (Backend)
+* Enable or Disable the JQuery-Source in the Extension Settings. (Backend -> Extension-Settings)
 * data-mode="word" => the following values are possible: word or link. Depending on which option the plugin suggests either words or links while typing. You can edit both template files unter indexed_search_autocomplete/Resources/Private/Partials/ (Fluid)
 * data-maxresults="10" => The amount of entrys a suggetion can have max. (Fluid)
 * data-minlength="2" => how many characters have to be in the input-box for the plugin to make it's first suggestion. (Fluid)
