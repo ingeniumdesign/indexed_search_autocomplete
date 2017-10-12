@@ -5,7 +5,7 @@ jQuery(document).ready(function(){
 });
 
 function initIndexSearchAutocomplete() {
-    jQuery('input.search, input.tx-indexedsearch-searchbox-sword, input.indexed-search-atocomplete-sword').on('keypress keyup', function(e) {
+    jQuery('input.search, input.tx-indexedsearch-searchbox-sword, input.indexed-search-atocomplete-sword, input.indexed-search-autocomplete-sword').on('keypress keyup', function(e) {
         var $input = $(this);
         var $elem = $(this);
         var $results;
