@@ -1,4 +1,4 @@
-# IndexedSearchAutocomplete Version 1.0.0
+# IndexedSearchAutocomplete Version 1.0.1
 
 ## BREAKING
 - [TASK] Sample Text
