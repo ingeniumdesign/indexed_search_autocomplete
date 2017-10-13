@@ -21,7 +21,9 @@ Step 2: Find the fluid file that contains the text-input for the search-word.
 Step 3: Add the class '.indexed-search-autocomplete-sword' to this text-input.
 
 Step 4: Now add the following line where you want the results to be displayed (so in most of the cases below the text-input):
-<div class="search-autocomplete-results" data-mode="word" data-maxresults="10" data-minlength="2" data-searchurl="{f:uri.action(action: 'search', pageType: '7423794', noCache: 1, noCacheHash: 1)}"></div>
+```html
+<div class="search-autocomplete-results" data-mode="word" data-searchonclick="false" data-maxresults="10" data-minlength="2" data-searchurl="{f:uri.action(action: 'search', pageType: '7423794', noCache: 1, noCacheHash: 1, extensionName: 'indexedSearchAutocomplete', controller: 'Search')}"></div>
+```
 
 Step 5: Now you can configure the plugins options with the parameters of that <Div> (see options)
 
@@ -31,6 +33,7 @@ Step 5: Now you can configure the plugins options with the parameters of that <D
 * data-mode="word" => the following values are possible: word or link. Depending on which option the plugin suggests either words or links while typing. You can edit both template files unter indexed_search_autocomplete/Resources/Private/Partials/ (Fluid)
 * data-maxresults="10" => The amount of entrys a suggetion can have max. (Fluid)
 * data-minlength="2" => how many characters have to be in the input-box for the plugin to make it's first suggestion. (Fluid)
+* data-searchonclick="false" => If one selects a suggestion, may this submit the form (so basically the search starts after one has selected a word). Possible values are "false" or "true". 
 
 # Contact &amp; Communication
 

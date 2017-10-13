@@ -22,6 +22,7 @@ function initIndexSearchAutocomplete() {
         }
         
         var mode = typeof $results.data('mode') === 'undefined' ? 'word' : $results.data('mode');
+        var soc = $results.data('searchonclick') == true;
         
         // navigate through the suggestion-results
         if (e.which === 38 || e.which === 40 || e.keyCode === 10 || e.keyCode === 13) { // up / down / enter
@@ -55,6 +56,9 @@ function initIndexSearchAutocomplete() {
                 if ($results.is(':visible') && $results.find('li.highlighted').length > 0) {
                     if (mode === 'word') {
                         $results.find('li.highlighted').click();
+                        if (soc) {
+                            $input.closest('form').submit();
+                        }
                     } else {
                         window.location = $results.find('li.highlighted a.navigate-on-enter').attr('href');
                     }
