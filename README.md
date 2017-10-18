@@ -52,3 +52,8 @@ In der Eisenbach 22<br />
 <br />
 http://www.ingeniumdesign.de/<br />
 info@ingeniumdesign.de
+
+## Reference
+
+We searching for LIVE-Rederence or Live-Example for the TYPO3 indexed_search Autocomplete Extension.
+Please send us an E-Mail. Thanks!
