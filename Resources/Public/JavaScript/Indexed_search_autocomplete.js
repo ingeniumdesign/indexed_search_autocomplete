@@ -1,5 +1,5 @@
 jQuery(document).ready(function(){
-    if (jQuery('.search').length > 0) {
+    if (jQuery('input.search, input.tx-indexedsearch-searchbox-sword, input.indexed-search-atocomplete-sword, input.indexed-search-autocomplete-sword').length > 0) {
         initIndexSearchAutocomplete();
     }
 });
