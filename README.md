@@ -55,5 +55,5 @@ info@ingeniumdesign.de
 
 ## Reference
 
-We searching for LIVE-Rederence or Live-Example for the TYPO3 indexed_search Autocomplete Extension.
+We searching for LIVE-Reference or Live-Example for the TYPO3 indexed_search Autocomplete Extension.
 Please send us an E-Mail. Thanks!
