@@ -1,0 +1,37 @@
+{
+  "name": "ID/indexed_search_autocomplete",
+  "type": "typo3-cms-extension",
+  "description": "Indexed Search Autocomplete",
+  "homepage": "http://www.ingeniumdesign.de",
+  "license": [
+    "MIT"
+  ],
+  "authors": [
+    {
+      "name": "Sebastian Schmal",
+      "email": "info@ingeniumdesign.de"
+    }
+  ],
+  "keywords": [
+    "typo3",
+    "cms",
+    "ingeniumdesign",
+    "autocomplete"
+  ],
+  "version": "1.0.3",
+  "replace": {
+    "typo3-ter/indexed_search_autocomplete": "*",
+    "indexed_search_autocomplete": "*"
+  },
+  "require": {
+    "typo3/cms-core": ">=8.7.0"
+  },
+  "suggest": {
+
+  },
+  "autoload": {
+    "psr-4": {
+      "ID\\IndexedSearchAutocomplete\\": "Classes/"
+    }
+  }
+}

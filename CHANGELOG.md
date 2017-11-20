@@ -1,8 +1,16 @@
+# IndexedSearchAutocomplete Version 1.0.3
+
+
+## FEATURE
+- Added Composer Support
+
+
+
 # IndexedSearchAutocomplete Version 1.0.2
 
 
 ## BUGFIX
-- Due to a Bug in JS the JS-Code did not got initialized properly evvery time
+- Due to a Bug in JS the JS-Code did not got initialized properly every time
 
 
 
