@@ -27,6 +27,8 @@ Step 4: Now add the following line where you want the results to be displayed (s
 
 Step 5: Now you can configure the plugins options with the parameters of that <Div> (see options)
 
+Additional: Make sure to disable Indexed-Search option "Use MySQL specific fulltext search", otherwise the word-suggestion won't work.
+
 ### Options
 
 * Enable or Disable the JQuery-Source in the Extension Settings. (Backend -> Extension-Settings)
