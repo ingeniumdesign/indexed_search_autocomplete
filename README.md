@@ -57,5 +57,9 @@ info@ingeniumdesign.de
 
 ## Reference
 
-We searching for LIVE-Reference or Live-Example for the TYPO3 indexed_search Autocomplete Extension.
+We searching for LIVE-Reference or Live-Example for the TYPO3 indexed_search Autocomplete Extension.<br />
 Please send us an E-Mail. Thanks!
+
+**Links:**
+
+https://www.wirtschaft-macht-klimaschutz.de/ - by wilhelm innovative medien GmbH
