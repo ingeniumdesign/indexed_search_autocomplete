@@ -55,6 +55,13 @@ In der Eisenbach 22<br />
 http://www.ingeniumdesign.de/<br />
 info@ingeniumdesign.de
 
+## Donate
+
+BTC: 1Emte6AxnifWqt7N8vSqSF7JK1K6CYuBj4<br />
+LTC: Lfs2F8DabYuunxYw2ym9CRLAMBKZUaaBNh<br />
+ETH: 0x95298b41564f070bc83bc76159bb7804d26483d6<br />
+PayPay: www.paypal.me/INGENIUMDESIGN/
+
 ## Reference
 
 We searching for LIVE-Reference or Live-Example for the TYPO3 indexed_search Autocomplete Extension.<br />
