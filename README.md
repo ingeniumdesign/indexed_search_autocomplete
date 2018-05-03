@@ -63,12 +63,12 @@ LTC: Lfs2F8DabYuunxYw2ym9CRLAMBKZUaaBNh<br />
 ETH: 0x95298b41564f070bc83bc76159bb7804d26483d6<br />
 PayPay: www.paypal.me/INGENIUMDESIGN/
 
-## Reference
+## Used by
 
-We searching for LIVE-Reference or Live-Example for the TYPO3 indexed_search Autocomplete Extension.<br />
-Please send us an E-Mail. Thanks!
+We are searching for LIVE-References or Live-Examples for the TYPO3 indexed_search Autocomplete Extension.<br />
+Please be so kind to send us an E-Mail if you're using it. Thanks!
 
-**Links/Referenzen:**
+**Links/References:**
 
 https://www.easy-sprachreisen.de/ - by INGENIUMDESIGN<br />
 https://www.wirtschaft-macht-klimaschutz.de/ - by wilhelm innovative medien GmbH
