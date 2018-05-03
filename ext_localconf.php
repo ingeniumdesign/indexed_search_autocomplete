@@ -32,7 +32,7 @@ if (!$myConf['disableJquerySource']) {
 	),
 	// non-cacheable actions
 	array(
-		'Entry' => 'search',
+		'Search' => 'search',
 		
 	)
 );

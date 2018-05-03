@@ -22,7 +22,7 @@ Step 3: Add the class '.indexed-search-autocomplete-sword' to this text-input.
 
 Step 4: Now add the following line where you want the results to be displayed (so in most of the cases below the text-input):
 ```html
-<div class="search-autocomplete-results" data-mode="word" data-searchonclick="false" data-maxresults="10" data-minlength="2" data-searchurl="{f:uri.action(action: 'search', pageType: '7423794', noCache: 1, noCacheHash: 1, extensionName: 'indexedSearchAutocomplete', controller: 'Search')}"></div>
+<div class="search-autocomplete-results  no-results" data-mode="word" data-searchonclick="false" data-maxresults="10" data-minlength="2" data-searchurl="{f:uri.action(action: 'search', pageType: '7423794', noCache: 1, noCacheHash: 1, extensionName: 'indexedSearchAutocomplete', controller: 'Search')}"></div>
 ```
 
 Step 5: Now you can configure the plugins options with the parameters of that <Div> (see options)

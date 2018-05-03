@@ -5,7 +5,8 @@ jQuery(document).ready(function(){
 });
 
 function initIndexSearchAutocomplete() {
-    jQuery('input.search, input.tx-indexedsearch-searchbox-sword, input.indexed-search-atocomplete-sword, input.indexed-search-autocomplete-sword').on('keypress keyup', function(e) {
+    jQuery('input.search, input.tx-indexedsearch-searchbox-sword, input.indexed-search-atocomplete-sword, input.indexed-search-autocomplete-sword')
+       .on('keypress keyup', function(e) {
         var $input = $(this);
         var $elem = $(this);
         var $results;
@@ -73,7 +74,7 @@ function initIndexSearchAutocomplete() {
             return;
         }
         
-        $results.html('');
+        $results.html('').hide().removeClass('results').addClass('no-results');
         
         var val = $(this).val();
         var minlen = typeof $results.data('minlength') === 'undefined' ? 3 : $results.data('minlength');
@@ -106,10 +107,31 @@ function initIndexSearchAutocomplete() {
                     $input.val($(this).text().trim());
                     $results.html('').hide();
                 });
-                if ($li.length === 0) {
+                if ($li.length == 0) {
                     $results.html('').hide();
+                    $results.removeClass('results').addClass('no-results');
+                } else {
+                    $results.removeClass('no-results').addClass('results');
                 }
             }
         });
     }).attr('autocomplete', 'off');
+
+    $('*').click(function() {
+       var elem = $(this);
+       var targetClass = '.search-autocomplete-results';
+
+       if ($('.search-autocomplete-results > *').length == 0) {
+           return; // Result-Div is not shown
+       }
+
+       while(elem.prop("tagName") != 'HTML' && !elem.hasClass(targetClass)) {
+           elem = elem.parent();
+       }
+
+       if (elem.prop("tagName") == 'HTML') {
+           $(targetClass).html('').hide().removeClass('results').addClass('no-results');
+       }
+
+    });
 }
