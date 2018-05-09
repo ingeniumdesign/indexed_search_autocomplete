@@ -1,15 +1,13 @@
-# IndexedSearchAutocomplete Version 1.0.4
+# IndexedSearchAutocomplete Version 1.0.5
 
 ## FEATURE
 - If the search-suggestion-div is opened now you can close it by clicking somewhere else
-
 
 
 # IndexedSearchAutocomplete Version 1.0.4
 
 ## FEATURE
 - Added a class to the results-div (".search-autocomplete-results") that shows if there are results ("results", "no-results").
-
 
 
 # IndexedSearchAutocomplete Version 1.0.3
@@ -23,7 +21,6 @@
 
 ## BUGFIX
 - Due to a Bug in JS the JS-Code did not got initialized properly every time
-
 
 
 # IndexedSearchAutocomplete Version 1.0.1
