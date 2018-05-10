@@ -57,6 +57,7 @@ info@ingeniumdesign.de
 
 ## Donate
 
+Amazon: https://www.amazon.de/hz/wishlist/ls/13RT2BFNRP05<br />
 Patreon: https://www.patreon.com/typo3probleme/<br />
 BTC: 1Emte6AxnifWqt7N8vSqSF7JK1K6CYuBj4<br />
 LTC: Lfs2F8DabYuunxYw2ym9CRLAMBKZUaaBNh<br />
