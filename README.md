@@ -72,9 +72,5 @@ Please be so kind to send us an E-Mail if you're using it. Thanks!
 **Links/References:**
 
 https://www.easy-sprachreisen.de/ - by INGENIUMDESIGN<br />
-<<<<<<< HEAD
 https://www.wirtschaft-macht-klimaschutz.de/ - by wilhelm innovative medien GmbH<br />
-=======
 https://www.wirtschaft-macht-klimaschutz.de/ - by wilhelm innovative medien GmbH
->>>>>>> b303e6cac110849e32a1fa79257cb8ecaeca66d8
-https://www.radprax.de/ - by wilhelm innovative medien GmbH
