@@ -13,7 +13,7 @@
  *
  * ************************************************************* */
 
-namespace ID\indexedSearchAutocomplete\Controller;
+namespace Id\IndexedSearchAutocomplete\Controller;
 
 /**
  * EntryController
@@ -30,7 +30,7 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      /**
       * Search functions
       * 
-      * @var ID\IndexedSearchAutocomplete\Service\SearchService
+      * @var Id\IndexedSearchAutocomplete\Service\SearchService
       * @inject
       */
     protected $searchService = null;

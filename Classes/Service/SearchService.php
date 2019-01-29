@@ -13,7 +13,7 @@
  *
  * ************************************************************* */
 
-namespace ID\indexedSearchAutocomplete\Service;
+namespace Id\IndexedSearchAutocomplete\Service;
 
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;

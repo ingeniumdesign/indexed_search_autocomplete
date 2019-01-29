@@ -24,7 +24,7 @@ if (!$myConf['disableJquerySource']) {
 
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-	'ID.' . $_EXTKEY,
+	'Id.' . $_EXTKEY,
 	'Search',
 	array(
 		'Search' => 'search',
