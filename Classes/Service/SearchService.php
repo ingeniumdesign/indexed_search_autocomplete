@@ -118,7 +118,7 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface  {
 
         return [
             'autocompleteResults' => $result,
-            'mode' => 'link'
+            'mode' => $arg['m']
         ];
     }
 
