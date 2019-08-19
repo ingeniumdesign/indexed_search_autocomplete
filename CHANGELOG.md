@@ -1,8 +1,10 @@
 # IndexedSearchAutocomplete Version 1.0.6
 
 ## FEATURE
+- Supports Typo3 9
 - Request to the server becomes sent after that user has stopped typing for 250ms. This reduces the amount of requests sent.
- 
+##FIX
+- rootPidList-Parameter of the indexed_search-Extension gets used in word&link-mode  
 
 # IndexedSearchAutocomplete Version 1.0.5
 
