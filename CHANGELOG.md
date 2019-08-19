@@ -1,3 +1,9 @@
+# IndexedSearchAutocomplete Version 1.0.6
+
+## FEATURE
+- Request to the server becomes sent after that user has stopped typing for 250ms. This reduces the amount of requests sent.
+ 
+
 # IndexedSearchAutocomplete Version 1.0.5
 
 ## FEATURE
