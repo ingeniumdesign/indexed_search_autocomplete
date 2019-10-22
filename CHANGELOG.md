@@ -1,3 +1,9 @@
+# IndexedSearchAutocomplete Version 1.0.7
+
+##FIX
+- bug in multilanguage handling  
+
+
 # IndexedSearchAutocomplete Version 1.0.6
 
 ## FEATURE

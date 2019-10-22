@@ -47,9 +47,7 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
             return trim($a);
         }, explode(',', $setting['plugin.']['tx_indexedsearch.']['settings.']['rootPidList']));
         $qbPage = $connectionPool->getQueryBuilderForTable('pages');
-        $pages = $qbPage->select('uid', 'pid')->from('pages')->where($qbPage->expr()->eq(
-            'sys_language_uid', (int)$languageId
-        ))->execute();
+        $pages = $qbPage->select('uid', 'pid')->from('pages')->execute();
 
         // Create a Map in the style of <Parent-ID> -> <child-IDs>
         $pageMap = [];
@@ -97,6 +95,9 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
                         $allowedPageIds,
                         \TYPO3\CMS\Core\Database\Connection::PARAM_INT_ARRAY
                     )
+                ),
+                $qbWords->expr()->eq(
+                    'ip.sys_language_uid', (int) $languageId
                 )
             )
             ->groupBy('index_words.baseword')
