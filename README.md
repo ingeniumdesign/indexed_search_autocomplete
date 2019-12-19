@@ -4,7 +4,7 @@ Extends the TYPO3 Core Extension Indexed_Search searchform with an autocomplete 
 
 ## Minimal Dependencies
 
-* TYPO3 CMS 8.7.x
+* TYPO3 CMS 8.7.x - 9.5.x
 * PHP 7.x
 * Jquery 1.x
 
@@ -58,10 +58,6 @@ info@ingeniumdesign.de
 ## Donate
 
 Amazon: https://www.amazon.de/hz/wishlist/ls/13RT2BFNRP05<br />
-Patreon: https://www.patreon.com/typo3probleme/<br />
-BTC: 1Emte6AxnifWqt7N8vSqSF7JK1K6CYuBj4<br />
-LTC: Lfs2F8DabYuunxYw2ym9CRLAMBKZUaaBNh<br />
-ETH: 0x95298b41564f070bc83bc76159bb7804d26483d6<br />
 PayPay: www.paypal.me/INGENIUMDESIGN/
 
 ## Used by
