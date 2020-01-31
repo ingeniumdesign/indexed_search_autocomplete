@@ -15,25 +15,28 @@
 
 namespace ID\indexedSearchAutocomplete\Controller;
 
+use ID\IndexedSearchAutocomplete\Service\SearchService;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\IndexedSearch\Domain\Repository\IndexSearchRepository;
+
 /**
  * EntryController
  */
-class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
+class SearchController extends ActionController {
 
     /**
      * Search repository
      *
-     * @var \TYPO3\CMS\IndexedSearch\Domain\Repository\IndexSearchRepository
+     * @var IndexSearchRepository
      */
-    protected $searchRepository = null;
+    protected $searchRepository;
     
      /**
       * Search functions
       * 
-      * @var ID\IndexedSearchAutocomplete\Service\SearchService
-      * @inject
+      * @var SearchService
       */
-    protected $searchService = null;
+    protected $searchService;
 
     /**
      * action search
@@ -54,5 +57,13 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         foreach ($result as $key => $value) {
             $this->view->assign($key, $value);
         }
+    }
+    
+    /**
+     * @param SearchService $searchService
+     * @return void
+     */
+    public function injectSearchService(SearchService $searchService) {
+        $this->searchService = $searchService;
     }
 }
