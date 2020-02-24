@@ -42,6 +42,5 @@ search {
         admPanel = 0
     }
 
-    10 = COA
     10 < tt_content.list.20.indexedsearchautocomplete_search
 }

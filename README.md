@@ -24,6 +24,16 @@ Step 4: Now add the following line where you want the results to be displayed (s
 ```html
 <div class="search-autocomplete-results  no-results" data-mode="word" data-searchonclick="false" data-maxresults="10" data-minlength="2" data-searchurl="{f:uri.action(action: 'search', pageType: '7423794', noCache: 1, noCacheHash: 1, extensionName: 'indexedSearchAutocomplete', controller: 'Search')}"></div>
 ```
+#####Note TYPO3 9.5:
+If you use the sites config.yaml, please add the routeEnhancers MAP:
+```html
+routeEnhancers:
+  PageTypeSuffix:
+    ...
+    ...
+    map:
+      'autocomplete': 7423794
+```
 
 Step 5: Now you can configure the plugins options with the parameters of that <Div> (see options)
 
