@@ -16,7 +16,7 @@ plugin {
         }
 
         settings {
-                wordTemplateFile = testtest
+
         }
     }
 }
