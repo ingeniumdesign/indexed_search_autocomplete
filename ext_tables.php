@@ -1,6 +1,15 @@
 <?php
-if (!defined('TYPO3_MODE')) {
-    die('Access denied.');
-}
+defined('TYPO3_MODE') or die();
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY,'Configuration/TypoScript/', 'Indexed Search AutoComplete');
+(function(){
+
+    // Register Typoscript
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
+        'indexed_search_autocomplete',
+        'Configuration/TypoScript/',
+        'Indexed Search AutoComplete'
+    );
+
+})();
+
+

@@ -15,8 +15,13 @@
 
 namespace ID\indexedSearchAutocomplete\Controller;
 
+use TYPO3\CMS\Extbase\Annotation\Inject;
+
+
 /**
- * EntryController
+ * SearchController
+ *
+ * This controller receives the search and handles them.
  */
 class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 
@@ -30,8 +35,8 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      /**
       * Search functions
       * 
-      * @var ID\IndexedSearchAutocomplete\Service\SearchService
-      * @inject
+      * @var \ID\IndexedSearchAutocomplete\Service\SearchService
+      * @Inject
       */
     protected $searchService = null;
 
@@ -41,16 +46,18 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      * @return string
      */
     public function SearchAction() {
-        $arg = $_REQUEST;
-        $searchmode = $arg['m'];
 
-        $result = [];
-        if ($searchmode == 'word') {
-            $result = $this->searchService->searchAWord($arg, $arg['mr']);
+        // Fetch the request
+        $arg = $_REQUEST;
+
+        // Check which search to perform
+        if ($arg['m'] == 'word') {
+            $result = $this->searchService->searchAWord($arg);
         } else {
-            $result = $this->searchService->searchASite($arg, $arg['mr']);
+            $result = $this->searchService->searchASite($arg);
         }
 
+        // Assign the results
         foreach ($result as $key => $value) {
             $this->view->assign($key, $value);
         }

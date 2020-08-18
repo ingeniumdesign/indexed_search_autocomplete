@@ -2,22 +2,16 @@
 /************************************************************************
  * Extension Manager/Repository config file for ext "indexed_search_autocomplete".
  ************************************************************************/
+
 $EM_CONF[$_EXTKEY] = [
     'title' => 'Indexed Search Autocomplete',
     'description' => 'Extends the TYPO3 Core Extension Indexed_Search searchform with an autocomplete feature.',
     'category' => 'fe',
     'constraints' => [
         'depends' => [
-            'typo3' => '8.7.0-9.7.99',
+            'typo3' => '9.0.0-10.9.99',
         ],
-        'conflicts' => [
-
-        ],
-    ],
-    'autoload' => [
-        'psr-4' => [
-            'ID\\IndexedSearchAutocomplete\\' => 'Classes'
-        ],
+        'conflicts' => [],
     ],
     'state' => 'stable',
     'uploadfolder' => 0,

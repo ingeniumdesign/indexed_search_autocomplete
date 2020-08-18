@@ -31,7 +31,7 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
      */
     protected $searchRepository = null;
 
-    public function searchAWord($arg, $maxResults)
+    public function searchAWord($arg)
     {
         $languageId = $GLOBALS['TSFE']->sys_language_uid;
         $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
@@ -101,7 +101,7 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
                 )
             )
             ->groupBy('index_words.baseword')
-            ->setMaxResults($maxResults)
+            ->setMaxResults((int) $arg['mr'])
             ->execute();
 
         $autocomplete = [];
@@ -117,7 +117,7 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
         ];
     }
 
-    public function searchASite($arg, $maxResults)
+    public function searchASite($arg)
     {
         $languageId = $GLOBALS['TSFE']->sys_language_uid;
         $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
@@ -142,7 +142,7 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
             'languageUid' => (int)$languageId,
             'sortDesc' => true,
             'searchType' => true,
-            'numberOfResults' => $maxResults,
+            'numberOfResults' => (int) $arg['mr'],
             'sword' => $arg['s']
         ];
 

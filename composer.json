@@ -18,20 +18,20 @@
     "ingeniumdesign",
     "autocomplete"
   ],
-  "version": "1.0.7",
+  "version": "1.0.8",
   "replace": {
     "typo3-ter/indexed_search_autocomplete": "*",
     "indexed_search_autocomplete": "*"
   },
   "require": {
-    "typo3/cms-core": ">=8.7.0"
+    "typo3/cms-core": ">=9.0.0"
   },
   "suggest": {
 
   },
   "autoload": {
     "psr-4": {
-      "ID\\IndexedSearchAutocomplete\\": "Classes/"
+      "ID\\IndexedSearchAutocomplete\\": "Classes"
     }
   }
 }

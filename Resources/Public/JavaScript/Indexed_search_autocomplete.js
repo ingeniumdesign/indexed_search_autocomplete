@@ -1,14 +1,28 @@
+
+
 jQuery(document).ready(function () {
-    if (jQuery('input.search, input.tx-indexedsearch-searchbox-sword, input.indexed-search-atocomplete-sword, input.indexed-search-autocomplete-sword').length > 0) {
-        initIndexSearchAutocomplete();
-    }
+
+    // Init
+    new IndexSearchAutoComplete();
 });
 
-var indexedSearchAutocompleteDebounceInterval = null; // Used to reduce the amount of querys
-function initIndexSearchAutocomplete() {
-    jQuery('input.search, input.tx-indexedsearch-searchbox-sword, input.indexed-search-atocomplete-sword, input.indexed-search-autocomplete-sword')
-        .on('keypress keyup', indexedSearchAutocomplete).attr('autocomplete', 'off');
 
+function IndexSearchAutoComplete() {
+    var debounceTimeout = null; // Used to reduce the amount of querys
+    var lastSearchQuery = ''; // Used to reduce the amount of querys
+
+    // Check whether there is an input box to apply the autocomplete to
+    if (jQuery('input.search, input.tx-indexedsearch-searchbox-sword, input.indexed-search-atocomplete-sword, input.indexed-search-autocomplete-sword').length == 0)
+        return;
+
+    // Initialise the autocomplete
+    var that = this;
+    jQuery('input.search, input.tx-indexedsearch-searchbox-sword, input.indexed-search-atocomplete-sword, input.indexed-search-autocomplete-sword')
+        .on('keypress keyup', function (e) {
+            that.autocomplete(e, this);
+        }).attr('autocomplete', 'off');
+
+    // When a click is performed somewhere on the page, remove the autocomplete-box
     $('*').click(function () {
         var elem = $(this);
         var targetClass = '.search-autocomplete-results';
@@ -26,12 +40,22 @@ function initIndexSearchAutocomplete() {
         }
 
     });
+
 }
 
-function indexedSearchAutocomplete(e) {
-    var $input = $(this);
-    var $elem = $(this);
+
+/**
+ * Autocomplete a query
+ *
+ * @param e jQuery-Event which gets fired in case of a keypress
+ */
+IndexSearchAutoComplete.prototype.autocomplete = function(e, ref) {
+    var $input = $(ref);
+    var $elem = $(ref);
     var $results;
+
+    // Find the corrosponding div for the results
+    var cnt = 0;
     while ($elem.prop("tagName") !== 'HTML') {
         $results = $elem.find('.search-autocomplete-results');
         if ($results.length > 0) {
@@ -44,10 +68,11 @@ function indexedSearchAutocomplete(e) {
         return;
     }
 
+    // Retrive options
     var mode = typeof $results.data('mode') === 'undefined' ? 'word' : $results.data('mode');
     var soc = $results.data('searchonclick') == true;
 
-    // navigate through the suggestion-results
+    // navigate through the suggestions/results
     if (e.which === 38 || e.which === 40 || e.keyCode === 10 || e.keyCode === 13) { // up / down / enter
 
         if (e.which === 38 && e.type === 'keyup') { // up
@@ -79,6 +104,8 @@ function indexedSearchAutocomplete(e) {
             if ($results.is(':visible') && $results.find('li.highlighted').length > 0) {
                 if (mode === 'word') {
                     $results.find('li.highlighted').click();
+
+                    // Search on click
                     if (soc) {
                         $input.closest('form').submit();
                     }
@@ -92,28 +119,47 @@ function indexedSearchAutocomplete(e) {
         return;
     }
 
-    if (e.type !== 'keyup') {
+    // Catch left / right arrow keys
+    if (e.keyCode === 37 || e.keyCode === 39)
         return;
-    }
 
+    // Do only start a query if a key is released to save querys
+    if (e.type !== 'keyup')
+        return;
+
+    // Empty the results
     $results.html('').hide().removeClass('results').addClass('no-results');
 
-    var val = $(this).val();
+    // Retrive the query
+    var val = $(ref).val().trim();
     var minlen = typeof $results.data('minlength') === 'undefined' ? 3 : $results.data('minlength');
     var maxResults = typeof $results.data('maxresults') === 'undefined' ? 10 : $results.data('maxresults');
 
-
-    if (val.length < minlen) {
+    // Check if the query is long enough
+    if (val.length < minlen)
         return;
-    }
 
+    // Check whether the search term changed
+    if (val == this.lastSearchQuery)
+        return;
 
+    // Set the old query value
+    this.lastSearchQuery = val;
+
+    // tell the user the search is running
     $results.addClass('autocomplete_searching');
 
+    // Perform the query
+    this.performQuery(val, mode, maxResults, $results, $input);
+}
+
+
+IndexSearchAutoComplete.prototype.performQuery = function(val, mode, maxResults, $results, $input) {
+
     // Debounce
-    clearInterval(indexedSearchAutocompleteDebounceInterval);
-    indexedSearchAutocompleteDebounceInterval = setInterval(function() {
-        clearInterval(indexedSearchAutocompleteDebounceInterval);
+    clearTimeout(this.debounceTimeout);
+    this.debounceTimeout = setTimeout(function() {
+        clearTimeout(this.debounceTimeout);
 
         // Execute the query
         $.ajax({
@@ -126,19 +172,29 @@ function indexedSearchAutocomplete(e) {
                 mr: maxResults
             },
             success: function (data) {
+
+                // Insert the results
                 $li = $results
                     .show()
                     .html(data)
                     .removeClass('autocomplete_searching')
                     .find('li');
+
+                // Add a click action
                 $li.click(function () {
                     $input.val($(this).text().trim());
                     $results.html('').hide();
                 });
+
+                // Check if there are results and update the FE depending on it
                 if ($li.length == 0) {
+
+                    // No results
                     $results.html('').hide();
                     $results.removeClass('results').addClass('no-results');
                 } else {
+
+                    // Results
                     $results.removeClass('no-results').addClass('results');
                 }
             }

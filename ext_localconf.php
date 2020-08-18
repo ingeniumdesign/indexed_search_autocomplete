@@ -1,38 +1,34 @@
 <?php
-if (!defined('TYPO3_MODE')) {
-    die('Access denied.');
-}
-
-/***************
- * Define TypoScript as content rendering template
- */
-$GLOBALS['TYPO3_CONF_VARS']['FE']['contentRenderingTemplates'][] = 'indexed_search_autocomplete/Configuration/TypoScript/';
+defined('TYPO3_MODE') or die();
 
 
-/***************
- * Make the extension configuration accessible
- */
-$myConf = $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$_EXTKEY];
-if (!is_array($myConf)) {
-    $myConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$_EXTKEY]);
-}
+// Setup
+(function(){
 
-// Add org. Jquery 3.2 in the Frontend
-if (!$myConf['disableJquerySource']) {
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScript($_EXTKEY, 'setup', 'page.includeJSFooterlibs.JquerySource = {$plugin.tx_indexedsearch_autocomplete.jqueryFile}');
-}
+    // Define TypoScript as content rendering template
+    $GLOBALS['TYPO3_CONF_VARS']['FE']['contentRenderingTemplates'][] = 'indexed_search_autocomplete/Configuration/TypoScript/';
 
+    // Retrieve configuration
+    $config = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+        \TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class
+    );
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-	'ID.' . $_EXTKEY,
-	'Search',
-	array(
-		'Search' => 'search',
-		
-	),
-	// non-cacheable actions
-	array(
-		'Search' => 'search',
-		
-	)
-);
+    // Check whether to add Jquery 3.2 to the Frontend
+    if (!$config->get['disableJquerySource']) {
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup('page.includeJSFooterlibs.JquerySource = {$plugin.tx_indexedsearch_autocomplete.jqueryFile}');
+    }
+
+    // Register Application
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+        'ID.indexed_search_autocomplete',
+        'Search',
+        [
+            'Search' => 'search',
+
+        ],
+        [
+            'Search' => 'search',
+
+        ]
+    );
+})();

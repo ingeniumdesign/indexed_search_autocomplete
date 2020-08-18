@@ -1,3 +1,11 @@
+# IndexedSearchAutocomplete Version 1.0.8
+
+## FEATURE
+- Added support for Typo3 10
+##FIX
+- Refractored JavaScript
+
+
 # IndexedSearchAutocomplete Version 1.0.7
 
 ##FIX
@@ -8,14 +16,14 @@
 
 ## FEATURE
 - Supports Typo3 9
-- Request to the server becomes sent after that user has stopped typing for 250ms. This reduces the amount of requests sent.
+- Request to the server are now debounced with a delay of 250ms. This reduces the amount of requests.
 ##FIX
 - rootPidList-Parameter of the indexed_search-Extension gets used in word&link-mode  
 
 # IndexedSearchAutocomplete Version 1.0.5
 
 ## FEATURE
-- If the search-suggestion-div is opened now you can close it by clicking somewhere else
+- If the search-suggestion-div is opened, you can close it by clicking somewhere else
 
 
 # IndexedSearchAutocomplete Version 1.0.4

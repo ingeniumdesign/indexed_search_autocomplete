@@ -4,7 +4,7 @@ Extends the TYPO3 Core Extension Indexed_Search searchform with an autocomplete 
 
 ## Minimal Dependencies
 
-* TYPO3 CMS 8.7.x - 9.5.x
+* TYPO3 CMS 8.7.x
 * PHP 7.x
 * Jquery 1.x
 
@@ -23,16 +23,6 @@ Step 3: Add the class '.indexed-search-autocomplete-sword' to this text-input.
 Step 4: Now add the following line where you want the results to be displayed (so in most of the cases below the text-input):
 ```html
 <div class="search-autocomplete-results  no-results" data-mode="word" data-searchonclick="false" data-maxresults="10" data-minlength="2" data-searchurl="{f:uri.action(action: 'search', pageType: '7423794', noCache: 1, noCacheHash: 1, extensionName: 'indexedSearchAutocomplete', controller: 'Search')}"></div>
-```
-##### Note TYPO3 9.5:
-If you use the sites config.yaml, please add the routeEnhancers MAP:
-```html
-routeEnhancers:
-  PageTypeSuffix:
-    ...
-    ...
-    map:
-      'autocomplete': 7423794
 ```
 
 Step 5: Now you can configure the plugins options with the parameters of that <Div> (see options)
@@ -68,6 +58,10 @@ info@ingeniumdesign.de
 ## Donate
 
 Amazon: https://www.amazon.de/hz/wishlist/ls/13RT2BFNRP05<br />
+Patreon: https://www.patreon.com/typo3probleme/<br />
+BTC: 1Emte6AxnifWqt7N8vSqSF7JK1K6CYuBj4<br />
+LTC: Lfs2F8DabYuunxYw2ym9CRLAMBKZUaaBNh<br />
+ETH: 0x95298b41564f070bc83bc76159bb7804d26483d6<br />
 PayPay: www.paypal.me/INGENIUMDESIGN/
 
 ## Used by
