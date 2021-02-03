@@ -27,7 +27,7 @@ Extends the TYPO3 Core Extension Indexed_Search searchform with an autocomplete 
 
 **Step 5:** Now you can configure the plugins options with the parameters of that <Div> (see options)
 
-**Step6:** TYPO3 Site-Config add the new PAGE typeNum 7423794: 
+**Step 6:** TYPO3 Site-Config add the new PAGE typeNum 7423794: 
 ```yaml
 routeEnhancers:
   PageTypeSuffix:
