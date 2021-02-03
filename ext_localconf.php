@@ -15,7 +15,9 @@ defined('TYPO3_MODE') or die();
 
     // Check whether to add Jquery 3.2 to the Frontend
     if (!$config->get['disableJquerySource']) {
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup('page.includeJSFooterlibs.JquerySource = {$plugin.tx_indexedsearch_autocomplete.jqueryFile}');
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup('
+        page.includeJSFooterlibs.JquerySource = {$plugin.tx_indexedsearch_autocomplete.jqueryFile}
+        ');
     }
 
     // Register Application
