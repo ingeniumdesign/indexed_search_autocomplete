@@ -19,8 +19,7 @@
     "autocomplete"
   ],
   "replace": {
-    "typo3-ter/indexed_search_autocomplete": "*",
-    "indexed_search_autocomplete": "*"
+    "typo3-ter/indexed_search_autocomplete": "self.version"
   },
   "require": {
     "typo3/cms-core": ">=9.0.0"
