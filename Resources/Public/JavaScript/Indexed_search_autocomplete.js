@@ -23,11 +23,11 @@ function IndexSearchAutoComplete() {
         }).attr('autocomplete', 'off');
 
     // When a click is performed somewhere on the page, remove the autocomplete-box
-    $('*').click(function () {
-        var elem = $(this);
+    jQuery('*').click(function () {
+        var elem = jQuery(this);
         var targetClass = '.search-autocomplete-results';
 
-        if ($('.search-autocomplete-results > *').length == 0) {
+        if (jQuery('.search-autocomplete-results > *').length == 0) {
             return; // Result-Div is not shown
         }
 
@@ -36,7 +36,7 @@ function IndexSearchAutoComplete() {
         }
 
         if (elem.prop("tagName") == 'HTML') {
-            $(targetClass).html('').hide().removeClass('results').addClass('no-results');
+            jQuery(targetClass).html('').hide().removeClass('results').addClass('no-results');
         }
 
     });
@@ -50,8 +50,8 @@ function IndexSearchAutoComplete() {
  * @param e jQuery-Event which gets fired in case of a keypress
  */
 IndexSearchAutoComplete.prototype.autocomplete = function(e, ref) {
-    var $input = $(ref);
-    var $elem = $(ref);
+    var $input = jQuery(ref);
+    var $elem = jQuery(ref);
     var $results;
 
     // Find the corrosponding div for the results
@@ -131,7 +131,7 @@ IndexSearchAutoComplete.prototype.autocomplete = function(e, ref) {
     $results.html('').hide().removeClass('results').addClass('no-results');
 
     // Retrive the query
-    var val = $(ref).val().trim();
+    var val = jQuery(ref).val().trim();
     var minlen = typeof $results.data('minlength') === 'undefined' ? 3 : $results.data('minlength');
     var maxResults = typeof $results.data('maxresults') === 'undefined' ? 10 : $results.data('maxresults');
 
@@ -162,7 +162,7 @@ IndexSearchAutoComplete.prototype.performQuery = function(val, mode, maxResults,
         clearTimeout(this.debounceTimeout);
 
         // Execute the query
-        $.ajax({
+        jQuery.ajax({
             url: $results.data('searchurl'),
             cache: false,
             method: 'POST',
@@ -182,7 +182,7 @@ IndexSearchAutoComplete.prototype.performQuery = function(val, mode, maxResults,
 
                 // Add a click action
                 $li.click(function () {
-                    $input.val($(this).text().trim());
+                    $input.val(jQuery(this).text().trim());
                     $results.html('').hide();
                 });
 

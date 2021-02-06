@@ -1,3 +1,15 @@
+# IndexedSearchAutocomplete Version 1.0.10
+
+##FIX
+- fix File permissions
+- Edit Composer.json
+- JS fixed `$` not defined
+
+# IndexedSearchAutocomplete Version 1.0.9
+
+##FIX
+- fix jQuery Setting for TYPO3 9 and 10
+
 # IndexedSearchAutocomplete Version 1.0.8
 
 ## FEATURE

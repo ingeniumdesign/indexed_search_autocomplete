@@ -18,7 +18,6 @@
     "ingeniumdesign",
     "autocomplete"
   ],
-  "version": "1.0.8",
   "replace": {
     "typo3-ter/indexed_search_autocomplete": "*",
     "indexed_search_autocomplete": "*"
