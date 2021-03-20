@@ -31,5 +31,10 @@
     "psr-4": {
       "ID\\IndexedSearchAutocomplete\\": "Classes"
     }
+  },
+  "extra": {
+    "typo3/cms": {
+      "extension-key": "indexed_search_autocomplete"
+    }
   }
 }
