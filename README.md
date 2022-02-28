@@ -23,7 +23,7 @@ Extends the TYPO3 Core Extension Indexed_Search searchform with an autocomplete 
 
 ### Install the TYPO3 Core indexed_search extensions
 
-**Step 1:** The extension works with the TYPO3 Core indexed_search extension. So please install and configure this one first.
+**Step 1:** The extension works with the TYPO3 Core indexed_search extension. So please install and configure this one first. Check final, the "Word Index"  works fine!
 
 **Step 2:** Install this plugin.
 
@@ -41,11 +41,27 @@ composer require id/indexed-search-autocomplete
 
 Download and install the [extension][2] with the extension manager module.
 
-**Step 3:** Find the fluid file that contains the text-input for the search-word.
+**Step 3:** Outsource from the EXT:indexed_search the Partials/Form.html Template. Like this:
+```typoscript
+plugin {
+  tx_indexedsearch {
+    view {
+      templateRootPath = fileadmin/Resources/Plugin/IndexedSearch/Private/Templates/
+      partialRootPath = fileadmin/Resources/Plugin/IndexedSearch/Private/Partials/
+      layoutRootPath = fileadmin/Resources/Plugin/IndexedSearch/Private/Layouts/
+    }
+  }
+}
+```
 
-**Step 4:** Add the class '.indexed-search-autocomplete-sword' to this text-input.
+**Step 4:** Find the fluid file / code line that contains the text-input for the search-word.
 
-**Step 5:** Now add the following line where you want the results to be displayed (so in most of the cases below the text-input):
+**Step 5:** Add the class '.indexed-search-autocomplete-sword' to this text-input. Example:
+```html
+<f:form.textfield name="search[sword]" value="{sword}" id="tx-indexedsearch-searchbox-sword" class="tx-indexedsearch-searchbox-sword indexed-search-autocomplete-sword" />
+```
+
+**Step 6:** Now add the following line where you want the results to be displayed (so in most of the cases below the text-input):
 
 **TYPO3 8.x - 10.x:**
 ```html
@@ -57,7 +73,15 @@ Download and install the [extension][2] with the extension manager module.
 <div class="search-autocomplete-results  no-results" data-mode="word" data-searchonclick="false" data-maxresults="10" data-minlength="2" data-searchurl="{f:uri.action(action: 'search', pageType: '7423794', noCache: 1, extensionName: 'indexedSearchAutocomplete', controller: 'Search')}"></div>
 ```
 
-**Step 6:** Now you can configure the plugins options with the parameters of that <Div> (see options)
+**Form.html Example:**
+```html
+<div class="tx-indexedsearch-form">
+  <label for="tx-indexedsearch-searchbox-sword"><f:translate key="form.searchFor" />:</label>
+  <f:form.textfield name="search[sword]" value="{sword}" id="tx-indexedsearch-searchbox-sword" class="tx-indexedsearch-searchbox-sword indexed-search-autocomplete-sword" />
+  <div class="search-autocomplete-results  no-results" data-mode="word" data-searchonclick="false" data-maxresults="10" data-minlength="2" data-searchurl="{f:uri.action(action: 'search', pageType: '7423794', noCache: 1, noCacheHash: 1, extensionName: 'indexedSearchAutocomplete', controller: 'Search')}"></div>
+</div>
+```
+**Step 7:** Now you can configure the plugins options with the parameters of that <Div> (see options)
 
 **Step 7:** TYPO3 Site-Config add the new PAGE typeNum 7423794: 
 ```yaml
@@ -83,6 +107,12 @@ routeEnhancers:
 * **data-searchonclick="false"** => If one selects a suggestion, may this submit the form (so basically the search starts after one has selected a word). Possible values are "false" or "true". 
 
 # Contact &amp; Communication
+
+## Working Developer Example:
+
+TYPO3 9: https://t9.baukasten-typo3.de/ <br />
+TYPO3 10: https://t10.baukasten-typo3.de/ <br />
+TYPO3 11: https://t11.baukasten-typo3.de/
 
 ## GIT
 
