@@ -110,9 +110,9 @@ routeEnhancers:
 
 ## Working Developer Example:
 
-TYPO3 9: https://t9.baukasten-typo3.de/ <br />
-TYPO3 10: https://t10.baukasten-typo3.de/ <br />
-TYPO3 11: https://t11.baukasten-typo3.de/
+**TYPO3 9:** https://t9.baukasten-typo3.de/ <br />
+**TYPO3 10:** https://t10.baukasten-typo3.de/ <br />
+**TYPO3 11:** https://t11.baukasten-typo3.de/
 
 ## GIT
 
