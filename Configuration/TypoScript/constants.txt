@@ -1,18 +1,1 @@
-plugin {
-	tx_indexedsearch_autocomplete {
-		view {
-			# cat=plugin.tx_indexedsearch_autocomplete/file; type=string; label=LLL:EXT:indexed_search_autocomplete/Resources/Private/Language/ExtConfTemplate.xlf:constants.templateFilePath
-			templateRootPath = EXT:indexed_search_autocomplete/Resources/Private/Templates/
-			# cat=plugin.tx_indexedsearch_autocomplete/file; type=string; label=LLL:EXT:indexed_search_autocomplete/Resources/Private/Language/ExtConfTemplate.xlf:constants.partialsFilePath
-			partialRootPath = EXT:indexed_search_autocomplete/Resources/Private/Partials/
-			# cat=plugin.tx_indexedsearch_autocomplete/file; type=string; label=LLL:EXT:indexed_search_autocomplete/Resources/Private/Language/ExtConfTemplate.xlf:constants.layoutsFilePath
-			layoutRootPath = EXT:indexed_search_autocomplete/Resources/Private/Layouts/
-		}
-		# cat=plugin.tx_indexedsearch_autocomplete/file; type=string; label=LLL:EXT:indexed_search_autocomplete/Resources/Private/Language/ExtConfTemplate.xlf:constants.cssAutocompleteFile
-		cssAutocompleteFile = EXT:indexed_search_autocomplete/Resources/Public/Css/Indexed_search_autocomplete.css
-		# cat=plugin.tx_indexedsearch_autocomplete/file; type=string; label=LLL:EXT:indexed_search_autocomplete/Resources/Private/Language/ExtConfTemplate.xlf:constants.javaScriptAutocompleteFile
-		javaScriptAutocompleteFile = EXT:indexed_search_autocomplete/Resources/Public/JavaScript/Indexed_search_autocomplete.js
-		# cat=plugin.tx_indexedsearch_autocomplete/file; type=string; label=LLL:EXT:indexed_search_autocomplete/Resources/Private/Language/ExtConfTemplate.xlf:constants.jqueryFile
-		jqueryFile = EXT:indexed_search_autocomplete/Resources/Public/JavaScript/Jquery-3.2.1.min.js
-	}
-}
+@import 'EXT:tx_indexedsearch_autocomplete/Configuration/TypoScript/constants.typoscript'

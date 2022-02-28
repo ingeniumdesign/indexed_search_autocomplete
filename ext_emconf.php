@@ -9,7 +9,7 @@ $EM_CONF[$_EXTKEY] = [
     'category' => 'fe',
     'constraints' => [
         'depends' => [
-            'typo3' => '9.5.0-10.9.99',
+            'typo3' => '9.5.0-11.9.99',
         ],
         'conflicts' => [],
     ],
@@ -20,5 +20,5 @@ $EM_CONF[$_EXTKEY] = [
     'author' => 'Sebastian Schmal',
     'author_email' => 'info@ingeniumdesign.de',
     'author_company' => 'INGENIUMDESIGN',
-    'version' => '1.0.10',
+    'version' => '1.0.11',
 ];

@@ -1,3 +1,13 @@
+# IndexedSearchAutocomplete Version 1.0.11
+
+## FEATURE
+- Added support for Typo3 11
+- Edit the Readme with Info Stuff
+- Edit TypoScript default files for .typoscript
+
+##FIX
+- Add extension key to composer.json - Thanks @RKlingler
+
 # IndexedSearchAutocomplete Version 1.0.10
 
 ##FIX
@@ -14,6 +24,7 @@
 
 ## FEATURE
 - Added support for Typo3 10
+
 ##FIX
 - Refractored JavaScript
 
@@ -29,6 +40,7 @@
 ## FEATURE
 - Supports Typo3 9
 - Request to the server are now debounced with a delay of 250ms. This reduces the amount of requests.
+
 ##FIX
 - rootPidList-Parameter of the indexed_search-Extension gets used in word&link-mode  
 
