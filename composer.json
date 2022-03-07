@@ -2,7 +2,7 @@
   "name": "id/indexed-search-autocomplete",
   "type": "typo3-cms-extension",
   "description": "Indexed Search Autocomplete",
-  "homepage": "http://www.ingeniumdesign.de",
+  "homepage": "https://www.ingeniumdesign.de/",
   "license": [
     "MIT"
   ],
@@ -15,8 +15,9 @@
   "keywords": [
     "typo3",
     "cms",
-    "ingeniumdesign",
-    "autocomplete"
+    "search",
+    "autocomplete",
+    "ingeniumdesign"
   ],
   "replace": {
     "typo3-ter/indexed_search_autocomplete": "self.version"
