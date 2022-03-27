@@ -13,10 +13,12 @@
  *
  * ************************************************************* */
 
-namespace ID\indexedSearchAutocomplete\Controller;
+namespace ID\IndexedSearchAutocomplete\Controller;
 
-use TYPO3\CMS\Extbase\Annotation\Inject;
 
+
+use ID\IndexedSearchAutocomplete\Service\SearchService;
+use TYPO3\CMS\IndexedSearch\Domain\Repository\IndexSearchRepository;
 
 /**
  * SearchController
@@ -28,17 +30,23 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     /**
      * Search repository
      *
-     * @var \TYPO3\CMS\IndexedSearch\Domain\Repository\IndexSearchRepository
+     * @var IndexSearchRepository
      */
     protected $searchRepository = null;
     
      /**
       * Search functions
       * 
-      * @var \ID\IndexedSearchAutocomplete\Service\SearchService
-      * @Inject
+      * @var SearchService
       */
     protected $searchService = null;
+
+
+    public function __construct(IndexSearchRepository $searchRepository, SearchService $searchService)
+    {
+        $this->searchRepository = $searchRepository;
+        $this->searchService = $searchService;
+    }
 
     /**
      * action search
