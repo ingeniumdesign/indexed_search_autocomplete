@@ -1,5 +1,5 @@
 plugin {
-    tx_indexedsearch_autocomplete {
+    tx_indexedsearchautocomplete {
         view {
             # cat=plugin.tx_indexedsearch_autocomplete/file; type=string; label=LLL:EXT:indexed_search_autocomplete/Resources/Private/Language/ExtConfTemplate.xlf:constants.templateFilePath
             templateRootPath = EXT:indexed_search_autocomplete/Resources/Private/Templates/
