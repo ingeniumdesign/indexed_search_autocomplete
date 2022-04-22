@@ -1,17 +1,17 @@
 plugin {
-    tx_indexedsearch_autocomplete {
+    tx_indexedsearchautocomplete {
         view {
             templateRootPaths {
                 0 = EXT:indexed_search_autocomplete/Resources/Private/Templates/
-                10 = {$plugin.tx_indexedsearch_autocomplete.view.templateRootPath}
+                10 = {$plugin.tx_indexedsearchautocomplete.view.templateRootPath}
             }
             partialRootPaths {
                 0 = EXT:indexed_search_autocomplete/Resources/Private/Partials/
-                10 = {$plugin.tx_indexedsearch_autocomplete.view.partialRootPath}
+                10 = {$plugin.tx_indexedsearchautocomplete.view.partialRootPath}
             }
             layoutRootPaths {
                 0 = EXT:indexed_search_autocomplete/Resources/Private/Layouts/
-                10 = {$plugin.tx_indexedsearch_autocomplete.view.layoutRootPath}
+                10 = {$plugin.tx_indexedsearchautocomplete.view.layoutRootPath}
             }
         }
     }
@@ -19,10 +19,10 @@ plugin {
 
 page {
     includeCSS {
-        indexedSearchAutocomplete = {$plugin.tx_indexedsearch_autocomplete.cssAutocompleteFile}
+        indexedSearchAutocomplete = {$plugin.tx_indexedsearchautocomplete.cssAutocompleteFile}
     }
     includeJSFooter {
-        indexedSearchAutocomplete = {$plugin.tx_indexedsearch_autocomplete.javaScriptAutocompleteFile}
+        indexedSearchAutocomplete = {$plugin.tx_indexedsearchautocomplete.javaScriptAutocompleteFile}
     }
 }
 
