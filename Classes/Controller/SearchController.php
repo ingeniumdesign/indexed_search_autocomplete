@@ -13,7 +13,7 @@
  *
  * ************************************************************* */
 
-namespace ID\indexedSearchAutocomplete\Controller;
+namespace ID\IndexedSearchAutocomplete\Controller;
 
 use TYPO3\CMS\Extbase\Annotation\Inject;
 
