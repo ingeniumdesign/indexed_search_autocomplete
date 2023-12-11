@@ -42,7 +42,7 @@ composer require id/indexed-search-autocomplete
 
 Download and install the [extension][2] with the extension manager module.
 
-**Step 3:** Outsource from the EXT:indexed_search the Partials/Form.html Template. Like this:
+**Step 3:** Outsource from the EXT:indexed_search the `Partials/Form.html` Template. Like this:
 ```typoscript
 plugin {
   tx_indexedsearch {
@@ -57,12 +57,12 @@ plugin {
 
 **Step 4:** Find the fluid file / code line that contains the text-input for the search-word.
 
-**Step 5:** Add the class '.indexed-search-autocomplete-sword' to this text-input. Example:
+**Step 5:** Add the class `'.indexed-search-autocomplete-sword'` to this text-input. Example:
 ```html
 <f:form.textfield name="search[sword]" value="{sword}" id="tx-indexedsearch-searchbox-sword" class="tx-indexedsearch-searchbox-sword indexed-search-autocomplete-sword" />
 ```
 
-**Step 6:** Now add the following line where you want the results to be displayed (so in most of the cases below the text-input):
+**Step 6:** Now add the following line where you want the results to be displayed (_so in most of the cases below the text-input_):
 
 **TYPO3 8.x - 10.x:**
 ```html
@@ -92,9 +92,9 @@ plugin {
 </div>
 ```
 
-**Step 7:** Now you can configure the plugins options with the parameters of that <Div> (see options)
+**Step 7:** Now you can configure the plugins options with the parameters of that `<div>` (see options)
 
-**Step 7:** TYPO3 Site-Config add the new PAGE typeNum 7423794: 
+**Step 7:** TYPO3 Site-Config add the new PAGE typeNum `7423794`: 
 ```yaml
 routeEnhancers:
   PageTypeSuffix:
@@ -106,7 +106,7 @@ routeEnhancers:
      sitemap.xml: 500001
      autocomplete: 7423794
 ```
-**Additional:** Make sure to disable Indexed-Search option "Use MySQL specific fulltext search", otherwise the word-suggestion won't work.
+**Additional:** Make sure to disable Indexed-Search option "_Use MySQL specific fulltext search_", otherwise the word-suggestion won't work.
 
 ### Options
 
