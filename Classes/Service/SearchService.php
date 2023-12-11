@@ -164,5 +164,4 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
             'mode' => 'link'
         ];
     }
-
 }

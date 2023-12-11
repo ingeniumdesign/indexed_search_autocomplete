@@ -9,7 +9,9 @@
   "authors": [
     {
       "name": "Sebastian Schmal",
-      "email": "info@ingeniumdesign.de"
+      "email": "info@ingeniumdesign.de",
+      "homepage": "https://www.ingeniumdesign.de/",
+      "role": "Developer"
     }
   ],
   "keywords": [

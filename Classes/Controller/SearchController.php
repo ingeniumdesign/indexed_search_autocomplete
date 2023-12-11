@@ -32,17 +32,13 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      */
     protected $searchRepository = null;
 
-    /**
-     * Search functions
-     *
-     * @var \ID\IndexedSearchAutocomplete\Service\SearchService
-     */
+     /**
+      * Search functions
+      *
+      * @var SearchService
+      */
     protected $searchService = null;
 
-    public function injectSearchService(SearchService $searchService): void
-    {
-        $this->searchService = $searchService;
-    }
 
     public function __construct(IndexSearchRepository $searchRepository, SearchService $searchService)
     {
