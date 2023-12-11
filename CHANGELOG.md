@@ -1,4 +1,8 @@
-# IndexedSearchAutocomplete Version 1.0.11
+# IndexedSearchAutocomplete Version 1.0.12
+
+## FEATURE
+- Added support for Typo3 12
+- Edit the Readme with Info Stuff
 
 ## FEATURE
 - Added support for Typo3 11

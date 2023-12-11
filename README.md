@@ -6,6 +6,7 @@
 [![TYPO3 9](https://img.shields.io/badge/TYPO3-9-orange.svg)](https://get.typo3.org/version/9)
 [![TYPO3 10](https://img.shields.io/badge/TYPO3-10-green.svg)](https://get.typo3.org/version/10)
 [![TYPO3 11](https://img.shields.io/badge/TYPO3-11-green.svg)](https://get.typo3.org/version/11)
+[![TYPO3 12](https://img.shields.io/badge/TYPO3-12-green.svg)](https://get.typo3.org/version/12)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-yellow.svg)](https://www.paypal.me/INGENIUMDESIGN/)
 [![Latest Stable Version](https://poser.pugx.org/id/indexed-search-autocomplete/v/stable)](https://packagist.org/packages/id/indexed-search-autocomplete)
 [![Monthly Downloads](https://poser.pugx.org/id/indexed-search-autocomplete/d/monthly)](https://packagist.org/packages/id/indexed-search-autocomplete)
@@ -15,8 +16,8 @@ Extends the TYPO3 Core Extension Indexed_Search searchform with an autocomplete 
 
 ## Minimal Dependencies
 
-* TYPO3 CMS 8.7.x - 11.4.x
-* PHP 7.x
+* TYPO3 CMS 8.7.x - 12.4.x
+* PHP 7.x - 8.x
 * Jquery 1.x
 
 # Quick Install Guide
@@ -73,7 +74,7 @@ plugin {
 <div class="search-autocomplete-results  no-results" data-mode="word" data-searchonclick="false" data-maxresults="10" data-minlength="2" data-searchurl="{f:uri.action(action: 'search', pageType: '7423794', noCache: 1, extensionName: 'indexedSearchAutocomplete', controller: 'Search')}"></div>
 ```
 
-**Form.html Example:**
+**Form.html Example TYPO3 9-10:**
 ```html
 <div class="tx-indexedsearch-form">
   <label for="tx-indexedsearch-searchbox-sword"><f:translate key="form.searchFor" />:</label>
@@ -81,6 +82,16 @@ plugin {
   <div class="search-autocomplete-results  no-results" data-mode="word" data-searchonclick="false" data-maxresults="10" data-minlength="2" data-searchurl="{f:uri.action(action: 'search', pageType: '7423794', noCache: 1, noCacheHash: 1, extensionName: 'indexedSearchAutocomplete', controller: 'Search')}"></div>
 </div>
 ```
+
+**Form.html Example TYPO 11-12:**
+```html
+<div class="tx-indexedsearch-form">
+  <label for="tx-indexedsearch-searchbox-sword"><f:translate key="form.searchFor" />:</label>
+  <f:form.textfield name="search[sword]" value="{sword}" id="tx-indexedsearch-searchbox-sword" class="tx-indexedsearch-searchbox-sword indexed-search-autocomplete-sword" />
+  <div class="search-autocomplete-results  no-results" data-mode="word" data-searchonclick="false" data-maxresults="10" data-minlength="2" data-searchurl="{f:uri.action(action: 'search', pageType: '7423794', noCache: 1, extensionName: 'indexedSearchAutocomplete', controller: 'Search')}"></div>
+</div>
+```
+
 **Step 7:** Now you can configure the plugins options with the parameters of that <Div> (see options)
 
 **Step 7:** TYPO3 Site-Config add the new PAGE typeNum 7423794: 
@@ -110,9 +121,8 @@ routeEnhancers:
 
 ## Working Developer Example:
 
-**TYPO3 9:** https://t9.baukasten-typo3.de/ <br />
-**TYPO3 10:** https://t10.baukasten-typo3.de/ <br />
-**TYPO3 11:** https://t11.baukasten-typo3.de/
+**TYPO3 11:** https://t11.baukasten-typo3.de/ <br />
+**TYPO3 12:** https://t12.baukasten-typo3.de/
 
 ## GIT
 
@@ -123,7 +133,7 @@ https://github.com/ingeniumdesign/indexed_search_autocomplete/
 ## Agency
 
 INGENIUMDESIGN<br />
-TYPO3 - Internetagentur<br />
+TYPO3 - Agentur<br />
 65510 Idstein<br />
 <br />
 https://www.ingeniumdesign.de/ <br />
@@ -141,12 +151,13 @@ Composer: https://packagist.org/packages/id/indexed-search-autocomplete
 
 ## Used by
 
-We are searching for LIVE-References or Live-Examples for the TYPO3 indexed_search Autocomplete Extension.<br />
+We are searching for Live-Examples and for Sponsoring for the TYPO3 indexed_search Autocomplete Extension.<br />
 Please be so kind to send us an E-Mail if you're using it. Thanks!
 
 **Links/References:**
 
 https://www.ingeniumdesign.de/ - by INGENIUMDESIGN<br />
+https://www.baukasten-typo3.de/ - by INGENIUMDESIGN<br />
 https://www.takeoffmedia.de/ - by INGENIUMDESIGN<br />
 https://ead.darmstadt.de/ - by INGENIUMDESIGN<br />
 https://www.easy-sprachreisen.de/ - by INGENIUMDESIGN<br />
