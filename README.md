@@ -3,8 +3,8 @@
 ## TYPO3 Extension `indexed_search_autocomplete`
 
 [![TYPO3 8](https://img.shields.io/badge/TYPO3-8-red.svg)](https://get.typo3.org/version/8)
-[![TYPO3 9](https://img.shields.io/badge/TYPO3-9-orange.svg)](https://get.typo3.org/version/9)
-[![TYPO3 10](https://img.shields.io/badge/TYPO3-10-green.svg)](https://get.typo3.org/version/10)
+[![TYPO3 9](https://img.shields.io/badge/TYPO3-9-red.svg)](https://get.typo3.org/version/9)
+[![TYPO3 10](https://img.shields.io/badge/TYPO3-10-red.svg)](https://get.typo3.org/version/10)
 [![TYPO3 11](https://img.shields.io/badge/TYPO3-11-green.svg)](https://get.typo3.org/version/11)
 [![TYPO3 12](https://img.shields.io/badge/TYPO3-12-green.svg)](https://get.typo3.org/version/12)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-yellow.svg)](https://www.paypal.me/INGENIUMDESIGN/)
