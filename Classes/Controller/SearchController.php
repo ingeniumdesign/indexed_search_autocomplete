@@ -3,7 +3,7 @@
 /* * *************************************************************
  *  Copyright notice
  *
- *  (c) 2017 Sebastian Schmal - INGENIUMDESIGN <info@ingeniumdesign.de>
+ *  (c) 2024 Sebastian Schmal - INGENIUMDESIGN <info@ingeniumdesign.de>
  *  All rights reserved
  *
  *  This file is part of the "indexed_search" Extension for TYPO3 CMS.
@@ -14,8 +14,6 @@
  * ************************************************************* */
 
 namespace ID\IndexedSearchAutocomplete\Controller;
-
-
 
 use ID\IndexedSearchAutocomplete\Service\SearchService;
 use TYPO3\CMS\IndexedSearch\Domain\Repository\IndexSearchRepository;
@@ -33,14 +31,18 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      * @var IndexSearchRepository
      */
     protected $searchRepository = null;
-    
-     /**
-      * Search functions
-      * 
-      * @var SearchService
-      */
+
+    /**
+     * Search functions
+     *
+     * @var \ID\IndexedSearchAutocomplete\Service\SearchService
+     */
     protected $searchService = null;
 
+    public function injectSearchService(SearchService $searchService): void
+    {
+        $this->searchService = $searchService;
+    }
 
     public function __construct(IndexSearchRepository $searchRepository, SearchService $searchService)
     {

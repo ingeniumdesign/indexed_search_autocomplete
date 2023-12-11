@@ -37,5 +37,11 @@
     "typo3/cms": {
       "extension-key": "indexed_search_autocomplete"
     }
-  }
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/ingeniumdesign/indexed_search_autocomplete"
+    }
+  ]
 }

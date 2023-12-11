@@ -3,7 +3,7 @@
 /* * *************************************************************
  *  Copyright notice
  *
- *  (c) 2017 Sebastian Schmal - INGENIUMDESIGN <info@ingeniumdesign.de>
+ *  (c) 2024 Sebastian Schmal - INGENIUMDESIGN <info@ingeniumdesign.de>
  *  All rights reserved
  *
  *  This file is part of the "indexed_search" Extension for TYPO3 CMS.
@@ -33,7 +33,8 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
 
     public function searchAWord($arg)
     {
-        $languageId = $GLOBALS['TSFE']->sys_language_uid;
+        $languageAspect = GeneralUtility::makeInstance(Context::class)->getAspect('language');
+        $languageId = $languageAspect->getId();
         $configurationManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManagerInterface');
         $setting = $configurationManager->getConfiguration(
             \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
@@ -118,7 +119,8 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
 
     public function searchASite($arg)
     {
-        $languageId = $GLOBALS['TSFE']->sys_language_uid;
+        $languageAspect = GeneralUtility::makeInstance(Context::class)->getAspect('language');
+        $languageId = $languageAspect->getId();
         $configurationManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManagerInterface');
         $setting = $configurationManager->getConfiguration(
             \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
