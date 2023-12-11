@@ -37,12 +37,11 @@ defined('TYPO3_MODE') or die();
         'ID.indexed_search_autocomplete',
         'Search',
         [
-            'Search' => 'search',
+            \ID\IndexedSearchAutocomplete\Controller\SearchController::class => 'search',
 
         ],
         [
-            'Search' => 'search',
-
+            \ID\IndexedSearchAutocomplete\Controller\SearchController::class => 'search',
         ]
     );
 })();
