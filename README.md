@@ -42,7 +42,9 @@ composer require id/indexed-search-autocomplete
 
 Download and install the [extension][2] with the extension manager module.
 
-**Step 3:** Outsource from the EXT:indexed_search the `Partials/Form.html` Template. Like this:
+**Step 3:** Include the static TypoScript of the extension in `Site Management > Typoscript > Edit the whole TypoScript record > Advanced Options > Include TypoScript sets: Indexed Search Autocomplete (indexed_search_autocomplete)`
+
+**Step 4:** Outsource from the EXT:indexed_search the `Partials/Form.html` Template. Like this:
 ```typoscript
 plugin {
   tx_indexedsearch {
@@ -55,14 +57,14 @@ plugin {
 }
 ```
 
-**Step 4:** Find the fluid file / code line that contains the text-input for the search-word.
+**Step 5:** Find the fluid file / code line that contains the text-input for the search-word.
 
-**Step 5:** Add the class `'.indexed-search-autocomplete-sword'` to this text-input. Example:
+**Step 6:** Add the class `'.indexed-search-autocomplete-sword'` to this text-input. Example:
 ```html
 <f:form.textfield name="search[sword]" value="{sword}" id="tx-indexedsearch-searchbox-sword" class="tx-indexedsearch-searchbox-sword indexed-search-autocomplete-sword" />
 ```
 
-**Step 6:** Now add the following line where you want the results to be displayed (_so in most of the cases below the text-input_):
+**Step 7:** Now add the following line where you want the results to be displayed (_so in most of the cases below the text-input_):
 
 **TYPO3 8.x - 10.x:**
 ```html
@@ -92,9 +94,9 @@ plugin {
 </div>
 ```
 
-**Step 7:** Now you can configure the plugins options with the parameters of that `<div>` (see options)
+**Step 8:** Now you can configure the plugins options with the parameters of that `<div>` (see options)
 
-**Step 7:** TYPO3 Site-Config add the new PAGE typeNum `7423794`: 
+**Step 9:** TYPO3 Site-Config add the new PAGE typeNum `7423794`: 
 ```yaml
 routeEnhancers:
   PageTypeSuffix:
@@ -112,10 +114,10 @@ routeEnhancers:
 
 * Enable or Disable the **JQuery-Source** in the Extension Settings. (Backend -> Extension-Settings)
   ```page.includeJSFooterlibs.JquerySource = ```
-* **data-mode="word"** => the following values are possible: word or link. Depending on which option the plugin suggests either words or links while typing. You can edit both template files unter indexed_search_autocomplete/Resources/Private/Partials/ (Fluid)
-* **data-maxresults="10"** => The amount of entrys a suggetion can have max. (Fluid)
-* **data-minlength="2"** => how many characters have to be in the input-box for the plugin to make it's first suggestion. (Fluid)
-* **data-searchonclick="false"** => If one selects a suggestion, may this submit the form (so basically the search starts after one has selected a word). Possible values are "false" or "true". 
+* **data-mode="word"** => the following values are possible: `word` or `link`. Depending on which option you choose, the plugin will suggest either words or links as you type. You can edit both template files at indexed_search_autocomplete/Resources/Private/Partials/ (Fluid)
+* **data-maxresults="10"** => The maximum number of entries per suggestion (Fluid)
+* **data-minlength="2"** => How many characters must be in the input field for the plugin to make it's first suggestion (Fluid)
+* **data-searchonclick="false"** => If a suggestion is selected, should this submit the form (so basically the search starts after selecting a word). Possible values are "false" or "true". 
 
 # Contact &amp; Communication
 
