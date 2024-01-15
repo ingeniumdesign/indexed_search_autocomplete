@@ -1,7 +1,5 @@
 <?php
-/************************************************************************
- * Extension Manager/Repository config file for ext "indexed_search_autocomplete".
- ************************************************************************/
+defined('TYPO3') or die();
 
 $EM_CONF[$_EXTKEY] = [
     'title' => 'Indexed Search Autocomplete',

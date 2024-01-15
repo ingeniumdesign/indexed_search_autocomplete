@@ -8,8 +8,8 @@ jQuery(document).ready(function () {
 
 
 function IndexSearchAutoComplete() {
-    var debounceTimeout = null; // Used to reduce the amount of querys
-    var lastSearchQuery = ''; // Used to reduce the amount of querys
+    var debounceTimeout = null; // Used to reduce the amount of queries
+    var lastSearchQuery = ''; // Used to reduce the amount of queries
 
     // Check whether there is an input box to apply the autocomplete to
     if (jQuery('input.search, input.tx-indexedsearch-searchbox-sword, input.indexed-search-atocomplete-sword, input.indexed-search-autocomplete-sword').length == 0)
@@ -54,7 +54,7 @@ IndexSearchAutoComplete.prototype.autocomplete = function(e, ref) {
     var $elem = jQuery(ref);
     var $results;
 
-    // Find the corrosponding div for the results
+    // Find the corresponding div for the results
     var cnt = 0;
     while ($elem.prop("tagName") !== 'HTML') {
         $results = $elem.find('.search-autocomplete-results');
@@ -68,7 +68,7 @@ IndexSearchAutoComplete.prototype.autocomplete = function(e, ref) {
         return;
     }
 
-    // Retrive options
+    // Retrieve options
     var mode = typeof $results.data('mode') === 'undefined' ? 'word' : $results.data('mode');
     var soc = $results.data('searchonclick') == true;
 
@@ -130,7 +130,7 @@ IndexSearchAutoComplete.prototype.autocomplete = function(e, ref) {
     // Empty the results
     $results.html('').hide().removeClass('results').addClass('no-results');
 
-    // Retrive the query
+    // Retrieve the query
     var val = jQuery(ref).val().trim();
     var minlen = typeof $results.data('minlength') === 'undefined' ? 3 : $results.data('minlength');
     var maxResults = typeof $results.data('maxresults') === 'undefined' ? 10 : $results.data('maxresults');

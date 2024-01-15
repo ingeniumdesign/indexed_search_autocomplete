@@ -51,7 +51,7 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      *
      * @return string
      */
-    public function SearchAction() {
+    public function SearchAction(): \Psr\Http\Message\ResponseInterface {
 
         // Fetch the request
         $arg = $_REQUEST;
@@ -67,5 +67,7 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         foreach ($result as $key => $value) {
             $this->view->assign($key, $value);
         }
+
+        return $this->htmlResponse();
     }
 }
