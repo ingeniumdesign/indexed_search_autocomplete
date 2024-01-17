@@ -156,6 +156,7 @@ IndexSearchAutoComplete.prototype.autocomplete = function(e, ref) {
 
 IndexSearchAutoComplete.prototype.performQuery = function(val, mode, maxResults, $results, $input) {
 
+    var soc = $results.data('searchonclick') === true;
     // Debounce
     clearTimeout(this.debounceTimeout);
     this.debounceTimeout = setTimeout(function() {
@@ -184,6 +185,10 @@ IndexSearchAutoComplete.prototype.performQuery = function(val, mode, maxResults,
                 $li.click(function () {
                     $input.val(jQuery(this).text().trim());
                     $results.html('').hide();
+                    
+                    if (soc) {
+                        $input.closest('form').submit();
+                    }
                 });
 
                 // Check if there are results and update the FE depending on it
