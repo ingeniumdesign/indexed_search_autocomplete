@@ -1,10 +1,17 @@
-# IndexedSearchAutocomplete Version 1.0.12
+# 1.0.12
 
 ## FEATURE
 - Added support for TYPO3 12
 - Edit the Readme with Info Stuff
 - Added data-mode "word" or "link"
 - Add new Sponsoring
+
+### Contributors
+
+- Felix Mächtle
+- Sebastian Schmal
+
+# 1.0.11
 
 ## FEATURE
 - Added support for TYPO3 11
@@ -14,7 +21,13 @@
 ## FIX
 - Add extension key to composer.json - Thanks @RKlingler
 
-# IndexedSearchAutocomplete Version 1.0.10
+### Contributors
+
+- Felix Mächtle
+- Sebastian Schmal
+- R. Klingler
+
+# 1.0.10
 
 ## FIX
 - fix File permissions
