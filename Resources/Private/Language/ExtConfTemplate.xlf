@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-    <file source-language="en" datatype="plaintext" original="messages" date="2017-09-19T09:11:39Z" product-name="indexed_search_autocomplete">
+    <file source-language="en" datatype="plaintext" original="messages" date="2023-09-19T09:11:39Z" product-name="indexed_search_autocomplete">
         <header/>
         <body>
             <trans-unit id="constants.templateFilePath">
