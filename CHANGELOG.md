@@ -1,51 +1,52 @@
 # IndexedSearchAutocomplete Version 1.0.12
 
 ## FEATURE
-- Added support for Typo3 12
+- Added support for TYPO3 12
 - Edit the Readme with Info Stuff
+- Added data-mode "word" or "link"
+- Add new Sponsoring
 
 ## FEATURE
-- Added support for Typo3 11
+- Added support for TYPO3 11
 - Edit the Readme with Info Stuff
 - Edit TypoScript default files for .typoscript
 
-##FIX
+## FIX
 - Add extension key to composer.json - Thanks @RKlingler
 
 # IndexedSearchAutocomplete Version 1.0.10
 
-##FIX
+## FIX
 - fix File permissions
 - Edit Composer.json
 - JS fixed `$` not defined
 
 # IndexedSearchAutocomplete Version 1.0.9
 
-##FIX
+## FIX
 - fix jQuery Setting for TYPO3 9 and 10
 
 # IndexedSearchAutocomplete Version 1.0.8
 
 ## FEATURE
-- Added support for Typo3 10
+- Added support for TYPO3 10
 
-##FIX
+## FIX
 - Refractored JavaScript
-
 
 # IndexedSearchAutocomplete Version 1.0.7
 
-##FIX
+## FIX
 - bug in multilanguage handling  
 
 
 # IndexedSearchAutocomplete Version 1.0.6
 
 ## FEATURE
-- Supports Typo3 9
+- Supports TYPO3 9
 - Request to the server are now debounced with a delay of 250ms. This reduces the amount of requests.
 
-##FIX
+## FIX
 - rootPidList-Parameter of the indexed_search-Extension gets used in word&link-mode  
 
 # IndexedSearchAutocomplete Version 1.0.5

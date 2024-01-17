@@ -71,12 +71,12 @@ plugin {
 <div class="search-autocomplete-results  no-results" data-mode="word" data-searchonclick="false" data-maxresults="10" data-minlength="2" data-searchurl="{f:uri.action(action: 'search', pageType: '7423794', noCache: 1, noCacheHash: 1, extensionName: 'indexedSearchAutocomplete', controller: 'Search')}"></div>
 ```
 
-**TYPO3 11.x:**
+**TYPO3 11.x - 12.x:**
 ```html
 <div class="search-autocomplete-results  no-results" data-mode="word" data-searchonclick="false" data-maxresults="10" data-minlength="2" data-searchurl="{f:uri.action(action: 'search', pageType: '7423794', noCache: 1, extensionName: 'indexedSearchAutocomplete', controller: 'Search')}"></div>
 ```
 
-**Form.html Example TYPO3 9-10:**
+**Form.html Example TYPO3 v9-10:**
 ```html
 <div class="tx-indexedsearch-form">
   <label for="tx-indexedsearch-searchbox-sword"><f:translate key="form.searchFor" />:</label>
@@ -85,7 +85,7 @@ plugin {
 </div>
 ```
 
-**Form.html Example TYPO 11-12:**
+**Form.html Example TYPO3 v11-12:**
 ```html
 <div class="tx-indexedsearch-form">
   <label for="tx-indexedsearch-searchbox-sword"><f:translate key="form.searchFor" />:</label>
@@ -96,7 +96,7 @@ plugin {
 
 **Step 8:** Now you can configure the plugins options with the parameters of that `<div>` (see options)
 
-**Step 9:** TYPO3 Site-Config add the new PAGE typeNum `7423794`: 
+**Step 9:** TYPO3 Site-Config add the new PAGE typeNum `7423794`, here a Example: 
 ```yaml
 routeEnhancers:
   PageTypeSuffix:
@@ -121,7 +121,7 @@ routeEnhancers:
 
 # Contact &amp; Communication
 
-## Working Developer Example:
+## Working / Testing Developer Example:
 
 **TYPO3 11:** https://t11.baukasten-typo3.de/ <br />
 **TYPO3 12:** https://t12.baukasten-typo3.de/
@@ -146,10 +146,21 @@ info@ingeniumdesign.de
 Amazon: https://www.amazon.de/hz/wishlist/ls/13RT2BFNRP05 <br />
 PayPay: www.paypal.me/INGENIUMDESIGN/
 
-## Donwloads
+### Sponsoring
+
+https://www.ingeniumdesign.de/ - INGENIUMDESIGN<br />
+https://www.agenturamwasser.ch/ - Agentur am Wasser GmbH<br />
+https://www.baukasten-typo3.de/ - INGENIUMDESIGN<br />
+https://www.smallprime.ch/ - Agentur am Wasser GmbH<br />
+https://www.takeoffmedia.de/ - Takeoff-Media GmbH<br />
+https://ead.darmstadt.de/ - Eigenbetrieb für kommunale Aufgaben und Dienstleistungen (EAD)<br />
+https://www.easy-sprachreisen.de/ - Sebastian Ernst & Petra Wagner GbR<br />
+
+
+## Downloads
+
 TYPO3 TER: https://extensions.typo3.org/extension/indexed_search_autocomplete <br />
 Composer: https://packagist.org/packages/id/indexed-search-autocomplete
-
 
 ## Used by
 
@@ -163,7 +174,6 @@ https://www.baukasten-typo3.de/ - by INGENIUMDESIGN<br />
 https://www.takeoffmedia.de/ - by INGENIUMDESIGN<br />
 https://ead.darmstadt.de/ - by INGENIUMDESIGN<br />
 https://www.easy-sprachreisen.de/ - by INGENIUMDESIGN<br />
-https://www.wirtschaft-macht-klimaschutz.de/ - by wilhelm innovative medien GmbH<br />
 https://www.radprax.de/ - by wilhelm innovative medien GmbH
 
 [1]: https://packagist.org/packages/id/indexed-search-autocomplete
