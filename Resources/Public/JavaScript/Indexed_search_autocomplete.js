@@ -191,7 +191,7 @@ IndexSearchAutoComplete.prototype.performQuery = function(val, mode, maxResults,
                             $input.closest('form').submit();
                         }
                     } else {
-                        window.location = $results.find('li.highlighted a.navigate-on-enter').attr('href');
+                        window.location = $li.find('a.navigate-on-enter').attr('href');
                     }
                 });
 
