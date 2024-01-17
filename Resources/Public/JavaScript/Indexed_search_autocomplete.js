@@ -183,11 +183,15 @@ IndexSearchAutoComplete.prototype.performQuery = function(val, mode, maxResults,
 
                 // Add a click action
                 $li.click(function () {
-                    $input.val(jQuery(this).text().trim());
-                    $results.html('').hide();
-                    
-                    if (soc) {
-                        $input.closest('form').submit();
+                    if (mode === 'word') {
+                        $input.val(jQuery(this).text().trim());
+                        $results.html('').hide();
+
+                        if (soc) {
+                            $input.closest('form').submit();
+                        }
+                    } else {
+                        window.location = $results.find('li.highlighted a.navigate-on-enter').attr('href');
                     }
                 });
 
