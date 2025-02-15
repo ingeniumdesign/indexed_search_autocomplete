@@ -1,12 +1,7 @@
-
-
 jQuery(document).ready(function () {
-
     // Init
     new IndexSearchAutoComplete();
 });
-
-
 function IndexSearchAutoComplete() {
     var debounceTimeout = null; // Used to reduce the amount of queries
     var lastSearchQuery = ''; // Used to reduce the amount of queries
@@ -30,9 +25,7 @@ function IndexSearchAutoComplete() {
             jQuery(targetClass).html('').hide().removeClass('results').addClass('no-results');
         }
     });
-
 }
-
 
 /**
  * Autocomplete a query
@@ -145,7 +138,6 @@ IndexSearchAutoComplete.prototype.autocomplete = function(e, ref) {
 
 
 IndexSearchAutoComplete.prototype.performQuery = function(val, mode, maxResults, $results, $input) {
-
     var soc = $results.data('searchonclick') === true;
     // Debounce
     clearTimeout(this.debounceTimeout);
