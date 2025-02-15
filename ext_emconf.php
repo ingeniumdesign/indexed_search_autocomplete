@@ -24,5 +24,5 @@ $EM_CONF[$_EXTKEY] = [
     'author' => 'Sebastian Schmal',
     'author_email' => 'info@ingeniumdesign.de',
     'author_company' => 'INGENIUMDESIGN',
-    'version' => '1.0.12',
+    'version' => '12.1.13',
 ];
