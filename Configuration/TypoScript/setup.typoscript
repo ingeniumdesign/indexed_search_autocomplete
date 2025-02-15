@@ -35,6 +35,7 @@ search {
         xhtml_cleaning = 0
         debug = 0
         admPanel = 0
+        no_cache = 1
     }
 
     10 = COA_INT
