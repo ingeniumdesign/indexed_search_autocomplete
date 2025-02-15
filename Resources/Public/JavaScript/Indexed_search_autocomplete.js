@@ -23,22 +23,12 @@ function IndexSearchAutoComplete() {
         }).attr('autocomplete', 'off');
 
     // When a click is performed somewhere on the page, remove the autocomplete-box
-    jQuery('*').click(function () {
-        var elem = jQuery(this);
+    jQuery(document).on("click", function (event) {
         var targetClass = '.search-autocomplete-results';
 
-        if (jQuery('.search-autocomplete-results > *').length == 0) {
-            return; // Result-Div is not shown
-        }
-
-        while (elem.prop("tagName") != 'HTML' && !elem.hasClass(targetClass)) {
-            elem = elem.parent();
-        }
-
-        if (elem.prop("tagName") == 'HTML') {
+        if (!jQuery(event.target).hasClass(targetClass)) {
             jQuery(targetClass).html('').hide().removeClass('results').addClass('no-results');
         }
-
     });
 
 }
