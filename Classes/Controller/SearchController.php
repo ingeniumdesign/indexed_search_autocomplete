@@ -51,7 +51,7 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      *
      * @return string
      */
-    public function SearchAction(): \Psr\Http\Message\ResponseInterface {
+    public function searchAction(): \Psr\Http\Message\ResponseInterface {
 
         // Fetch the request
         $arg = $_REQUEST;

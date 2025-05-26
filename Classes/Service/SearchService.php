@@ -48,11 +48,11 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
             return trim($a);
         }, explode(',', $setting['plugin.']['tx_indexedsearch.']['settings.']['rootPidList']));
         $qbPage = $connectionPool->getQueryBuilderForTable('pages');
-        $pages = $qbPage->select('uid', 'pid')->from('pages')->execute();
+        $pages = $qbPage->select('uid', 'pid')->from('pages')->executeQuery()->fetchAllAssociative();
 
         // Create a Map in the style of <Parent-ID> -> <child-IDs>
         $pageMap = [];
-        while ($row = $pages->fetch()) {
+        foreach ($pages as $row) {
             if (!isset($pageMap[$row['pid']])) {
                 $pageMap[$row['pid']] = [];
             }
@@ -103,10 +103,11 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
             )
             ->groupBy('index_words.baseword')
             ->setMaxResults((int) $arg['mr'])
-            ->execute();
+            ->executeQuery()
+            ->fetchAllAssociative();
 
         $autocomplete = [];
-        while ($row = $result->fetch()) {
+        foreach ($result as $row) {
             if ($row['baseword'] !== $arg['s']) {
                 $autocomplete[] = $row['baseword'];
             }
