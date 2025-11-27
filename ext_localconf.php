@@ -18,15 +18,14 @@ defined('TYPO3') or die('Access denied.');
         \TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class
     );
 
-    $indexedSearchAutocompleteConfiguration = $extensionConfiguration->get('indexed_search_autocomplete');
-
+    //$indexedSearchAutocompleteConfiguration = $extensionConfiguration->get('indexed_search_autocomplete');
 
     // Check whether to add Jquery 3.2 to the Frontend
-    if (!$indexedSearchAutocompleteConfiguration['disableJquerySource']) {
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup('
-        page.includeJSFooterlibs.JquerySource = {$plugin.tx_indexedsearch_autocomplete.jqueryFile}
-        ');
-    }
+    //if (!$indexedSearchAutocompleteConfiguration['disableJquerySource']) {
+    //    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup('
+    //    page.includeJSFooterlibs.JquerySource = {$plugin.tx_indexedsearch_autocomplete.jqueryFile}
+    //    ');
+    //}
 
     // Register Application
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(

@@ -1,11 +1,17 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+{namespace f=TYPO3\CMS\Fluid\ViewHelpers}
 <!-- Partials/AutocompleteLink.html -->
 <f:spaceless>
     <li>
         Titel: {results.title}<br />
         Beschreibung: {results.description}<br />
         Page-ID: {results.page_id}<br />
-        Link: <f:link.typolink parameter="{results.page_id}" class="navigate-on-enter" title="Link zur Seite {results.title}">Link zur Seite: {results.title}</f:link.typolink>
+        Link:
+        <f:link.typolink
+                parameter="{results.page_id}"
+                class="navigate-on-enter"
+                title="Link zur Seite {results.title}">
+            Link zur Seite: {results.title}
+        </f:link.typolink>
     </li>
 </f:spaceless>
-</html>
+

@@ -3,7 +3,7 @@
 /* * *************************************************************
  *  Copyright notice
  *
- *  (c) 2024 Sebastian Schmal - INGENIUMDESIGN <info@ingeniumdesign.de>
+ *  (c) 2025 Sebastian Schmal - INGENIUMDESIGN <info@ingeniumdesign.de>
  *  All rights reserved
  *
  *  This file is part of the "indexed_search" Extension for TYPO3 CMS.
@@ -17,13 +17,15 @@ namespace ID\IndexedSearchAutocomplete\Controller;
 
 use ID\IndexedSearchAutocomplete\Service\SearchService;
 use TYPO3\CMS\IndexedSearch\Domain\Repository\IndexSearchRepository;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * SearchController
  *
  * This controller receives the search and handles them.
  */
-class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
+class SearchController extends ActionController {
 
     /**
      * Search repository
@@ -40,8 +42,10 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     protected $searchService = null;
 
 
-    public function __construct(IndexSearchRepository $searchRepository, SearchService $searchService)
-    {
+    public function __construct(
+        IndexSearchRepository $searchRepository,
+        SearchService $searchService
+    ) {
         $this->searchRepository = $searchRepository;
         $this->searchService = $searchService;
     }
@@ -51,13 +55,16 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      *
      * @return string
      */
-    public function SearchAction(): \Psr\Http\Message\ResponseInterface {
+    public function searchAction(): ResponseInterface {
 
         // Fetch the request
         $arg = $_REQUEST;
 
+        // Mode sicher auslesen, Standard = 'word'
+        $mode = $arg['m'] ?? 'word';
+
         // Check which search to perform
-        if ($arg['m'] == 'word') {
+        if ($mode === 'word') {
             $result = $this->searchService->searchAWord($arg);
         } else {
             $result = $this->searchService->searchASite($arg);

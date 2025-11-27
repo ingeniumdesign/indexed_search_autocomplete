@@ -7,6 +7,7 @@
 [![TYPO3 10](https://img.shields.io/badge/TYPO3-10-red.svg)](https://get.typo3.org/version/10)
 [![TYPO3 11](https://img.shields.io/badge/TYPO3-11-green.svg)](https://get.typo3.org/version/11)
 [![TYPO3 12](https://img.shields.io/badge/TYPO3-12-green.svg)](https://get.typo3.org/version/12)
+[![TYPO3 13](https://img.shields.io/badge/TYPO3-13-green.svg)](https://get.typo3.org/version/13)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-yellow.svg)](https://www.paypal.me/INGENIUMDESIGN/)
 [![Latest Stable Version](https://poser.pugx.org/id/indexed-search-autocomplete/v/stable)](https://packagist.org/packages/id/indexed-search-autocomplete)
 [![Monthly Downloads](https://poser.pugx.org/id/indexed-search-autocomplete/d/monthly)](https://packagist.org/packages/id/indexed-search-autocomplete)
@@ -16,9 +17,9 @@ Extends the TYPO3 Core Extension Indexed_Search searchform with an autocomplete 
 
 ## Minimal Dependencies
 
-* TYPO3 CMS 8.7.x - 12.4.x
+* TYPO3 CMS 8.7.x - 13.4.x
 * PHP 7.x - 8.x
-* Jquery 1.x
+* Jquery 1.x (TYPO3 8.7.x - 12.4.x)
 
 # Quick Install Guide
 
@@ -66,31 +67,17 @@ plugin {
 
 **Step 7:** Now add the following line where you want the results to be displayed (_so in most of the cases below the text-input_):
 
-**TYPO3 8.x - 10.x:**
+**TYPO3 13.x:**
 ```html
-<div class="search-autocomplete-results  no-results" data-mode="word" data-searchonclick="false" data-maxresults="10" data-minlength="2" data-searchurl="{f:uri.action(action: 'search', pageType: '7423794', noCache: 1, noCacheHash: 1, extensionName: 'indexedSearchAutocomplete', controller: 'Search')}"></div>
+<div class="search-autocomplete-results no-results" data-mode="word" data-searchonclick="false" data-maxresults="10" data-minlength="2" data-searchurl="{f:uri.action(action: 'search', pageType: '7423794', noCache: 1, extensionName: 'indexedSearchAutocomplete', controller: 'Search')}"></div>
 ```
 
-**TYPO3 11.x - 12.x:**
-```html
-<div class="search-autocomplete-results  no-results" data-mode="word" data-searchonclick="false" data-maxresults="10" data-minlength="2" data-searchurl="{f:uri.action(action: 'search', pageType: '7423794', noCache: 1, extensionName: 'indexedSearchAutocomplete', controller: 'Search')}"></div>
-```
-
-**Form.html Example TYPO3 v9-10:**
+**Form.html Example TYPO3 v13:**
 ```html
 <div class="tx-indexedsearch-form">
   <label for="tx-indexedsearch-searchbox-sword"><f:translate key="form.searchFor" />:</label>
   <f:form.textfield name="search[sword]" value="{sword}" id="tx-indexedsearch-searchbox-sword" class="tx-indexedsearch-searchbox-sword indexed-search-autocomplete-sword" />
-  <div class="search-autocomplete-results  no-results" data-mode="word" data-searchonclick="false" data-maxresults="10" data-minlength="2" data-searchurl="{f:uri.action(action: 'search', pageType: '7423794', noCache: 1, noCacheHash: 1, extensionName: 'indexedSearchAutocomplete', controller: 'Search')}"></div>
-</div>
-```
-
-**Form.html Example TYPO3 v11-12:**
-```html
-<div class="tx-indexedsearch-form">
-  <label for="tx-indexedsearch-searchbox-sword"><f:translate key="form.searchFor" />:</label>
-  <f:form.textfield name="search[sword]" value="{sword}" id="tx-indexedsearch-searchbox-sword" class="tx-indexedsearch-searchbox-sword indexed-search-autocomplete-sword" />
-  <div class="search-autocomplete-results  no-results" data-mode="word" data-searchonclick="false" data-maxresults="10" data-minlength="2" data-searchurl="{f:uri.action(action: 'search', pageType: '7423794', noCache: 1, extensionName: 'indexedSearchAutocomplete', controller: 'Search')}"></div>
+  <div class="search-autocomplete-results no-results" data-mode="word" data-searchonclick="false" data-maxresults="10" data-minlength="2" data-searchurl="{f:uri.action(action: 'search', pageType: '7423794', noCache: 1, extensionName: 'indexedSearchAutocomplete', controller: 'Search')}"></div>
 </div>
 ```
 
@@ -108,7 +95,7 @@ routeEnhancers:
      sitemap.xml: 500001
      autocomplete: 7423794
 ```
-**Additional:** Make sure to disable Indexed-Search option "_Use MySQL specific fulltext search_", otherwise the word-suggestion won't work.
+**Additional:** Make sure to disable Indexed-Search option "_Use MySQL specific fulltext search_", otherwise the word-suggestion won't work!
 
 ### Options
 
@@ -124,7 +111,8 @@ routeEnhancers:
 ## Working / Testing Developer Example:
 
 **TYPO3 11:** https://t11.baukasten-typo3.de/ <br />
-**TYPO3 12:** https://t12.baukasten-typo3.de/
+**TYPO3 12:** https://t12.baukasten-typo3.de/ <br />
+**TYPO3 12:** https://t13.baukasten-typo3.de/
 
 ## GIT
 

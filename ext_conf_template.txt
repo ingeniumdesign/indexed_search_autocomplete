@@ -3,4 +3,4 @@
 ###############
 
 # cat=basic; type=boolean; label=LLL:EXT:indexed_search_autocomplete/Resources/Private/Language/ExtConfTemplate.xlf:setupTs.disableJquerySource
-disableJquerySource = 1
+#disableJquerySource = 1
