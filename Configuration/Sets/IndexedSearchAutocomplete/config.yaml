@@ -1,0 +1,4 @@
+name: id/indexed-search-autocomplete
+label: 'IndexedSearch Autocomplete'
+dependencies:
+  - typo3/indexed-search

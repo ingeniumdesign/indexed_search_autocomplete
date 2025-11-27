@@ -3,7 +3,7 @@
 /* * *************************************************************
  *  Copyright notice
  *
- *  (c) 2024 Sebastian Schmal - INGENIUMDESIGN <info@ingeniumdesign.de>
+ *  (c) 2025 Sebastian Schmal - INGENIUMDESIGN <info@ingeniumdesign.de>
  *  All rights reserved
  *
  *  This file is part of the "indexed_search" Extension for TYPO3 CMS.
@@ -15,44 +15,60 @@
 
 namespace ID\IndexedSearchAutocomplete\Service;
 
-use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use Psr\EventDispatcher\EventDispatcherInterface;
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\TimeTracker\TimeTracker;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\IndexedSearch\Domain\Repository\IndexSearchRepository;
 
 /**
- * EntryController
+ * SearchService
  */
 class SearchService implements \TYPO3\CMS\Core\SingletonInterface
 {
-
-    /**
-     * Search repository
-     *
-     * @var \TYPO3\CMS\IndexedSearch\Domain\Repository\IndexSearchRepository
-     */
-    protected $searchRepository = null;
-
     public function searchAWord($arg)
     {
         $languageAspect = GeneralUtility::makeInstance(Context::class)->getAspect('language');
         $languageId = $languageAspect->getId();
-        $configurationManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManagerInterface');
+
+        $configurationManager = GeneralUtility::makeInstance(
+            \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::class
+        );
         $setting = $configurationManager->getConfiguration(
             \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
         );
 
+        // Suchparameter defensiv lesen
+        $searchTerm = isset($arg['s']) ? trim((string)$arg['s']) : '';
+        $maxResults = isset($arg['mr']) ? (int)$arg['mr'] : 10;
+
+        // Wenn kein Suchbegriff übergeben wurde → leeres Ergebnis
+        if ($searchTerm === '') {
+            return [
+                'autocompleteResults' => [],
+                'mode' => 'word',
+            ];
+        }
+
         $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
 
         // Fetch all allowed Pages
-        $allowedPageIds = array_map(function ($a) {
+        $allowedPageIds = array_map(static function ($a) {
             return trim($a);
         }, explode(',', $setting['plugin.']['tx_indexedsearch.']['settings.']['rootPidList']));
+
         $qbPage = $connectionPool->getQueryBuilderForTable('pages');
-        $pages = $qbPage->select('uid', 'pid')->from('pages')->execute();
+        $pages = $qbPage
+            ->select('uid', 'pid')
+            ->from('pages')
+            ->executeQuery()
+            ->fetchAllAssociative();
 
         // Create a Map in the style of <Parent-ID> -> <child-IDs>
         $pageMap = [];
-        while ($row = $pages->fetch()) {
+        foreach ($pages as $row) {
             if (!isset($pageMap[$row['pid']])) {
                 $pageMap[$row['pid']] = [];
             }
@@ -72,7 +88,7 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
 
         // Fetch all Words that belong to an allowed page
         $qbWords = $connectionPool->getQueryBuilderForTable('index_words');
-        $result = $qbWords
+        $rows = $qbWords
             ->select('baseword')
             ->from('index_words')
             ->join(
@@ -80,7 +96,8 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
                 'index_rel',
                 'ir',
                 $qbWords->expr()->eq('ir.wid', 'index_words.wid')
-            )->join(
+            )
+            ->join(
                 'ir',
                 'index_phash',
                 'ip',
@@ -88,7 +105,10 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
             )
             ->where(
                 $qbWords->expr()->like(
-                    'index_words.baseword', $qbWords->createNamedParameter($qbWords->escapeLikeWildcards($arg['s']) . '%')
+                    'index_words.baseword',
+                    $qbWords->createNamedParameter(
+                        $qbWords->escapeLikeWildcards($searchTerm) . '%'
+                    )
                 ),
                 $qbWords->expr()->in(
                     'ip.data_page_id',
@@ -98,23 +118,25 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
                     )
                 ),
                 $qbWords->expr()->eq(
-                    'ip.sys_language_uid', (int) $languageId
+                    'ip.sys_language_uid',
+                    (int)$languageId
                 )
             )
             ->groupBy('index_words.baseword')
-            ->setMaxResults((int) $arg['mr'])
-            ->execute();
+            ->setMaxResults($maxResults)
+            ->executeQuery()
+            ->fetchAllAssociative();
 
         $autocomplete = [];
-        while ($row = $result->fetch()) {
-            if ($row['baseword'] !== $arg['s']) {
+        foreach ($rows as $row) {
+            if ($row['baseword'] !== $searchTerm) {
                 $autocomplete[] = $row['baseword'];
             }
         }
 
         return [
             'autocompleteResults' => $autocomplete,
-            'mode' => 'word'
+            'mode' => 'word',
         ];
     }
 
@@ -122,20 +144,32 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
     {
         $languageAspect = GeneralUtility::makeInstance(Context::class)->getAspect('language');
         $languageId = $languageAspect->getId();
-        $configurationManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManagerInterface');
+
+        $configurationManager = GeneralUtility::makeInstance(
+            \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::class
+        );
         $setting = $configurationManager->getConfiguration(
             \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
         );
 
+        // Suchparameter defensiv lesen
+        $searchTerm = isset($arg['s']) ? trim((string)$arg['s']) : '';
+        $maxResults = isset($arg['mr']) ? (int)$arg['mr'] : 10;
+
+        // Wenn kein Suchbegriff → sofort leeres Ergebnis
+        if ($searchTerm === '') {
+            return [
+                'autocompleteResults' => [],
+                'mode' => 'link',
+            ];
+        }
 
         $search = [
             [
-                'sword' => $arg['s'],
-                "oper" => "AND"
-            ]
+                'sword' => $searchTerm,
+                'oper' => 'AND',
+            ],
         ];
-
-        $this->searchRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\IndexedSearch\Domain\Repository\IndexSearchRepository::class);
 
         $settings = $setting['plugin.']['tx_indexedsearch.']['settings.'];
         $searchData = [
@@ -143,26 +177,50 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
             'languageUid' => (int)$languageId,
             'sortDesc' => true,
             'searchType' => true,
-            'numberOfResults' => (int) $arg['mr'],
-            'sword' => $arg['s']
+            'numberOfResults' => $maxResults,
+            'sword' => $searchTerm,
         ];
 
-        $this->searchRepository->initialize($settings, $searchData, [], $settings['rootPidList']);
+        // IndexSearchRepository für TYPO3 13 korrekt instanziieren
+        $context = GeneralUtility::makeInstance(Context::class);
+        $extensionConfiguration = GeneralUtility::makeInstance(ExtensionConfiguration::class);
+        $timeTracker = GeneralUtility::makeInstance(TimeTracker::class);
+        $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
+        $eventDispatcher = GeneralUtility::makeInstance(EventDispatcherInterface::class);
 
-        $resultData = $this->searchRepository->doSearch($search, -1);
+        /** @var IndexSearchRepository $searchRepository */
+        $searchRepository = GeneralUtility::makeInstance(
+            IndexSearchRepository::class,
+            $context,
+            $extensionConfiguration,
+            $timeTracker,
+            $connectionPool,
+            $eventDispatcher
+        );
+
+        $searchRepository->initialize($settings, $searchData, [], $settings['rootPidList']);
+
+        $resultData = $searchRepository->doSearch($search, -1);
 
         $result = [];
-        foreach ($resultData['resultRows'] as $r) {
-            $result[] = [
-                'page_id' => $r['page_id'],
-                'title' => $r['item_title'],
-                'description' => $r['item_description']
-            ];
+
+        // doSearch() kann false liefern – absichern
+        if (is_array($resultData)
+            && isset($resultData['resultRows'])
+            && is_array($resultData['resultRows'])
+        ) {
+            foreach ($resultData['resultRows'] as $r) {
+                $result[] = [
+                    'page_id' => $r['page_id'] ?? null,
+                    'title' => $r['item_title'] ?? '',
+                    'description' => $r['item_description'] ?? '',
+                ];
+            }
         }
 
         return [
             'autocompleteResults' => $result,
-            'mode' => 'link'
+            'mode' => 'link',
         ];
     }
 }

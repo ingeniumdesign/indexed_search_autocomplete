@@ -1,3 +1,30 @@
+# 13.0.1
+
+## FEATURE
+- Added support for TYPO3 13
+- Edit the Readme with Info Stuff
+- Improved Word & Link autocomplete modes
+- Removed jQuery dependency
+
+## FIX
+- Modernized internal code structure for TYPO3 13
+- Updated fluid templates and TypoScript
+
+### Contributors
+
+- Sebastian Schmal
+- Simon Dürr
+
+# 12.1.13
+
+## FEATURE
+- Edit structure for TYPO3 12
+- Edit the Readme with Info Stuff
+
+### Contributors
+
+- Sebastian Schmal
+
 # 1.0.12
 
 ## FEATURE
