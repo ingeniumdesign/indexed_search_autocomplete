@@ -19,7 +19,7 @@ Extends the TYPO3 Core Extension Indexed_Search searchform with an autocomplete 
 
 * TYPO3 CMS 8.7.x - 13.4.x
 * PHP 7.x - 8.x
-* Jquery 1.x (TYPO3 8.7.x - 12.4.x)
+* ~~Jquery 1.x~~ (TYPO3 8.7.x - 12.4.x)
 
 # Quick Install Guide
 
@@ -99,7 +99,7 @@ routeEnhancers:
 
 ### Options
 
-* Enable or Disable the **JQuery-Source** in the Extension Settings. (Backend -> Extension-Settings)
+* ~~Enable or Disable~~ the **JQuery-Source** in the Extension Settings. (Backend -> Extension-Settings) => (TYPO3 8.7.x - 12.4.x)
   ```page.includeJSFooterlibs.JquerySource = ```
 * **data-mode="word"** => the following values are possible: `word` or `link`. Depending on which option you choose, the plugin will suggest either words or links as you type. You can edit both template files at indexed_search_autocomplete/Resources/Private/Partials/ (Fluid)
 * **data-maxresults="10"** => The maximum number of entries per suggestion (Fluid)
@@ -112,7 +112,7 @@ routeEnhancers:
 
 **TYPO3 11:** https://t11.baukasten-typo3.de/ <br />
 **TYPO3 12:** https://t12.baukasten-typo3.de/ <br />
-**TYPO3 12:** https://t13.baukasten-typo3.de/
+**TYPO3 13:** https://t13.baukasten-typo3.de/
 
 ## GIT
 
