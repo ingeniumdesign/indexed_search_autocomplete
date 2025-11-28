@@ -28,7 +28,7 @@
     "typo3-ter/indexed_search_autocomplete": "self.version"
   },
   "require": {
-    "php": ">= 8.2 < 8.4",
+    "php": ">=8.2",
     "typo3/cms-core": "^13.4",
     "typo3/cms-indexed-search": "^13.4"
   },
