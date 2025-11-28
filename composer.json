@@ -1,11 +1,9 @@
 {
   "name": "id/indexed-search-autocomplete",
-  "type": "typo3-cms-extension",
   "description": "Indexed Search Autocomplete",
+  "type": "typo3-cms-extension",
+  "license": "GPL-2.0-or-later",
   "homepage": "https://www.ingeniumdesign.de/",
-  "license": [
-    "MIT"
-  ],
   "authors": [
     {
       "name": "Sebastian Schmal",
@@ -22,11 +20,15 @@
     "autocomplete",
     "ingeniumdesign"
   ],
+  "support": {
+    "issues": "https://github.com/ingeniumdesign/indexed_search_autocomplete/issues",
+    "source": "https://github.com/ingeniumdesign/indexed_search_autocomplete"
+  },
   "replace": {
     "typo3-ter/indexed_search_autocomplete": "self.version"
   },
   "require": {
-    "php": ">=8.2",
+    "php": ">= 8.2 < 8.4",
     "typo3/cms-core": "^13.4",
     "typo3/cms-indexed-search": "^13.4"
   },
