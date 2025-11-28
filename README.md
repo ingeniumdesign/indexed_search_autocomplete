@@ -161,8 +161,7 @@ https://www.ingeniumdesign.de/ - by INGENIUMDESIGN<br />
 https://www.baukasten-typo3.de/ - by INGENIUMDESIGN<br />
 https://www.takeoffmedia.de/ - by INGENIUMDESIGN<br />
 https://ead.darmstadt.de/ - by INGENIUMDESIGN<br />
-https://www.easy-sprachreisen.de/ - by INGENIUMDESIGN<br />
-https://www.radprax.de/ - by wilhelm innovative medien GmbH
+https://www.easy-sprachreisen.de/ - by INGENIUMDESIGN
 
 [1]: https://packagist.org/packages/id/indexed-search-autocomplete
 [2]: https://extensions.typo3.org/extension/indexed_search_autocomplete
