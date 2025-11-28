@@ -1,0 +1,43 @@
+plugin {
+    tx_indexedsearch_autocomplete {
+        view {
+            templateRootPaths {
+                0 = EXT:indexed_search_autocomplete/Resources/Private/Templates/
+                10 = {$plugin.tx_indexedsearch_autocomplete.view.templateRootPath}
+            }
+            partialRootPaths {
+                0 = EXT:indexed_search_autocomplete/Resources/Private/Partials/
+                10 = {$plugin.tx_indexedsearch_autocomplete.view.partialRootPath}
+            }
+            layoutRootPaths {
+                0 = EXT:indexed_search_autocomplete/Resources/Private/Layouts/
+                10 = {$plugin.tx_indexedsearch_autocomplete.view.layoutRootPath}
+            }
+        }
+    }
+}
+
+page {
+    includeCSS {
+        indexedSearchAutocomplete = {$plugin.tx_indexedsearch_autocomplete.cssAutocompleteFile}
+    }
+    includeJSFooter {
+        indexedSearchAutocomplete = {$plugin.tx_indexedsearch_autocomplete.javaScriptAutocompleteFile}
+    }
+}
+
+search = PAGE
+search {
+    typeNum = 7423794
+    config {
+        disableAllHeaderCode = 1
+        additionalHeaders = Content-type:text/html
+        xhtml_cleaning = 0
+        debug = 0
+        admPanel = 0
+        no_cache = 1
+    }
+
+    10 = COA_INT
+    10 < tt_content.list.20.indexedsearchautocomplete_search
+}
