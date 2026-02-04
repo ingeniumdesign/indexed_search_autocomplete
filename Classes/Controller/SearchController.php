@@ -16,7 +16,6 @@
 namespace ID\IndexedSearchAutocomplete\Controller;
 
 use ID\IndexedSearchAutocomplete\Service\SearchService;
-use TYPO3\CMS\IndexedSearch\Domain\Repository\IndexSearchRepository;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use Psr\Http\Message\ResponseInterface;
 
@@ -28,37 +27,30 @@ use Psr\Http\Message\ResponseInterface;
 class SearchController extends ActionController {
 
     /**
-     * Search repository
-     *
-     * @var IndexSearchRepository
-     */
-    protected $searchRepository = null;
-
-     /**
-      * Search functions
-      *
-      * @var SearchService
-      */
+    * Search functions
+    *
+    * @var SearchService
+    */
     protected $searchService = null;
 
 
     public function __construct(
-        IndexSearchRepository $searchRepository,
         SearchService $searchService
     ) {
-        $this->searchRepository = $searchRepository;
         $this->searchService = $searchService;
     }
 
     /**
-     * action search
-     *
-     * @return string
-     */
+    * action search
+    *
+    * @return ResponseInterface
+    */
     public function searchAction(): ResponseInterface {
-
-        // Fetch the request
-        $arg = $_REQUEST;
+        // POST-Daten direkt vom Extbase-Request lesen (ist selbst ein PSR-7 ServerRequestInterface)
+        $arg = $this->request->getParsedBody();
+        if (!is_array($arg)) {
+            $arg = [];
+        }
 
         // Mode sicher auslesen, Standard = 'word'
         $mode = $arg['m'] ?? 'word';

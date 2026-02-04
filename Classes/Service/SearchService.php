@@ -15,12 +15,8 @@
 
 namespace ID\IndexedSearchAutocomplete\Service;
 
-use Psr\EventDispatcher\EventDispatcherInterface;
-use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\TimeTracker\TimeTracker;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\IndexedSearch\Domain\Repository\IndexSearchRepository;
 
 /**
@@ -28,15 +24,19 @@ use TYPO3\CMS\IndexedSearch\Domain\Repository\IndexSearchRepository;
  */
 class SearchService implements \TYPO3\CMS\Core\SingletonInterface
 {
+    public function __construct(
+        private readonly Context $context,
+        private readonly ConnectionPool $connectionPool,
+        private readonly \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager,
+        private readonly IndexSearchRepository $searchRepository,
+    ) {}
+
     public function searchAWord($arg)
     {
-        $languageAspect = GeneralUtility::makeInstance(Context::class)->getAspect('language');
+        $languageAspect = $this->context->getAspect('language');
         $languageId = $languageAspect->getId();
 
-        $configurationManager = GeneralUtility::makeInstance(
-            \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::class
-        );
-        $setting = $configurationManager->getConfiguration(
+        $setting = $this->configurationManager->getConfiguration(
             \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
         );
 
@@ -52,14 +52,12 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
             ];
         }
 
-        $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
-
         // Fetch all allowed Pages
         $allowedPageIds = array_map(static function ($a) {
-            return trim($a);
+            return (int)trim($a);
         }, explode(',', $setting['plugin.']['tx_indexedsearch.']['settings.']['rootPidList']));
 
-        $qbPage = $connectionPool->getQueryBuilderForTable('pages');
+        $qbPage = $this->connectionPool->getQueryBuilderForTable('pages');
         $pages = $qbPage
             ->select('uid', 'pid')
             ->from('pages')
@@ -87,7 +85,7 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
         } while ($found);
 
         // Fetch all Words that belong to an allowed page
-        $qbWords = $connectionPool->getQueryBuilderForTable('index_words');
+        $qbWords = $this->connectionPool->getQueryBuilderForTable('index_words');
         $rows = $qbWords
             ->select('baseword')
             ->from('index_words')
@@ -142,13 +140,10 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
 
     public function searchASite($arg)
     {
-        $languageAspect = GeneralUtility::makeInstance(Context::class)->getAspect('language');
+        $languageAspect = $this->context->getAspect('language');
         $languageId = $languageAspect->getId();
 
-        $configurationManager = GeneralUtility::makeInstance(
-            \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::class
-        );
-        $setting = $configurationManager->getConfiguration(
+        $setting = $this->configurationManager->getConfiguration(
             \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
         );
 
@@ -181,26 +176,8 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
             'sword' => $searchTerm,
         ];
 
-        // IndexSearchRepository für TYPO3 13 korrekt instanziieren
-        $context = GeneralUtility::makeInstance(Context::class);
-        $extensionConfiguration = GeneralUtility::makeInstance(ExtensionConfiguration::class);
-        $timeTracker = GeneralUtility::makeInstance(TimeTracker::class);
-        $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
-        $eventDispatcher = GeneralUtility::makeInstance(EventDispatcherInterface::class);
-
-        /** @var IndexSearchRepository $searchRepository */
-        $searchRepository = GeneralUtility::makeInstance(
-            IndexSearchRepository::class,
-            $context,
-            $extensionConfiguration,
-            $timeTracker,
-            $connectionPool,
-            $eventDispatcher
-        );
-
-        $searchRepository->initialize($settings, $searchData, [], $settings['rootPidList']);
-
-        $resultData = $searchRepository->doSearch($search, -1);
+        $this->searchRepository->initialize($settings, $searchData, [], $settings['rootPidList']);
+        $resultData = $this->searchRepository->doSearch($search, -1);
 
         $result = [];
 

@@ -18,18 +18,6 @@
             <trans-unit id="constants.javaScriptAutocompleteFile">
                 <source>Filepath of the JavaScript Autocomplete File</source>
             </trans-unit>
-            <trans-unit id="constants.jqueryFile">
-                <source>Filepath of the JavaScript Jquery Source File</source>
-            </trans-unit>
-            <trans-unit id="constants.templatefileword">
-                <source>Filepath of the autocomplete template Source File for words</source>
-            </trans-unit>
-            <trans-unit id="constants.templatefilelink">
-                <source>Filepath of the autocomplete template Source File for links</source>
-            </trans-unit>
-            <trans-unit id="setupTs.disableJquerySource">
-                <source>Disable Jquery Source: If this option is set the org. Jquery 3.2 is not loaded in the Frontend. Include "FILE:EXT:indexed_search_autocomplete/Resources/Public/JavaScript/Jquery-3.2.1.min.js" in your includeJSFooterlibs.</source>
-            </trans-unit>
         </body>
     </file>
 </xliff>

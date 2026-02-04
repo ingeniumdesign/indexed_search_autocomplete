@@ -4,7 +4,7 @@ class IndexSearchAutoComplete {
         this.lastSearchQuery = '';     // Used to reduce the amount of queries
 
         // Alle relevanten Input-Felder suchen
-        const selectors = 'input.search, input.tx-indexedsearch-searchbox-sword, input.indexed-search-atocomplete-sword, input.indexed-search-autocomplete-sword';
+        const selectors = 'input.search, input.tx-indexedsearch-searchbox-sword, input.indexed-search-autocomplete-sword';
         const inputs = document.querySelectorAll(selectors);
 
         if (inputs.length === 0) {

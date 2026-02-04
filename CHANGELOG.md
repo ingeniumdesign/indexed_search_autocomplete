@@ -1,4 +1,16 @@
-# 13.0.1
+# 13.0.2
+
+## UPDATE
+- Replaced `$_REQUEST` with PSR-7 `$this->request->getParsedBody()` in SearchController
+- Introduced Constructor Injection in SearchService for `Context`, `ConnectionPool`, `ConfigurationManagerInterface` and `IndexSearchRepository`
+- Removed manual `GeneralUtility::makeInstance()` calls and unused imports
+- Removed all dead jQuery-related code, settings and labels (`ext_localconf.php`, `ext_conf_template.txt`, `ExtConfTemplate.xlf`, `constants.typoscript`)
+- Fixed typo in JS selector: `indexed-search-atocomplete-sword` → `indexed-search-autocomplete-sword`
+- Removed duplicate JS selector
+- Removed dead CSS rules (`li.even`, `li.odd`)
+- Removed empty `suggest` block from `composer.json`
+- Added explicit `(int)` cast for `rootPidList` values
+- Added explicit `$pluginType` argument (`PLUGIN_TYPE_PLUGIN`) to `configurePlugin()` call
 
 ## FEATURE
 - Added support for TYPO3 13

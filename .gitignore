@@ -1,6 +1,8 @@
 .well-known
 .DS_Store
 .idea
+.claude
+CLAUDE.md
 node_modules
 npm-debug.log
 bower_components
