@@ -1,3 +1,23 @@
+# 13.0.3
+
+## UPDATE
+- Migrated to pure TYPO3 13.4 architecture: removed `ext_tables.php`.
+- Replaced deprecated `PLUGIN_TYPE_PLUGIN` with `PLUGIN_TYPE_CONTENT_ELEMENT` in `configurePlugin()`
+- Replaced `COA_INT` + `tt_content.list.20` TypoScript approach with `EXTBASEPLUGIN` on a dedicated `PAGE` typeNum
+- TypoScript constants and setup are now loaded globally via `addTypoScriptConstants()` and `addTypoScriptSetup()` in `ext_localconf.php`
+- AJAX endpoint PAGE typeNum `7423794` is now defined in `Configuration/TypoScript/setup.typoscript` (not in the Config Set)
+- Added `pluginName: 'Search'` to `f:uri.action()` in Fluid template to ensure correct plugin namespace in URL
+
+## FIX
+- Fixed deprecation warning #105076 (PLUGIN_TYPE_PLUGIN)
+- Fixed broken AJAX endpoint (`No page configured for type=7423794`) caused by TypoScript not loading
+- Fixed unresolved `{$...}` constants causing empty JS/CSS file paths
+
+### Contributors
+
+- Sebastian Schmal
+
+
 # 13.0.2
 
 ## UPDATE

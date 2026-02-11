@@ -3,7 +3,7 @@
 /* * *************************************************************
  *  Copyright notice
  *
- *  (c) 2025 Sebastian Schmal - INGENIUMDESIGN <info@ingeniumdesign.de>
+ *  (c) 2026 Sebastian Schmal - INGENIUMDESIGN <info@ingeniumdesign.de>
  *  All rights reserved
  *
  *  This file is part of the "indexed_search" Extension for TYPO3 CMS.

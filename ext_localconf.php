@@ -10,8 +10,15 @@
 defined('TYPO3') or die('Access denied.');
 
 (function() {
-    // Define TypoScript as content rendering template
-    $GLOBALS['TYPO3_CONF_VARS']['FE']['contentRenderingTemplates'][] = 'indexed_search_autocomplete/Configuration/TypoScript/';
+    // Load TypoScript constants globally
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptConstants(
+        "@import 'EXT:indexed_search_autocomplete/Configuration/TypoScript/constants.typoscript'"
+    );
+
+    // Load TypoScript setup globally
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(
+        "@import 'EXT:indexed_search_autocomplete/Configuration/TypoScript/setup.typoscript'"
+    );
 
     // Register Application
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
@@ -23,6 +30,6 @@ defined('TYPO3') or die('Access denied.');
         [
             \ID\IndexedSearchAutocomplete\Controller\SearchController::class => 'search',
         ],
-        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::PLUGIN_TYPE_PLUGIN,
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
     );
 })();
