@@ -31,7 +31,7 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
         private readonly IndexSearchRepository $searchRepository,
     ) {}
 
-    public function searchAWord($arg)
+    public function searchAWord($arg, int $fallbackRootPid = 0)
     {
         $languageAspect = $this->context->getAspect('language');
         $languageId = $languageAspect->getId();
@@ -56,10 +56,16 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
             ];
         }
 
+        // rootPidList aus den indexed_search-Settings; leer = aktuelle Site-Root (Core-Semantik)
+        $rootPidList = trim((string)($setting['plugin.']['tx_indexedsearch.']['settings.']['rootPidList'] ?? ''));
+        if ($rootPidList === '') {
+            $rootPidList = (string)$fallbackRootPid;
+        }
+
         // Fetch all allowed Pages
         $allowedPageIds = array_map(static function ($a) {
             return (int)trim($a);
-        }, explode(',', $setting['plugin.']['tx_indexedsearch.']['settings.']['rootPidList']));
+        }, explode(',', $rootPidList));
 
         $qbPage = $this->connectionPool->getQueryBuilderForTable('pages');
         $pages = $qbPage
@@ -152,7 +158,7 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
         ];
     }
 
-    public function searchASite($arg)
+    public function searchASite($arg, int $fallbackRootPid = 0)
     {
         $languageAspect = $this->context->getAspect('language');
         $languageId = $languageAspect->getId();
@@ -180,7 +186,20 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
             ],
         ];
 
-        $settings = $setting['plugin.']['tx_indexedsearch.']['settings.'];
+        $settings = $setting['plugin.']['tx_indexedsearch.']['settings.'] ?? null;
+        if (!is_array($settings)) {
+            // indexed_search-TypoScript nicht geladen → kein Suchscope ermittelbar
+            return [
+                'autocompleteResults' => [],
+                'mode' => 'link',
+            ];
+        }
+
+        $rootPidList = trim((string)($settings['rootPidList'] ?? ''));
+        if ($rootPidList === '') {
+            $rootPidList = (string)$fallbackRootPid; // Core-Semantik: leer = aktuelle Site-Root
+        }
+
         $searchData = [
             'sortOrder' => 'rank_flag',
             'languageUid' => (int)$languageId,
@@ -190,7 +209,7 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
             'sword' => $searchTerm,
         ];
 
-        $this->searchRepository->initialize($settings, $searchData, [], $settings['rootPidList']);
+        $this->searchRepository->initialize($settings, $searchData, [], $rootPidList);
         $resultData = $this->searchRepository->doSearch($search, -1);
 
         $result = [];

@@ -52,14 +52,18 @@ class SearchController extends ActionController {
             $arg = [];
         }
 
+        // Site-Root als Fallback-Scope, falls rootPidList nicht konfiguriert ist (Core-Semantik)
+        $site = $this->request->getAttribute('site');
+        $fallbackRootPid = $site instanceof \TYPO3\CMS\Core\Site\Entity\Site ? $site->getRootPageId() : 0;
+
         // Mode sicher auslesen, Standard = 'word'
         $mode = $arg['m'] ?? 'word';
 
         // Check which search to perform
         if ($mode === 'word') {
-            $result = $this->searchService->searchAWord($arg);
+            $result = $this->searchService->searchAWord($arg, $fallbackRootPid);
         } else {
-            $result = $this->searchService->searchASite($arg);
+            $result = $this->searchService->searchASite($arg, $fallbackRootPid);
         }
 
         // Assign the results
