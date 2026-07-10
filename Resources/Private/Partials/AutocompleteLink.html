@@ -1,17 +1,12 @@
 {namespace f=TYPO3\CMS\Fluid\ViewHelpers}
 <!-- Partials/AutocompleteLink.html -->
 <f:spaceless>
-    <li>
-        Titel: {results.title}<br />
-        Beschreibung: {results.description}<br />
-        Page-ID: {results.page_id}<br />
-        Link:
-        <f:link.typolink
-                parameter="{results.page_id}"
-                class="navigate-on-enter"
-                title="Link zur Seite {results.title}">
-            Link zur Seite: {results.title}
+    <li role="option">
+        <f:link.typolink parameter="{results.page_id}" class="navigate-on-enter" title="{results.title}">
+            <span class="tx-indexedsearch-autocomplete-title">{results.title}</span>
+            <f:if condition="{results.description}">
+                <span class="tx-indexedsearch-autocomplete-desc"><f:format.crop maxCharacters="80">{results.description}</f:format.crop></span>
+            </f:if>
         </f:link.typolink>
     </li>
 </f:spaceless>
-

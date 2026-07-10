@@ -204,7 +204,7 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
             'sortOrder' => 'rank_flag',
             'languageUid' => (int)$languageId,
             'sortDesc' => true,
-            'searchType' => true,
+            'searchType' => 1,
             'numberOfResults' => $maxResults,
             'sword' => $searchTerm,
         ];

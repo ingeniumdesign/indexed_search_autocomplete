@@ -5,8 +5,6 @@ search {
     typeNum = 7423794
     config {
         disableAllHeaderCode = 1
-        additionalHeaders = Content-type:text/html
-        xhtml_cleaning = 0
         debug = 0
         admPanel = 0
         no_cache = 1

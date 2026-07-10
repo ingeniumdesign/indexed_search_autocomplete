@@ -18,7 +18,13 @@
 	padding: 2px 5px;
 }
 .tx-indexedsearch-autocomplete a {
+	display: block;
 	width: 100%;
+}
+.tx-indexedsearch-autocomplete .tx-indexedsearch-autocomplete-desc {
+	display: block;
+	font-size: 85%;
+	opacity: 0.75;
 }
 .tx-indexedsearch-autocomplete .autocomplete_searching {
 	background:#FFFFFF url('../Images/Indicator.gif') no-repeat right center;
