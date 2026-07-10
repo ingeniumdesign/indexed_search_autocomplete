@@ -14,7 +14,7 @@ class IndexSearchAutoComplete {
         // Event-Listener registrieren
         inputs.forEach((input) => {
             input.addEventListener('keyup', (e) => this.autocomplete(e, input));
-            input.addEventListener('keypress', (e) => this.autocomplete(e, input));
+            input.addEventListener('keydown', (e) => this.autocomplete(e, input));
             input.setAttribute('autocomplete', 'off');
         });
 
@@ -101,7 +101,7 @@ class IndexSearchAutoComplete {
             }
 
             // Enter
-            if ((keyCode === 10 || keyCode === 13) && e.type === 'keypress') {
+            if ((keyCode === 10 || keyCode === 13) && e.type === 'keydown') {
                 const isVisible = results.offsetParent !== null;
                 const current = results.querySelector('li.highlighted');
 
