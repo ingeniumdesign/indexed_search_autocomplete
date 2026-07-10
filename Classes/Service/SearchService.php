@@ -36,13 +36,17 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
         $languageAspect = $this->context->getAspect('language');
         $languageId = $languageAspect->getId();
 
+        $frontendUserGroupList = implode(',',
+            $this->context->getPropertyFromAspect('frontend.user', 'groupIds', [0, -1])
+        );
+
         $setting = $this->configurationManager->getConfiguration(
             \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
         );
 
         // Suchparameter defensiv lesen
         $searchTerm = isset($arg['s']) ? trim((string)$arg['s']) : '';
-        $maxResults = isset($arg['mr']) ? (int)$arg['mr'] : 10;
+        $maxResults = max(1, min(50, (int)($arg['mr'] ?? 10)));
 
         // Wenn kein Suchbegriff übergeben wurde → leeres Ergebnis
         if ($searchTerm === '') {
@@ -101,6 +105,12 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
                 'ip',
                 $qbWords->expr()->eq('ip.phash', 'ir.phash')
             )
+            ->join(
+                'ip',
+                'index_grlist',
+                'ig',
+                $qbWords->expr()->eq('ig.phash', 'ip.phash')
+            )
             ->where(
                 $qbWords->expr()->like(
                     'index_words.baseword',
@@ -118,6 +128,10 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
                 $qbWords->expr()->eq(
                     'ip.sys_language_uid',
                     (int)$languageId
+                ),
+                $qbWords->expr()->eq(
+                    'ig.gr_list',
+                    $qbWords->createNamedParameter($frontendUserGroupList)
                 )
             )
             ->groupBy('index_words.baseword')
@@ -149,7 +163,7 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
 
         // Suchparameter defensiv lesen
         $searchTerm = isset($arg['s']) ? trim((string)$arg['s']) : '';
-        $maxResults = isset($arg['mr']) ? (int)$arg['mr'] : 10;
+        $maxResults = max(1, min(50, (int)($arg['mr'] ?? 10)));
 
         // Wenn kein Suchbegriff → sofort leeres Ergebnis
         if ($searchTerm === '') {

@@ -152,6 +152,7 @@ class IndexSearchAutoComplete {
 
         // Mindestlänge prüfen
         if (val.length < minlen) {
+            this.lastSearchQuery = '';
             return;
         }
 
