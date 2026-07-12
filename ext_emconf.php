@@ -11,7 +11,7 @@ $EM_CONF[$_EXTKEY] = [
     'title' => 'Indexed Search Autocomplete',
     'description' => 'Extends the TYPO3 Core Extension Indexed_Search searchform with an autocomplete feature.',
     'category' => 'plugin',
-    'version' => '13.0.3',
+    'version' => '13.0.4',
     'constraints' => [
         'depends' => [
             'typo3' => '13.4.0-13.4.99',
@@ -22,8 +22,6 @@ $EM_CONF[$_EXTKEY] = [
         'suggests' => [],
     ],
     'state' => 'stable',
-    'uploadfolder' => 0,
-    'createDirs' => '',
     'clearCacheOnLoad' => 1,
     'author' => 'Sebastian Schmal',
     'author_email' => 'info@ingeniumdesign.de',
