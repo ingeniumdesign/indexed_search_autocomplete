@@ -1,3 +1,30 @@
+# 13.0.4
+
+## UPDATE
+- Link mode: redesigned the default suggestion markup - each result is now a single compact clickable row (linked title plus optional cropped description) instead of the debug-style "Titel/Beschreibung/Page-ID" text lines; the internal page ID is no longer rendered as visible text. If you styled the previous default markup, check your site's CSS
+- Removed the empty `ext_conf_template.txt` - the extension no longer shows up with an empty form in Admin Tools > Settings > Extension Configuration
+- Removed the dead TypoScript options `xhtml_cleaning` (removed from core in 8.0) and `additionalHeaders` (scalar form, never evaluated) from the AJAX PAGE config
+- Performance: the word-mode page scope is now resolved via `PageRepository::getPageIdsRecursive()` instead of loading the entire `pages` table into PHP and walking the tree manually on every request
+- README: removed the premature TYPO3 14 badge, corrected the PHP requirement (8.2 - 8.4) and fixed install Step 3 (TypoScript is loaded globally by the extension; the Site Set is optional)
+- Removed the legacy `uploadfolder` and `createDirs` keys from `ext_emconf.php` (ignored since TYPO3 v12); `searchType` is now passed as explicit int `1` (`SearchType::PART_OF_WORD`) instead of a boolean - runtime-identical
+- Accessibility: the suggestion list now exposes `role="listbox"` on the container and `role="option"` on each entry (both word and link mode) so screen readers announce the suggestions as a selectable list
+
+## FIX
+- Security: Word mode no longer suggests words from fe_group-protected pages to visitors without access. Suggestions are now filtered by the frontend user's group list via an `index_grlist` join, mirroring the core `IndexSearchRepository::checkResume()` behaviour that link mode already used
+- Security: The client-supplied `mr` (max results) POST parameter is now bounded server-side to 1-50 in both search modes, preventing unbounded `LIMIT` values and result buffers
+- JavaScript: Reset `lastSearchQuery` when the input drops below `minlength`, so re-typing the same search term triggers a new suggestion request again
+- Word mode: a missing or empty `plugin.tx_indexedsearch.settings.rootPidList` no longer triggers PHP 8.2 warnings/deprecations and no longer silently expands the search scope to the whole installation - the scope now falls back to the current site root (core semantics)
+- Link mode: missing indexed_search plugin TypoScript no longer causes a fatal `TypeError` in `IndexSearchRepository::initialize()`; an empty `rootPidList` no longer produces invalid SQL - both cases now use the same site-root fallback
+- JavaScript: Selecting a suggestion with Enter now listens on `keydown` instead of the deprecated `keypress` event, so keyboard selection also works reliably on mobile/IME keyboards
+- The search term is now only accepted as a string; an array-shaped POST parameter (`s[]=...`) no longer triggers a PHP "Array to string conversion" warning (or an HTTP 500 under debug error presets)
+- JavaScript: visible suggestions are no longer wiped when a value-preserving key (Shift, CapsLock, Home/End) is pressed - the list is only cleared when a new search actually starts
+- JavaScript: a scheduled request is now cancelled when the input drops below `minlength`, so suggestions for an already-deleted term no longer appear after the debounce delay
+
+### Contributors
+
+- Sebastian Schmal
+
+
 # 13.0.3
 
 ## UPDATE
