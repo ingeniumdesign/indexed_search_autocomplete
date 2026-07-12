@@ -139,29 +139,34 @@ class IndexSearchAutoComplete {
             return;
         }
 
-        // Ergebnisse leeren
-        results.innerHTML = '';
-        results.style.display = 'none';
-        results.classList.remove('results');
-        results.classList.add('no-results');
-
         // Suchbegriff
         const val = input.value.trim();
         const minlen = results.dataset.minlength ? parseInt(results.dataset.minlength, 10) : 3;
         const maxResults = results.dataset.maxresults ? parseInt(results.dataset.maxresults, 10) : 10;
 
-        // Mindestlänge prüfen
+        // Mindestlänge nicht erreicht: zurücksetzen und geplante Anfrage abbrechen
         if (val.length < minlen) {
+            clearTimeout(this.debounceTimeout);
             this.lastSearchQuery = '';
+            results.innerHTML = '';
+            results.style.display = 'none';
+            results.classList.remove('results');
+            results.classList.add('no-results');
             return;
         }
 
-        // Nur neue Suchbegriffe wirklich losschicken
+        // Nur neue Suchbegriffe losschicken; wertgleiche Tasten (Shift etc.) lassen die Vorschläge stehen
         if (val === this.lastSearchQuery) {
             return;
         }
 
         this.lastSearchQuery = val;
+
+        // Ergebnisse erst jetzt leeren, wenn wirklich eine neue Suche startet
+        results.innerHTML = '';
+        results.style.display = 'none';
+        results.classList.remove('results');
+        results.classList.add('no-results');
 
         // User anzeigen, dass gesucht wird
         results.classList.add('autocomplete_searching');
