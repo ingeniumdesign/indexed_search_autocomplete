@@ -3,7 +3,6 @@
 ## TYPO3 Extension `indexed_search_autocomplete`
 
 [![TYPO3 13](https://img.shields.io/badge/TYPO3-13-green.svg)](https://get.typo3.org/version/13)
-[![TYPO3 14](https://img.shields.io/badge/TYPO3-14-orange.svg)](https://get.typo3.org/version/14)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-yellow.svg)](https://www.paypal.me/INGENIUMDESIGN/)
 [![Latest Stable Version](https://poser.pugx.org/id/indexed-search-autocomplete/v/stable)](https://packagist.org/packages/id/indexed-search-autocomplete)
 [![Monthly Downloads](https://poser.pugx.org/id/indexed-search-autocomplete/d/monthly)](https://packagist.org/packages/id/indexed-search-autocomplete)
@@ -14,7 +13,7 @@ Extends the TYPO3 Core Extension Indexed_Search searchform with an autocomplete 
 ## Minimal Dependencies
 
 * TYPO3 CMS 13.4.x
-* PHP 8.x
+* PHP 8.2 - 8.4
 * Plain JavaScript
 
 # Quick Install Guide
@@ -39,7 +38,7 @@ composer require id/indexed-search-autocomplete
 
 Download and install the [extension][2] with the extension manager module.
 
-**Step 3:** Activate the Site Set in `Site Management > Sites > Edit your site > Sets > Add: "IndexedSearch Autocomplete"`. The TypoScript (constants + setup) is loaded automatically via this Site Set.
+**Step 3:** No manual TypoScript activation is required — constants and setup (including the AJAX `PAGE` endpoint, typeNum `7423794`) are loaded globally by the extension's `ext_localconf.php`. Activating the Site Set in `Site Management > Sites > Edit your site > Sets > Add: "IndexedSearch Autocomplete"` is optional (site-scoped overrides of the view paths).
 
 **Step 4:** Outsource from the EXT:indexed_search the `Partials/Form.html` Template. Like this:
 ```typoscript

@@ -17,6 +17,8 @@ namespace ID\IndexedSearchAutocomplete\Service;
 
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Domain\Repository\PageRepository;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\IndexedSearch\Domain\Repository\IndexSearchRepository;
 
 /**
@@ -45,7 +47,7 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
         );
 
         // Suchparameter defensiv lesen
-        $searchTerm = isset($arg['s']) ? trim((string)$arg['s']) : '';
+        $searchTerm = isset($arg['s']) && is_string($arg['s']) ? trim($arg['s']) : '';
         $maxResults = max(1, min(50, (int)($arg['mr'] ?? 10)));
 
         // Wenn kein Suchbegriff übergeben wurde → leeres Ergebnis
@@ -62,37 +64,13 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
             $rootPidList = (string)$fallbackRootPid;
         }
 
-        // Fetch all allowed Pages
-        $allowedPageIds = array_map(static function ($a) {
+        // Fetch all allowed Pages: Root-PIDs + kompletter Unterbaum (Core-Idiom statt Volltabellen-Scan)
+        $rootPids = array_map(static function ($a) {
             return (int)trim($a);
         }, explode(',', $rootPidList));
 
-        $qbPage = $this->connectionPool->getQueryBuilderForTable('pages');
-        $pages = $qbPage
-            ->select('uid', 'pid')
-            ->from('pages')
-            ->executeQuery()
-            ->fetchAllAssociative();
-
-        // Create a Map in the style of <Parent-ID> -> <child-IDs>
-        $pageMap = [];
-        foreach ($pages as $row) {
-            if (!isset($pageMap[$row['pid']])) {
-                $pageMap[$row['pid']] = [];
-            }
-            $pageMap[$row['pid']][] = $row['uid'];
-        }
-
-        do {
-            $found = false;
-            foreach ($allowedPageIds as $id) {
-                if (isset($pageMap[$id])) {
-                    $found = true;
-                    $allowedPageIds = array_merge($allowedPageIds, $pageMap[$id]);
-                    unset($pageMap[$id]);
-                }
-            }
-        } while ($found);
+        $pageRepository = GeneralUtility::makeInstance(PageRepository::class);
+        $allowedPageIds = $pageRepository->getPageIdsRecursive($rootPids, 9999);
 
         // Fetch all Words that belong to an allowed page
         $qbWords = $this->connectionPool->getQueryBuilderForTable('index_words');
@@ -168,7 +146,7 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
         );
 
         // Suchparameter defensiv lesen
-        $searchTerm = isset($arg['s']) ? trim((string)$arg['s']) : '';
+        $searchTerm = isset($arg['s']) && is_string($arg['s']) ? trim($arg['s']) : '';
         $maxResults = max(1, min(50, (int)($arg['mr'] ?? 10)));
 
         // Wenn kein Suchbegriff → sofort leeres Ergebnis
