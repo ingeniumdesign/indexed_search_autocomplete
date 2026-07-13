@@ -96,6 +96,7 @@ routeEnhancers:
 ### Options
 
 * **data-mode="word"** => the following values are possible: `word` or `link`. Depending on which option you choose, the plugin will suggest either words or links as you type. You can edit both template files at indexed_search_autocomplete/Resources/Private/Partials/ (Fluid)
+* **Note:** _Autocomplete completes **single words** only. Typing a partial phrase such as `typo3 autocom` will not complete the second word — suggestions are matched against individual words stored in the `index_words` table._
 * **data-maxresults="10"** => The maximum number of entries per suggestion (Fluid)
 * **data-minlength="2"** => How many characters must be in the input field for the plugin to make it's first suggestion (Fluid)
 * **data-searchonclick="false"** => If a suggestion is selected, should this submit the form (so basically the search starts after selecting a word). Possible values are "false" or "true". 
