@@ -1,6 +1,6 @@
 {
   "name": "id/indexed-search-autocomplete",
-  "description": "Indexed Search Autocomplete",
+  "description": "Indexed Search Autocomplete - Extends the TYPO3 Core Extension Indexed_Search searchform with an autocomplete feature.",
   "type": "typo3-cms-extension",
   "license": "GPL-2.0-or-later",
   "homepage": "https://www.ingeniumdesign.de/",
@@ -28,9 +28,9 @@
     "typo3-ter/indexed_search_autocomplete": "self.version"
   },
   "require": {
-    "php": ">=8.2",
-    "typo3/cms-core": "^13.4",
-    "typo3/cms-indexed-search": "^13.4"
+    "php": "^8.2",
+    "typo3/cms-core": "^13.4 || ^14.0",
+    "typo3/cms-indexed-search": "^13.4 || ^14.0"
   },
   "autoload": {
     "psr-4": {
@@ -39,7 +39,11 @@
   },
   "extra": {
     "typo3/cms": {
-      "extension-key": "indexed_search_autocomplete"
+      "extension-key": "indexed_search_autocomplete",
+      "version": "14.0.1",
+      "Package": {
+        "providesPackages": {}
+      }
     }
   },
   "repositories": [

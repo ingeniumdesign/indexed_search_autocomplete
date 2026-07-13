@@ -11,12 +11,12 @@ $EM_CONF[$_EXTKEY] = [
     'title' => 'Indexed Search Autocomplete',
     'description' => 'Extends the TYPO3 Core Extension Indexed_Search searchform with an autocomplete feature.',
     'category' => 'plugin',
-    'version' => '13.0.4',
+    'version' => '14.0.1',
     'constraints' => [
         'depends' => [
-            'typo3' => '13.4.0-13.4.99',
-            'indexed_search' => '13.4.0-13.4.99',
-            'php' => '8.2.0-8.4.99',
+            'typo3' => '13.4.0-14.99.99',
+            'indexed_search' => '13.4.0-14.99.99',
+            'php' => '8.2.0-8.99.99',
         ],
         'conflicts' => [],
         'suggests' => [],
