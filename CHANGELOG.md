@@ -1,3 +1,15 @@
+# 14.0.1
+
+## UPDATE
+- Added TYPO3 v14 support: the extension now runs on TYPO3 13.4 LTS and TYPO3 14 from a single codebase (`typo3/cms-core: ^13.4 || ^14.0`); no functional or source-code changes.
+- composer.json: declared `extra.typo3/cms.version` and `Package.providesPackages` (clears the TYPO3 v14.2 `ext_emconf.php` deprecation in classic mode), embedded the title in the `description` (` - ` separator), and tightened the PHP constraint to `^8.2`.
+- ext_emconf.php: widened the `typo3` and `indexed_search` dependency ranges to include 14.x and lifted the PHP upper bound.
+
+### Contributors
+
+- Sebastian Schmal
+
+
 # 13.0.4
 
 ## UPDATE

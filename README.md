@@ -3,6 +3,7 @@
 ## TYPO3 Extension `indexed_search_autocomplete`
 
 [![TYPO3 13](https://img.shields.io/badge/TYPO3-13-green.svg)](https://get.typo3.org/version/13)
+[![TYPO3 14](https://img.shields.io/badge/TYPO3-14-green.svg)](https://get.typo3.org/version/14)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-yellow.svg)](https://www.paypal.me/INGENIUMDESIGN/)
 [![Latest Stable Version](https://poser.pugx.org/id/indexed-search-autocomplete/v/stable)](https://packagist.org/packages/id/indexed-search-autocomplete)
 [![Monthly Downloads](https://poser.pugx.org/id/indexed-search-autocomplete/d/monthly)](https://packagist.org/packages/id/indexed-search-autocomplete)
@@ -12,8 +13,8 @@ Extends the TYPO3 Core Extension Indexed_Search searchform with an autocomplete 
 
 ## Minimal Dependencies
 
-* TYPO3 CMS 13.4.x
-* PHP 8.2 - 8.4
+* TYPO3 CMS 13.4 & 14.x
+* PHP 8.2+
 * Plain JavaScript
 
 # Quick Install Guide
@@ -62,12 +63,12 @@ plugin {
 
 **Step 7:** Now add the following line where you want the results to be displayed (_so in most of the cases below the text-input_):
 
-**TYPO3 13.x:**
+**TYPO3 13.x & 14.x:**
 ```html
 <div class="search-autocomplete-results no-results" data-mode="word" data-searchonclick="false" data-maxresults="10" data-minlength="2" data-searchurl="{f:uri.action(action: 'search', controller: 'Search', extensionName: 'IndexedSearchAutocomplete', pluginName: 'Search', pageType: '7423794', noCache: 1)}"></div>
 ```
 
-**Form.html Example TYPO3 v13:**
+**Form.html Example TYPO3 v13.x & v14.x:**
 ```html
 <div class="tx-indexedsearch-form">
   <label for="tx-indexedsearch-searchbox-sword"><f:translate key="form.searchFor" />:</label>
@@ -105,7 +106,8 @@ routeEnhancers:
 
 **TYPO3 11:** https://t11.baukasten-typo3.de/ <br />
 **TYPO3 12:** https://t12.baukasten-typo3.de/ <br />
-**TYPO3 13:** https://t13.baukasten-typo3.de/
+**TYPO3 13:** https://t13.baukasten-typo3.de/ <br />
+**TYPO3 14:** https://t14.baukasten-typo3.de/
 
 ## GIT
 
