@@ -2,6 +2,7 @@ class IndexSearchAutoComplete {
     constructor() {
         // Per-Box-State (Debounce-Timer, letzte Query, laufende Anfrage), gekeyed am results-Container
         this.state = new WeakMap();
+        this.seq = 0; // fortlaufende Nummer für eindeutige ARIA-IDs
 
         // Alle relevanten Input-Felder suchen
         const selectors = 'input.search, input.tx-indexedsearch-searchbox-sword, input.indexed-search-autocomplete-sword';
@@ -16,6 +17,10 @@ class IndexSearchAutoComplete {
             input.addEventListener('keyup', (e) => this.autocomplete(e, input));
             input.addEventListener('keydown', (e) => this.autocomplete(e, input));
             input.setAttribute('autocomplete', 'off');
+            // ARIA-Combobox (statischer Teil)
+            input.setAttribute('role', 'combobox');
+            input.setAttribute('aria-autocomplete', 'list');
+            input.setAttribute('aria-expanded', 'false');
         });
 
         // Klick überall auf der Seite: Autocomplete schließen, wenn außerhalb geklickt wird
@@ -26,22 +31,44 @@ class IndexSearchAutoComplete {
                     box.style.display = 'none';
                     box.classList.remove('results');
                     box.classList.add('no-results');
+                    const st = this.state.get(box);
+                    if (st) {
+                        this.collapse(st);
+                    }
                 });
             }
         });
     }
 
     /**
-     * Per-Box-State (Debounce-Timer, letzte Query, laufender AbortController)
+     * Per-Box-State (Debounce-Timer, letzte Query, laufender AbortController, Input, ARIA-Listbox-ID)
      * @param {HTMLElement} results
      */
     getState(results) {
         let state = this.state.get(results);
         if (!state) {
-            state = { debounceTimeout: null, lastQuery: '', controller: null };
+            state = {
+                debounceTimeout: null,
+                lastQuery: '',
+                controller: null,
+                input: null,
+                listId: 'isac-' + (++this.seq)
+            };
             this.state.set(results, state);
         }
         return state;
+    }
+
+    /**
+     * Combobox schließen: ARIA-Zustand am Input zurücksetzen
+     * @param {object} state
+     */
+    collapse(state) {
+        if (state.input) {
+            state.input.setAttribute('aria-expanded', 'false');
+            state.input.removeAttribute('aria-activedescendant');
+            state.input.removeAttribute('aria-controls');
+        }
     }
 
     /**
@@ -70,6 +97,7 @@ class IndexSearchAutoComplete {
         }
 
         const state = this.getState(results);
+        state.input = input;
 
         // Optionen aus data-Attributen lesen
         const mode = results.dataset.mode || 'word';
@@ -93,8 +121,13 @@ class IndexSearchAutoComplete {
                 if (target) {
                     if (highlighted) {
                         highlighted.classList.remove('highlighted');
+                        highlighted.removeAttribute('aria-selected');
                     }
                     target.classList.add('highlighted');
+                    target.setAttribute('aria-selected', 'true');
+                    if (target.id) {
+                        input.setAttribute('aria-activedescendant', target.id);
+                    }
                 }
             }
 
@@ -110,8 +143,13 @@ class IndexSearchAutoComplete {
                 if (target) {
                     if (highlighted) {
                         highlighted.classList.remove('highlighted');
+                        highlighted.removeAttribute('aria-selected');
                     }
                     target.classList.add('highlighted');
+                    target.setAttribute('aria-selected', 'true');
+                    if (target.id) {
+                        input.setAttribute('aria-activedescendant', target.id);
+                    }
                 }
             }
 
@@ -172,6 +210,7 @@ class IndexSearchAutoComplete {
             results.style.display = 'none';
             results.classList.remove('results');
             results.classList.add('no-results');
+            this.collapse(state);
             return;
         }
 
@@ -187,6 +226,7 @@ class IndexSearchAutoComplete {
         results.style.display = 'none';
         results.classList.remove('results');
         results.classList.add('no-results');
+        this.collapse(state);
 
         // Anfrage ausführen
         this.performQuery(val, mode, maxResults, results, input, state);
@@ -244,12 +284,22 @@ class IndexSearchAutoComplete {
 
                     const items = results.querySelectorAll('li');
 
+                    // ARIA: Listbox-ID + eindeutige Option-IDs vergeben
+                    const list = results.querySelector('ul');
+                    if (list) {
+                        list.id = state.listId;
+                    }
+                    items.forEach((li, i) => {
+                        li.id = state.listId + '-opt-' + i;
+                    });
+
                     items.forEach((li) => {
                         li.addEventListener('click', () => {
                             if (mode === 'word') {
                                 input.value = li.textContent.trim();
                                 results.innerHTML = '';
                                 results.style.display = 'none';
+                                this.collapse(state);
 
                                 if (soc) {
                                     const form = input.closest('form');
@@ -272,10 +322,15 @@ class IndexSearchAutoComplete {
                         results.style.display = 'none';
                         results.classList.remove('results');
                         results.classList.add('no-results');
+                        this.collapse(state);
                     } else {
                         // Ergebnisse vorhanden
                         results.classList.remove('no-results');
                         results.classList.add('results');
+                        // ARIA: Combobox als geöffnet markieren
+                        input.setAttribute('aria-controls', state.listId);
+                        input.setAttribute('aria-expanded', 'true');
+                        input.removeAttribute('aria-activedescendant');
                     }
                 })
                 .catch((error) => {
@@ -290,6 +345,7 @@ class IndexSearchAutoComplete {
                     results.style.display = 'none';
                     results.classList.remove('results');
                     results.classList.add('no-results');
+                    this.collapse(state);
                 });
         }, 250);
     }
