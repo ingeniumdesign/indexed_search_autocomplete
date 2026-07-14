@@ -1,6 +1,6 @@
 .tx-indexedsearch-autocomplete {
 	background: #F5F5F5;
-	width: 200px; /* This value is set in the javascript code, to match the width of the search box */
+	width: 200px; /* fixed fallback width; not adjusted by JS */
 	cursor: pointer;
 	position: absolute;
 	left: 0;

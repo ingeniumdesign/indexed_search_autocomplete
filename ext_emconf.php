@@ -4,7 +4,7 @@
  * This file is part of the package ID\IndexedSearchAutocomplete.
  *
  * For the full copyright and license information, please read the
- * LICENSE file that was distributed with this source code.
+ * LICENSE.txt file that was distributed with this source code.
  */
 
 $EM_CONF[$_EXTKEY] = [
@@ -22,7 +22,6 @@ $EM_CONF[$_EXTKEY] = [
         'suggests' => [],
     ],
     'state' => 'stable',
-    'clearCacheOnLoad' => 1,
     'author' => 'Sebastian Schmal',
     'author_email' => 'info@ingeniumdesign.de',
     'author_company' => 'INGENIUMDESIGN',

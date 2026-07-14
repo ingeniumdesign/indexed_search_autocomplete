@@ -6,10 +6,10 @@
  *  (c) 2026 Sebastian Schmal - INGENIUMDESIGN <info@ingeniumdesign.de>
  *  All rights reserved
  *
- *  This file is part of the "indexed_search" Extension for TYPO3 CMS.
+ *  This file is part of the "indexed_search_autocomplete" Extension.
  *
  *  For the full copyright and license information, please read the
- *  LICENSE file that was distributed with this source code.
+ *  LICENSE.txt file that was distributed with this source code.
  *
  * ************************************************************* */
 
