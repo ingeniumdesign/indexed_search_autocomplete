@@ -18,6 +18,7 @@ namespace ID\IndexedSearchAutocomplete\Controller;
 use ID\IndexedSearchAutocomplete\Service\SearchService;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Site\Entity\Site;
 
 /**
  * SearchController
@@ -26,25 +27,15 @@ use Psr\Http\Message\ResponseInterface;
  */
 class SearchController extends ActionController {
 
-    /**
-    * Search functions
-    *
-    * @var SearchService
-    */
-    protected $searchService = null;
-
-
     public function __construct(
-        SearchService $searchService
-    ) {
-        $this->searchService = $searchService;
-    }
+        private readonly SearchService $searchService
+    ) {}
 
     /**
-    * action search
-    *
-    * @return ResponseInterface
-    */
+     * action search
+     *
+     * @return ResponseInterface
+     */
     public function searchAction(): ResponseInterface {
         // POST-Daten direkt vom Extbase-Request lesen (ist selbst ein PSR-7 ServerRequestInterface)
         $arg = $this->request->getParsedBody();
@@ -54,7 +45,7 @@ class SearchController extends ActionController {
 
         // Site-Root als Fallback-Scope, falls rootPidList nicht konfiguriert ist (Core-Semantik)
         $site = $this->request->getAttribute('site');
-        $fallbackRootPid = $site instanceof \TYPO3\CMS\Core\Site\Entity\Site ? $site->getRootPageId() : 0;
+        $fallbackRootPid = $site instanceof Site ? $site->getRootPageId() : 0;
 
         // Mode sicher auslesen, Standard = 'word'
         $mode = $arg['m'] ?? 'word';

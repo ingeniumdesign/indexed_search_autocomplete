@@ -16,21 +16,24 @@
 namespace ID\IndexedSearchAutocomplete\Service;
 
 use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Domain\Repository\PageRepository;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\SingletonInterface;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\IndexedSearch\Domain\Repository\IndexSearchRepository;
 
 /**
  * SearchService
  */
-class SearchService implements \TYPO3\CMS\Core\SingletonInterface
+readonly class SearchService implements SingletonInterface
 {
     public function __construct(
-        private readonly Context $context,
-        private readonly ConnectionPool $connectionPool,
-        private readonly \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager,
-        private readonly IndexSearchRepository $searchRepository,
+        private Context $context,
+        private ConnectionPool $connectionPool,
+        private ConfigurationManagerInterface $configurationManager,
+        private IndexSearchRepository $searchRepository,
+        private PageRepository $pageRepository,
     ) {}
 
     public function searchAWord($arg, int $fallbackRootPid = 0)
@@ -43,7 +46,7 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
         );
 
         $setting = $this->configurationManager->getConfiguration(
-            \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
         );
 
         // Suchparameter defensiv lesen
@@ -69,8 +72,7 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
             return (int)trim($a);
         }, explode(',', $rootPidList));
 
-        $pageRepository = GeneralUtility::makeInstance(PageRepository::class);
-        $allowedPageIds = $pageRepository->getPageIdsRecursive($rootPids, 9999);
+        $allowedPageIds = $this->pageRepository->getPageIdsRecursive($rootPids, 9999);
 
         // Fetch all Words that belong to an allowed page
         $qbWords = $this->connectionPool->getQueryBuilderForTable('index_words');
@@ -106,7 +108,7 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
                     'ip.data_page_id',
                     $qbWords->createNamedParameter(
                         $allowedPageIds,
-                        \TYPO3\CMS\Core\Database\Connection::PARAM_INT_ARRAY
+                        Connection::PARAM_INT_ARRAY
                     )
                 ),
                 $qbWords->expr()->eq(
@@ -146,7 +148,7 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
         $languageId = $languageAspect->getId();
 
         $setting = $this->configurationManager->getConfiguration(
-            \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
         );
 
         // Suchparameter defensiv lesen
