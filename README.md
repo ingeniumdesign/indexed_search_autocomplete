@@ -11,6 +11,16 @@
 
 Extends the TYPO3 Core Extension Indexed_Search searchform with an autocomplete feature.
 
+## Features
+
+* **Two suggestion modes** – `word` (individual indexed words) or `link` (ranked page results)
+* **Accessible** – full WAI-ARIA combobox (`role="combobox"`, `aria-expanded`, `aria-controls`, `aria-activedescendant`, `role="listbox"`/`option`); screen readers announce the suggestion list and the active item, with complete keyboard navigation (↑/↓ + Enter)
+* **Loading indicator** – lightweight CSS spinner while a request is running (no image asset)
+* **Multiple search fields** on one page work independently
+* **Robust** – debounced requests; superseded requests are aborted, so no stale or out-of-order results
+* **Access-aware** – respects the current language and the visitor's `fe_group` access rights
+* **No dependencies** – plain vanilla JavaScript, no build step, no jQuery
+
 ## Minimal Dependencies
 
 * TYPO3 CMS 13.4 & 14.x
