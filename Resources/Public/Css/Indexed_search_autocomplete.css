@@ -26,8 +26,25 @@
 	font-size: 85%;
 	opacity: 0.75;
 }
-.tx-indexedsearch-autocomplete .autocomplete_searching {
-	background:#FFFFFF url('../Images/Indicator.gif') no-repeat right center;
+/* CSS-only-Spinner */
+.search-autocomplete-results.autocomplete_searching {
+	position: relative;
+	min-height: 22px;
+}
+.search-autocomplete-results.autocomplete_searching::after {
+	content: '';
+	position: absolute;
+	top: 4px;
+	right: 6px;
+	width: 14px;
+	height: 14px;
+	border: 2px solid #AAAAAA;
+	border-top-color: transparent;
+	border-radius: 50%;
+	animation: tx-isac-spin 0.7s linear infinite;
+}
+@keyframes tx-isac-spin {
+	to { transform: rotate(360deg); }
 }
 .tx-indexedsearch-autocomplete .highlighted {
 	background-color: #A7CDF0 !important;
