@@ -1,7 +1,7 @@
 class IndexSearchAutoComplete {
     constructor() {
-        this.debounceTimeout = null;   // Used to reduce the amount of queries
-        this.lastSearchQuery = '';     // Used to reduce the amount of queries
+        // Per-Box-State (Debounce-Timer, letzte Query, laufende Anfrage), gekeyed am results-Container
+        this.state = new WeakMap();
 
         // Alle relevanten Input-Felder suchen
         const selectors = 'input.search, input.tx-indexedsearch-searchbox-sword, input.indexed-search-autocomplete-sword';
@@ -32,6 +32,19 @@ class IndexSearchAutoComplete {
     }
 
     /**
+     * Per-Box-State (Debounce-Timer, letzte Query, laufender AbortController)
+     * @param {HTMLElement} results
+     */
+    getState(results) {
+        let state = this.state.get(results);
+        if (!state) {
+            state = { debounceTimeout: null, lastQuery: '', controller: null };
+            this.state.set(results, state);
+        }
+        return state;
+    }
+
+    /**
      * Autocomplete a query
      *
      * @param {KeyboardEvent} e
@@ -55,6 +68,8 @@ class IndexSearchAutoComplete {
             console.log("we couldn't find a result div (.search-autocomplete-results)");
             return;
         }
+
+        const state = this.getState(results);
 
         // Optionen aus data-Attributen lesen
         const mode = results.dataset.mode || 'word';
@@ -144,10 +159,15 @@ class IndexSearchAutoComplete {
         const minlen = results.dataset.minlength ? parseInt(results.dataset.minlength, 10) : 3;
         const maxResults = results.dataset.maxresults ? parseInt(results.dataset.maxresults, 10) : 10;
 
-        // Mindestlänge nicht erreicht: zurücksetzen und geplante Anfrage abbrechen
+        // Mindestlänge nicht erreicht: zurücksetzen, geplante Anfrage abbrechen, laufende Anfrage canceln
         if (val.length < minlen) {
-            clearTimeout(this.debounceTimeout);
-            this.lastSearchQuery = '';
+            clearTimeout(state.debounceTimeout);
+            if (state.controller) {
+                state.controller.abort();
+                state.controller = null;
+            }
+            state.lastQuery = '';
+            results.classList.remove('autocomplete_searching');
             results.innerHTML = '';
             results.style.display = 'none';
             results.classList.remove('results');
@@ -156,11 +176,11 @@ class IndexSearchAutoComplete {
         }
 
         // Nur neue Suchbegriffe losschicken; wertgleiche Tasten (Shift etc.) lassen die Vorschläge stehen
-        if (val === this.lastSearchQuery) {
+        if (val === state.lastQuery) {
             return;
         }
 
-        this.lastSearchQuery = val;
+        state.lastQuery = val;
 
         // Ergebnisse erst jetzt leeren, wenn wirklich eine neue Suche startet
         results.innerHTML = '';
@@ -168,27 +188,32 @@ class IndexSearchAutoComplete {
         results.classList.remove('results');
         results.classList.add('no-results');
 
-        // User anzeigen, dass gesucht wird
-        results.classList.add('autocomplete_searching');
-
         // Anfrage ausführen
-        this.performQuery(val, mode, maxResults, results, input);
+        this.performQuery(val, mode, maxResults, results, input, state);
     }
 
-    performQuery(val, mode, maxResults, results, input) {
+    performQuery(val, mode, maxResults, results, input, state) {
         const soc = results.dataset.searchonclick === 'true';
 
-        // Debounce
-        clearTimeout(this.debounceTimeout);
-        this.debounceTimeout = setTimeout(() => {
-            clearTimeout(this.debounceTimeout);
-
+        // Debounce (pro Box)
+        clearTimeout(state.debounceTimeout);
+        state.debounceTimeout = setTimeout(() => {
             const url = results.dataset.searchurl;
             if (!url) {
                 console.error('No data-searchurl defined on .search-autocomplete-results');
-                results.classList.remove('autocomplete_searching');
                 return;
             }
+
+            // Noch laufende Anfrage dieser Box abbrechen, damit keine veralteten Ergebnisse überschreiben
+            if (state.controller) {
+                state.controller.abort();
+            }
+            const controller = new AbortController();
+            state.controller = controller;
+
+            // Lade-Indikator: Box sichtbar machen + Spinner-Klasse setzen
+            results.classList.add('autocomplete_searching');
+            results.style.display = '';
 
             // Request-Daten wie vorher: s, m, mr
             const formData = new FormData();
@@ -199,7 +224,8 @@ class IndexSearchAutoComplete {
             fetch(url, {
                 method: 'POST',
                 body: formData,
-                cache: 'no-store'
+                cache: 'no-store',
+                signal: controller.signal
             })
                 .then((response) => {
                     if (!response.ok) {
@@ -208,10 +234,13 @@ class IndexSearchAutoComplete {
                     return response.text();
                 })
                 .then((data) => {
+                    state.controller = null;
+
+                    results.classList.remove('autocomplete_searching');
+
                     // Ergebnisse einfügen
                     results.innerHTML = data;
                     results.style.display = '';
-                    results.classList.remove('autocomplete_searching');
 
                     const items = results.querySelectorAll('li');
 
@@ -250,8 +279,13 @@ class IndexSearchAutoComplete {
                     }
                 })
                 .catch((error) => {
-                    console.error('Autocomplete request failed:', error);
+                    // Abgebrochene (überholte) Anfrage ignorieren – kein Fehler
+                    if (error.name === 'AbortError') {
+                        return;
+                    }
+                    state.controller = null;
                     results.classList.remove('autocomplete_searching');
+                    console.error('Autocomplete request failed:', error);
                     results.innerHTML = '';
                     results.style.display = 'none';
                     results.classList.remove('results');
