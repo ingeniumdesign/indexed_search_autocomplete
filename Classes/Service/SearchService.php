@@ -119,7 +119,8 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
                 )
             )
             ->groupBy('index_words.baseword')
-            ->setMaxResults($maxResults)
+            ->orderBy('index_words.baseword', 'ASC')
+            ->setMaxResults($maxResults + 1)
             ->executeQuery()
             ->fetchAllAssociative();
 
@@ -129,6 +130,9 @@ class SearchService implements \TYPO3\CMS\Core\SingletonInterface
                 $autocomplete[] = $row['baseword'];
             }
         }
+
+        // exact-match row may have consumed one of the N+1 fetched rows → trim back to N
+        $autocomplete = array_slice($autocomplete, 0, $maxResults);
 
         return [
             'autocompleteResults' => $autocomplete,
