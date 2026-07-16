@@ -221,14 +221,8 @@ class IndexSearchAutoComplete {
 
         state.lastQuery = val;
 
-        // Ergebnisse erst jetzt leeren, wenn wirklich eine neue Suche startet
-        results.innerHTML = '';
-        results.style.display = 'none';
-        results.classList.remove('results');
-        results.classList.add('no-results');
-        this.collapse(state);
-
-        // Anfrage ausführen
+        // Vorhandene Treffer bleiben sichtbar, bis die neuen Ergebnisse
+        // (oder keine Treffer) eintreffen => kein Flackern beim eintippen.
         this.performQuery(val, mode, maxResults, results, input, state);
     }
 
