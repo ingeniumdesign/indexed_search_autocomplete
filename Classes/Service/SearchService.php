@@ -20,6 +20,7 @@ use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Domain\Repository\PageRepository;
 use TYPO3\CMS\Core\SingletonInterface;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\IndexedSearch\Domain\Repository\IndexSearchRepository;
 
@@ -33,7 +34,6 @@ readonly class SearchService implements SingletonInterface
         private ConnectionPool $connectionPool,
         private ConfigurationManagerInterface $configurationManager,
         private IndexSearchRepository $searchRepository,
-        private PageRepository $pageRepository,
     ) {}
 
     public function searchAWord($arg, int $fallbackRootPid = 0)
@@ -72,7 +72,8 @@ readonly class SearchService implements SingletonInterface
             return (int)trim($a);
         }, explode(',', $rootPidList));
 
-        $allowedPageIds = $this->pageRepository->getPageIdsRecursive($rootPids, 9999);
+        $pageRepository = GeneralUtility::makeInstance(PageRepository::class);
+        $allowedPageIds = $pageRepository->getPageIdsRecursive($rootPids, 9999);
 
         // Fetch all Words that belong to an allowed page
         $qbWords = $this->connectionPool->getQueryBuilderForTable('index_words');
