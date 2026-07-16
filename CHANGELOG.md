@@ -1,3 +1,26 @@
+# 14.0.2
+
+## FEATURE
+- Accessibility: the search input is now a full WAI-ARIA combobox (`role="combobox"`, `aria-expanded`, `aria-controls`, `aria-activedescendant`, plus `role="listbox"`/`option` and `aria-selected`). Screen readers announce the suggestion list and the currently highlighted item, with complete keyboard navigation (arrow keys + Enter)
+- Added a lightweight CSS loading spinner, shown inside the right-hand side of the search field while a suggestion request is running - it replaces the previous, never-rendering GIF indicator (the `Indicator.gif` asset was removed). Its position can be tuned without overriding the rule via the `--isac-spinner-right` and `--isac-spinner-offset` CSS custom properties
+- Multiple autocomplete search fields on one page now work independently (per-input state)
+
+## FIX
+- Word mode: suggestions now have a deterministic order (`ORDER BY index_words.baseword`) and honour `data-maxresults` exactly even when the exact-match word is dropped
+- Superseded in-flight requests are aborted (`AbortController`), so a slow earlier response can no longer overwrite newer suggestions
+- Overlay positioning: the suggestion box now stays aligned beneath the search input instead of jumping to the far left of the page once results load (the results container is now its own positioning context)
+- No flicker while typing: the suggestion box stays visible and swaps its contents in place when new results arrive, instead of briefly disappearing on every keystroke
+
+## UPDATE
+- Modernized internals: `SearchService` is now a `readonly` class, the controller uses a promoted readonly constructor property, and inline fully-qualified class names use `use` imports
+- Removed legacy leftovers: the orphan root `ext_icon.png`, the dead `clearCacheOnLoad` ext_emconf key, and stale/incorrect PHP file headers and CSS comment
+- Documented that word mode completes single words only (#30) and added a Features section (incl. accessibility) to the README
+
+### Contributors
+
+- Sebastian Schmal
+
+
 # 14.0.1
 
 ## UPDATE

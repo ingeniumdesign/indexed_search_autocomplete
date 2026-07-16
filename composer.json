@@ -40,7 +40,7 @@
   "extra": {
     "typo3/cms": {
       "extension-key": "indexed_search_autocomplete",
-      "version": "14.0.1",
+      "version": "14.0.2",
       "Package": {
         "providesPackages": {}
       }
